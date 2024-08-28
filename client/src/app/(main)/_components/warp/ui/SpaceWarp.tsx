@@ -1,0 +1,77 @@
+import { useFrame } from "@react-three/fiber";
+// import { getRandomFloat, getRandomInt } from '../lib/utils';
+import React, { useMemo } from "react";
+import * as THREE from "three";
+import {
+  SPACE_WARP_LINES_NUM,
+  SPACE_WARP_LINE_COLORS,
+  SPACE_WARP_LINE_LENGTH,
+  SPACE_WARP_XZ_MAX,
+  SPACE_WARP_XZ_MIN,
+  SPACE_WARP_Y_MAX,
+  SPACE_WARP_Y_MIN,
+  type WarpStateType,
+} from "../lib/constants";
+import {
+  getRandomFloat,
+  getRandomInt,
+} from "@/app/(main)/_components/warp/lib/utils";
+// import { WarpStateType } from 'shared/lib';
+
+const getSpaceWarpLinesInfo = () => {
+  const positions = Array.from({ length: SPACE_WARP_LINES_NUM }, () => {
+    const x = getRandomFloat(SPACE_WARP_XZ_MIN, SPACE_WARP_XZ_MAX);
+    const y = getRandomFloat(SPACE_WARP_Y_MIN, SPACE_WARP_Y_MAX);
+    const z = getRandomFloat(SPACE_WARP_XZ_MIN, SPACE_WARP_XZ_MAX);
+
+    return [x, y, z, x, y - SPACE_WARP_LINE_LENGTH, z];
+  }).flat();
+
+  const colors = Array.from({ length: SPACE_WARP_LINES_NUM }, () => {
+    const color = new THREE.Color(
+      SPACE_WARP_LINE_COLORS[getRandomInt(0, SPACE_WARP_LINE_COLORS.length)]
+    );
+
+    return [color.r, color.g, color.b];
+  }).flat();
+
+  return [new Float32Array(positions), new Float32Array(colors)];
+};
+
+interface PropsType {
+  setIsSwitching: React.Dispatch<React.SetStateAction<WarpStateType>>;
+}
+
+export default function SpaceWarp({ setIsSwitching }: PropsType) {
+  const [positions, colors] = useMemo(() => getSpaceWarpLinesInfo(), []);
+
+  useFrame((state, delta) => {
+    if (state.camera.position.y <= SPACE_WARP_Y_MIN) {
+      state.scene.background = new THREE.Color(0xffffff);
+      setIsSwitching("fade");
+      return;
+    }
+    state.camera.position.y -= 75000 * delta;
+  });
+
+  return (
+    <lineSegments>
+      <bufferGeometry attach="geometry">
+        <bufferAttribute
+          attach="attributes-position"
+          count={SPACE_WARP_LINES_NUM}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={SPACE_WARP_LINES_NUM}
+          array={colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+
+      <lineBasicMaterial attach="material" vertexColors={true} />
+    </lineSegments>
+  );
+}

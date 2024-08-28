@@ -1,0 +1,98 @@
+# name: CI Pipeline
+# on:
+#   push:
+#     branches: ['main']
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - run: ls -al
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0 # 최신 코드 반영?
+
+#         # - name: Set working directory
+#         #   run: |
+#         #     sudo mkdir -p /home/ubuntu/actions-runner/_work/dev-extension-server/dev-extension-server
+#         #     sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/dev-extension-server/dev-extension-server
+#         # shell: bash
+
+#       # 체크아웃된 커밋 해시를 출력하는 단계
+#       - name: Print Git Commit Hash
+#         run: git log -1 --pretty=format:"%H"
+
+#       - name: Login Dockerhub
+#         env:
+#           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+#         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+#       - name: Build Docker Image
+#         # run: docker build -t nestjs_api .
+#         # run: docker build -t nestjs_api:latest .
+#         # working-directory: /home/ubuntu/actions-runner/_work/dev-extension-server/dev-extension-server
+#         # run: docker build -t jongmany/nestjs_api:latest .
+#         run: docker build --no-cache -t jongmany/nestjs_api:latest .
+
+#       - name: Tag Docker Image
+#         run: docker tag jongmany/nestjs_api:latest jongmany/nestjs_api:latest
+#         # run: docker tag nestjs_api:latest jongmany/nestjs_api:latest
+
+#       - name: Push to Dockerhub
+#         run: docker push jongmany/nestjs_api:latest
+
+#   deploy:
+#     needs: build
+#     runs-on: self-hosted
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+
+#       - name: Set up Docker Compose
+#         run: |
+#           sudo curl -L "https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#           sudo chmod +x /usr/local/bin/docker-compose
+
+#       - name: 📩 Pull Docker image
+#         run: sudo docker pull jongmany/nestjs_api:latest
+
+#       - name: Stop existing MongoDB container
+#         run: |
+#           if [ $(sudo docker ps -q --filter "name=mongo_db" | wc -l) -gt 0 ]; then
+#             sudo docker stop mongo_db
+#             sudo docker rm mongo_db
+#           fi
+
+#       - name: ❌ Delete Old docker container
+#         # run: sudo docker rm -f nestjs_api-container || true
+#         working-directory: /home/ubuntu/actions-runner/_work/dev-extension-server/dev-extension-server
+#         run: sudo docker-compose down || true
+#       - name: 🏃🏿 Run Docker Container
+#         # run: sudo docker run -d -p 8080:8080 --name nestjs_api-container jongmany/nestjs_api:latest
+#         working-directory: /home/ubuntu/actions-runner/_work/dev-extension-server/dev-extension-server
+#         run: sudo docker-compose up -d --force-recreate
+#         # run: sudo docker-compose up -d -p 8080:8080 --name nestjs_api-container jongmany/nestjs_api:latest
+#       - name: ❌ Prune Old image
+#         run: sudo docker image prune -f
+#   # deploy:
+#   #   needs: build
+#   #   runs-on: self-hosted
+
+#   #   steps:
+#   #     - name: Pull Docker Image
+#   #       run: sudo docker pull jongmany/nestjs_api:latest
+
+#   #     - name: Delete Old Docker Container
+#   #       run: sudo docker rm -f nestjs_api-container || true
+
+#   #     - name: Run Docker Container
+#   #       run: sudo docker run -d -p 8080:8080 --name nestjs_api-container jongmany/nestjs_api:latest
+
+#   #     - name: Prune Old Docker Image
+#   #       run: sudo docker image prune -f
