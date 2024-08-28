@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   } catch (error) {
     console.log("ERROR", error);
   }
-  // console.log("middleware", process.env.NEXTAUTH_URL, session, pathname);
+  // console.log("middleware", process.env., session, pathname);
   // console.log("SESSION", session);
   // console.log("PATHNAME", pathname);
 

@@ -5,6 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dev": "NEXT_NODE_ENV=development next build",
+    "build:prod": "NEXT_NODE_ENV=production next build",
+    "start:dev": "NEXT_NODE_ENV=development next start",
+    "start:prod": "NEXT_NODE_ENV=production next start",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest --watch --passWithNoTests --coverage",

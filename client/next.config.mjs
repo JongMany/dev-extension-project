@@ -1,12 +1,10 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+  path: `./config/.env.development`,
+});
 
 // console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
-console.log(
-  "NEXTAUTH_URL:",
-  process.env.NEXT_AUTH_URL,
-  process.env.NEXTAUTH_URL
-);
+console.log("NEXTAUTH_URL:", process.env.NEXT_PUBLIC_AUTH_URL, process.env);
 console.log("NEXTAUTH_URL:", process.env.NEXT_PUBLIC_BASE_URL);
 
 /** @type {import('next').NextConfig} */
@@ -38,6 +36,7 @@ const nextConfig = {
     NEXT_AUTH_URL: process.env.NEXT_AUTH_URL,
     NEXTAUTHURL: process.env.NEXT_AUTH_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    MODE: process.env.MODE,
   },
   // rewrites: [
   //   {
