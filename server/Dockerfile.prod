@@ -1,29 +1,35 @@
-# build stage
-# WORKDIR /usr/src/app
-# COPY package*.json ./
-# RUN npm install
+# FROM node:18-alpine AS build
+# RUN mkdir -p /var/app
+# WORKDIR /var/app
 # COPY . .
+# RUN npm install
 # RUN npm run build
-# FROM node:20
-FROM node:18-alpine AS build
-RUN mkdir -p /var/app
-WORKDIR /var/app
-COPY . .
-RUN npm install
-RUN npm run build
-RUN rm -rf ./src
+# RUN rm -rf ./src
 
-EXPOSE 8080
-CMD [ "npm", "run", "start:prod" ]
-
-# prod stage
-# FROM node:18-alpine
-# WORKDIR /usr/src/app
-# ARG NODE_ENV=production
-# ENV NODE_ENV=${NODE_ENV}
-# COPY --from=build /usr/src/app/dist ./dist
-# COPY package*.json ./
-# RUN npm install --only=production
-# RUN rm package*.json
 # EXPOSE 8080
-# CMD ["node", "dist/main.js"]
+# CMD [ "npm", "run", "start:prod" ]
+
+
+# 1. Node.js의 경량 버전 기반 이미지 사용
+FROM node:18-alpine
+
+# 2. 작업 디렉토리 설정
+WORKDIR /app
+
+# 3. package.json과 package-lock.json 복사
+COPY package*.json ./
+
+# 4. 종속성 설치
+RUN npm install
+
+# 5. 애플리케이션 소스 코드 복사
+COPY . .
+
+# 6. Nest.js 애플리케이션 빌드
+RUN npm run build
+
+# 7. 포트 설정 (Nest.js 기본 포트는 3001, 변경 가능)
+EXPOSE 8080
+
+# 8. 애플리케이션 시작
+CMD ["npm", "run", "start:prod"]
