@@ -9,6 +9,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: study-log
+  ECR_REGISTRY: 214925768882.dkr.ecr.ap-northeast-2.amazonaws.com
 
 jobs:
   ci:
@@ -35,20 +36,10 @@ jobs:
           echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
 
-      # - name: Get previous SHA
-      #   id: get-sha
-      #   run: |
-      #     PREV_SHA=$(git rev-parse HEAD~1)
-      #     echo "PREV_SHA=$PREV_SHA" >> $GITHUB_ENV
-
-      # - name: Delete previous image from ECR
-      #   run: |
-      #     aws ecr batch-delete-image --repository-name ${{ env.ECR_REPOSITORY }} --image-ids imageTag=${{ env.PREV_SHA }} --region ${{ env.AWS_REGION }}
-
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./server/Dockerfile.prod ./server
@@ -60,15 +51,17 @@ jobs:
 
       - name: Verify image tag file
         run: cat image-tag.txt
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: image-tag
           path: image-tag.txt
+
   cd:
     name: Deploy Docker Image to Server
     runs-on: [self-hosted, study-log-server]
-    needs: ci # ci 작업이 성공적으로 완료된 후 cd 작업이 실행됩니다
+    needs: ci
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
@@ -82,7 +75,7 @@ jobs:
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -94,6 +87,6 @@ jobs:
 
       - name: Pull image from Amazon ECR and restart container
         run: |
-          docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          docker pull ${{ env.IMAGE_TAG }}
           docker stop test_con || true && docker rm test_con || true
-          docker run -d --name test_con -p 80:80 --restart unless-stopped ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          docker run -d --name test_con -p 80:80 --restart unless-stopped ${{ env.IMAGE_TAG }}
