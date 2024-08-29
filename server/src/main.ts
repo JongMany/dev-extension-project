@@ -11,7 +11,7 @@ const whiteList = [
   'http://localhost:3000',
 ];
 async function bootstrap() {
-  console.log(process.env.MONGO_URI);
+  console.log('MONGO_URI', process.env.MONGO_URI);
   const app = await NestFactory.create(AppModule);
   // // Pre flight request
   // app.use((req: Request, res: Response, next) => {
