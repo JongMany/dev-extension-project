@@ -87,7 +87,8 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo NEST_MONGO_URI=${{ secrets.NEST_MONGO_URI }} > .env
+          echo MONGO_URI="mongodb://devLee:g4345220%21@3.36.88.178:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh%2B2.2.6" > .env
+          # echo MONGO_URI=${{ secrets.MONGO_URI }} > .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
       - name: Set permissions for .env file
         run: chmod 600 .env
