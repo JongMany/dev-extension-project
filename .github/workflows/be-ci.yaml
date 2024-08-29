@@ -35,15 +35,15 @@ jobs:
           echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
 
-      - name: Get previous SHA
-        id: get-sha
-        run: |
-          PREV_SHA=$(git rev-parse HEAD~1)
-          echo "PREV_SHA=$PREV_SHA" >> $GITHUB_ENV
+      # - name: Get previous SHA
+      #   id: get-sha
+      #   run: |
+      #     PREV_SHA=$(git rev-parse HEAD~1)
+      #     echo "PREV_SHA=$PREV_SHA" >> $GITHUB_ENV
 
-      - name: Delete previous image from ECR
-        run: |
-          aws ecr batch-delete-image --repository-name ${{ env.ECR_REPOSITORY }} --image-ids imageTag=${{ env.PREV_SHA }} --region ${{ env.AWS_REGION }}
+      # - name: Delete previous image from ECR
+      #   run: |
+      #     aws ecr batch-delete-image --repository-name ${{ env.ECR_REPOSITORY }} --image-ids imageTag=${{ env.PREV_SHA }} --region ${{ env.AWS_REGION }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
