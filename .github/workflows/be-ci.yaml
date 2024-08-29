@@ -84,7 +84,13 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
+      - name: Debug environment variables
+        run: |
+          echo "ECR_REGISTRY=${{ env.ECR_REGISTRY }}"
+          echo "ECR_REPOSITORY=${{ env.ECR_REPOSITORY }}"
+          echo "IMAGE_TAG=${{ env.IMAGE_TAG }}"
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}"
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
       - name: Pull image from Amazon ECR and restart Docker Container
         run: |
           docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
