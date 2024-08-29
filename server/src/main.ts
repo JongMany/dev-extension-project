@@ -60,12 +60,28 @@ async function bootstrap() {
     next();
   });
 
+  // app.enableCors({
+  //   origin: (origin, callback) => {
+  //     // console.log(origin, whiteList);
+  //     if (!origin || whiteList.indexOf(origin) !== -1) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   },
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  //   credentials: true,
+  //   allowedHeaders:
+  //     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  // });
+
   app.enableCors({
     origin: (origin, callback) => {
-      // console.log(origin, whiteList);
+      console.log(`CORS request from origin: ${origin}`);
       if (!origin || whiteList.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
+        console.log(`Blocked by CORS: ${origin}`);
         callback(new Error('Not allowed by CORS'));
       }
     },
