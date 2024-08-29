@@ -58,6 +58,8 @@ jobs:
       - name: Save image tag to file
         run: echo "${{ steps.build-image.outputs.image }}" > image-tag.txt
 
+      - name: Verify image tag file
+        run: cat image-tag.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
