@@ -30,6 +30,11 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Create .env file from secrets
+        run: |
+          echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
