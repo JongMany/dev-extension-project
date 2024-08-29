@@ -7,9 +7,9 @@ on:
       - completed
 
 env:
-AWS_REGION: ap-northeast-2
-ECR_REPOSITORY: study-log
-ECR_REGISTRY: 214925768882.dkr.ecr.ap-northeast-2.amazonaws.com/study-log
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: study-log
+  ECR_REGISTRY: 214925768882.dkr.ecr.ap-northeast-2.amazonaws.com/study-log
 
 jobs:
   deploy:
