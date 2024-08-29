@@ -25,11 +25,14 @@ RUN npm install
 # 5. 애플리케이션 소스 코드 복사
 COPY . .
 
-# 6. Nest.js 애플리케이션 빌드
+# 6. 애플리케이션 소스 코드 복사
+COPY .env .env
+
+# 7. Nest.js 애플리케이션 빌드
 RUN npm run build
 
-# 7. 포트 설정 (Nest.js 기본 포트는 3001, 변경 가능)
+# 8. 포트 설정 (Nest.js 기본 포트는 3001, 변경 가능)
 EXPOSE 8080
 
-# 8. 애플리케이션 시작
+# 9. 애플리케이션 시작
 CMD ["npm", "run", "start:prod"]
