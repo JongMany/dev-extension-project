@@ -35,6 +35,16 @@ jobs:
           echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
 
+      - name: Get previous SHA
+        id: get-sha
+        run: |
+          PREV_SHA=$(git rev-parse HEAD~1)
+          echo "PREV_SHA=$PREV_SHA" >> $GITHUB_ENV
+
+      - name: Delete previous image from ECR
+        run: |
+          aws ecr batch-delete-image --repository-name ${{ env.ECR_REPOSITORY }} --image-ids imageTag=${{ env.PREV_SHA }} --region ${{ env.AWS_REGION }}
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
@@ -44,3 +54,12 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./server/Dockerfile.prod ./server
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Save image tag to file
+        run: echo "${{ steps.build-image.outputs.image }}" > image-tag.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: image-tag
+          path: image-tag.txt
