@@ -89,4 +89,7 @@ jobs:
         run: |
           docker pull ${{ env.IMAGE_TAG }}
           docker stop study-log-server || true && docker rm study-log-server || true
-          docker run -d --name study-log-server -p 8080:8080 --restart unless-stopped ${{ env.IMAGE_TAG }}
+          docker run -d --name study-log-server -p 8080:8080  --restart unless-stopped \
+            -e MONGO_URI=${{ secrets.MONGO_URI }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            ${{ env.IMAGE_TAG }}
