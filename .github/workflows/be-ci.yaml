@@ -3,8 +3,12 @@ name: Dockerizing to Amazon ECR
 on:
   push:
     branches: ["main"]
+    paths:
+      - "server/**"
   pull_request:
     branches: ["main"]
+    paths:
+      - "server/**"
 
 env:
   AWS_REGION: ap-northeast-2
