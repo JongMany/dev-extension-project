@@ -35,7 +35,7 @@ export default async function Footer() {
             <span>
               <Link
                 href={`/profile/${
-                  session?.user.email || "blackberry1114@naver.com"
+                  session?.user?.email || "blackberry1114@naver.com"
                 }`}
               >
                 프로필

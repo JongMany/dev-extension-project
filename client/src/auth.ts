@@ -74,7 +74,7 @@ export const {
             return null;
           }
 
-          console.log("response", response);
+          console.log("authorize response", response);
 
           if (response.status === 200) {
             // 서버의 쿠키를 받아서 브라우저에 쿠키를 심는 코드 (프론트 서버에 쿠키를 두면 개인정보 문제 발생)
@@ -88,7 +88,7 @@ export const {
                 sameSite: "none",
                 domain:
                   process.env.NODE_ENV === "production"
-                    ? "43.203.82.210"
+                    ? "https://www.study-log.net"
                     : "127.0.0.1",
                 secure: false,
                 maxAge: 1000 * 60 * 60 * 24 * 30, // 14 days
@@ -101,7 +101,7 @@ export const {
               console.error("Email is missing in response data");
               return null;
             }
-            // console.log("data", data, parsed);
+            console.log("authorize data", data, parsed);
             return {
               ...data,
               id: data.apiKey,

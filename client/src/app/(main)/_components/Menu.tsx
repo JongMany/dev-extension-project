@@ -4,13 +4,15 @@ import { auth } from "@/auth";
 
 export const Menu = async () => {
   const session = await auth();
+  console.log('session', session);
   const menuItems = [
     { text: "홈", href: "/main" },
     { text: "대시보드", href: "/dashboard" },
     { text: "목표", href: "/goal" },
     { text: "랭킹", href: "/rank" },
-    { text: "프로필", href: `/profile/${session?.user.email}` },
+    { text: "프로필", href: `/profile/${session?.user?.email}` },
   ];
+
   return (
     <div className="flex-1">
       <ul className="flex justify-center gap-x-10 ">

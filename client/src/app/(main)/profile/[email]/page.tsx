@@ -12,18 +12,18 @@ export default async function ProfilePage({ params }: Props) {
   const { email } = params;
   const session = await auth();
   const decodedEmail = decodeURIComponent(email);
-  console.log(decodeURIComponent(email), session?.user.email);
+  console.log('abcse', decodeURIComponent(email), session?.user?.email);
   return (
     <main className="flex flex-1 min-h-[90vh] justify-between">
       <nav className="flex flex-col w-[250px] items-center px-4 mb-4 border-r-[1px]">
         <h1 className="text-2xl font-bold mb-6">Profile</h1>
         <ProfileView email={decodedEmail} />
-        {session?.user.email === decodedEmail ? <EditButton /> : null}
+        {session?.user?.email === decodedEmail ? <EditButton /> : null}
       </nav>
       <section className="min-w-[700px] flex-1 px-4 py-2">
         <TimeHeatmapContainer email={decodedEmail} />
         <SessionProvider>
-          {session?.user.email === decodedEmail ? (
+          {session?.user?.email === decodedEmail ? (
             <CalendarContainer />
           ) : (
             <SharedCalendarContainer email={decodedEmail} />

@@ -6,19 +6,20 @@ import { useRouter } from "next/navigation";
 export default function SignoutButton() {
   const router = useRouter();
   const signoutHandler = () => {
-    console.log(
+    const URL =
       process.env.NODE_ENV === "production"
-        ? "http://43.203.55.144/signin"
+        ? "https:/www.study-log.net/signin"
         : "http://localhost:3000/signin"
-    );
+
     signOut({
-      callbackUrl:
-        process.env.NODE_ENV === "production"
-          ? "http://43.203.55.144/signin"
-          : "http://localhost:3000/signin",
+      callbackUrl: URL,
       redirect: false,
     }).then(() => {
-      router.replace(process.env.NEXTAUTH_URL || "http://43.203.55.144/signin");
+      const URL = process.env.NODE_ENV === "production"
+        ? "https:/www.study-log.net/signin"
+        : "http://localhost:3000/signin"
+      router.replace(URL);
+      // router.replace(process.env.NEXTAUTH_URL || "http://43.203.55.144/signin");
     });
 
     // localStorage.removeItem("email");
