@@ -1,4 +1,4 @@
-name: Dockerizing to Amazon ECR
+name: FE-Dockerizing to Amazon ECR
 
 on:
   push:
@@ -17,7 +17,7 @@ env:
 
 jobs:
   ci:
-    name: Deploy
+    name: FE-Deploy
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -57,7 +57,7 @@ jobs:
           path: image-tag.txt
 
   cd:
-    name: Deploy Docker Image to Server
+    name: FE-Deploy Docker Image to Server
     runs-on: [self-hosted, study-log-server]
     needs: ci
     steps:
@@ -86,6 +86,7 @@ jobs:
       - name: Create .env file
         run: |
           echo NEXT_AUTH_SECRET="${{ secrets.NEXT_AUTH_SECRET }}" >> .env          
+          echo NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" >> .env          
           echo NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env          
           echo NEXT_PUBLIC_NEXTAUTH_SECRET="${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> .env          
           echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env

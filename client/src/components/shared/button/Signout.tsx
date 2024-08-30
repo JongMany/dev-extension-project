@@ -18,9 +18,7 @@ export default function SignoutButton() {
           : "http://localhost:3000/signin",
       redirect: false,
     }).then(() => {
-      router.replace(
-        process.env.NEXT_AUTH_URL || "http://43.203.55.144/signin"
-      );
+      router.replace(process.env.NEXTAUTH_URL || "http://43.203.55.144/signin");
     });
 
     // localStorage.removeItem("email");

@@ -1,4 +1,4 @@
-name: Dockerizing to Amazon ECR
+name: BE-Dockerizing to Amazon ECR
 
 on:
   push:
@@ -17,7 +17,7 @@ env:
 
 jobs:
   ci:
-    name: Deploy
+    name: BE-Deploy
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -63,7 +63,7 @@ jobs:
           path: image-tag.txt
 
   cd:
-    name: Deploy Docker Image to Server
+    name: BE-Deploy Docker Image to Server
     runs-on: [self-hosted, study-log-server]
     needs: ci
     steps:
