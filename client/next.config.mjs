@@ -4,7 +4,7 @@ dotenv.config({
 });
 
 // console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
-console.log("NEXTAUTH_URL:", process.env.NEXT_PUBLIC_AUTH_URL, process.env);
+console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL, process.env);
 console.log("NEXTAUTH_URL:", process.env.NEXT_PUBLIC_BASE_URL);
 
 /** @type {import('next').NextConfig} */
