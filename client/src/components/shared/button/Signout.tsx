@@ -14,7 +14,7 @@ export default function SignoutButton() {
     }).then(() => {
       console.log("MY URL", process.env.NEXT_PUBLIC_MY_URL)
       // router.replace(`${process.env.NEXT_PUBLIC_MY_URL}/signin`);
-      router.replace(`${process.env.NEXT_PUBLIC_MY_URL}/signin`);
+      router.replace(`/signin`);
     });
   };
 
