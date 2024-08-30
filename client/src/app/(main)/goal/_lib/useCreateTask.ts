@@ -11,7 +11,7 @@ interface Task {
 }
 
 const useCreateTask = () => {
-  const { fetch } = use);
+  const { fetch } = useFetch();
   const queryClient = useQueryClient();
   const router = useRouter();
 
