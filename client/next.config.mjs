@@ -35,8 +35,8 @@ const nextConfig = {
     PORT: "80",
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL, // Added if required
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     MODE: process.env.MODE,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   // rewrites: [
   //   {
