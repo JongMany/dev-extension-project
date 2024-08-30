@@ -140,7 +140,7 @@ export const useFetch = (include: boolean = true) => {
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-      baseUrl: `${process.env.NEXTAUTH_URL}` || "https://www.study-log.net",
+      baseUrl: "https://www.study-log.net",
       // `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
       // `${process.env.NEXT_PUBLIC_BASE_URL}` || "https://www.study-log.net",
       headers: {
