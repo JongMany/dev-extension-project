@@ -7,8 +7,10 @@ export default function SignoutButton() {
   const router = useRouter();
 
   const signoutHandler = () => {
-    const URL = `${process.env.NEXTAUTH_URL || 'https://www.study-log.net/api/auth'}/signin`;
-    console.log('URL', URL);
+    const URL = `${
+      process.env.NEXTAUTH_URL || "https://www.study-log.net/api/auth"
+    }/signin`;
+    console.log("URL", URL);
     signOut({
       callbackUrl: URL,
       redirect: false,
