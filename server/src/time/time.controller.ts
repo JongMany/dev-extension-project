@@ -31,6 +31,7 @@ export class TimeController {
         apiKey,
         payload,
       );
+      console.log('time save', result, payload);
       if (result.status === 'OK') {
         return res.status(HttpStatus.OK).json({ message: 'SUCCESSFUL' });
       } else {
