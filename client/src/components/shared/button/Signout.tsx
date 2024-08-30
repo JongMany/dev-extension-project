@@ -8,6 +8,7 @@ export default function SignoutButton() {
 
   const signoutHandler = () => {
     const URL = `${process.env.NEXTAUTH_URL}/signin`;
+    console.log(URL);
     signOut({
       callbackUrl: URL,
       redirect: false,
