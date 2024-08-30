@@ -80,7 +80,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 
         const res = await fetch(
           `${
-            process.env.NEXT_PUBLIC_BASE_URL || "http://43.203.82.210:8080"
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net"
           }/api/v1/auth/refresh`,
           {
             method: "POST",
@@ -136,9 +136,10 @@ export const useFetch = (include: boolean = true) => {
     `BASEURL, ${process.env.NEXT_PUBLIC_BASE_URL}`,
     `${process.env.NEXTAUTH_URL}`
   );
-  const URL = process.env.NODE_ENV === "production"
-  ? "https:/www.study-log.net"
-  : "http://localhost:8080"
+  const URL =
+    process.env.NODE_ENV === "production"
+      ? "https:/www.study-log.net"
+      : "http://localhost:8080";
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
