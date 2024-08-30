@@ -45,6 +45,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
     interceptors: {
       request: async (requestArgs) => {
         const [url, option] = requestArgs;
+        console.log("request url", url, option);
         const accessToken = session?.user?.accessToken;
 
         return [
@@ -135,7 +136,8 @@ export const useFetch = (include: boolean = true) => {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
       baseUrl:
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
+        // `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
+        `${process.env.NEXT_PUBLIC_BASE_URL}` ||
         "http://43.203.82.210:8080/api",
       headers: {
         Accept: "application/json",
