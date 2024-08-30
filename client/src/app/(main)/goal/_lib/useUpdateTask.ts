@@ -8,7 +8,7 @@ const useUpdateTask = (taskId: string) => {
 
   const updateFn = async (taskForm: IEditTaskForm) => {
     console.log(taskForm);
-    return fetch(`api/goal/${taskId}`, {
+    return fetch(`api/v1/goal/${taskId}`, {
       method: "PATCH",
       body: JSON.stringify(taskForm),
     });

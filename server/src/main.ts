@@ -14,7 +14,7 @@ async function bootstrap() {
   console.log('MONGO_URI', process.env.MONGO_URI);
   const app = await NestFactory.create(AppModule);
   // 모든 경로 앞에 '/api' 프리픽스 추가
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api/v1');
   // // Pre flight request
   // app.use((req: Request, res: Response, next) => {
   //   if (req.method === 'OPTIONS') {

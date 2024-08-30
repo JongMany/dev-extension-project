@@ -80,7 +80,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_BASE_URL || "http://43.203.82.210:8080"
-          }/api/auth/refresh`,
+          }/api/v1/auth/refresh`,
           {
             method: "POST",
             credentials: "include",

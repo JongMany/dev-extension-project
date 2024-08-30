@@ -17,7 +17,7 @@ const useCreateTask = () => {
 
   const createTask = async (task: Task) => {
     console.log(task, "task");
-    const response = await fetch(`api/goal`, {
+    const response = await fetch(`api/v1/goal`, {
       method: "POST",
       body: JSON.stringify({ ...task }),
       // credentials: "include",

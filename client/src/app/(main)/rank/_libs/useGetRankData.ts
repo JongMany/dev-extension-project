@@ -41,7 +41,7 @@ export default function useGetRankData() {
 
   const fetchRank = async (from: string, to: string) => {
     try {
-      const response = await fetch(`api/time/rank/from/${from}/to/${to}`, {
+      const response = await fetch(`api/v1/time/rank/from/${from}/to/${to}`, {
         method: "GET",
       });
       const data = (await response.json()) as { data: RankEntity[] };

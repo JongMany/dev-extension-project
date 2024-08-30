@@ -66,7 +66,7 @@ export default function TimeHeatmap({ email }: { email: string }) {
       const startDayOfYear = format(getStartOfYear(currentYear), "yyyy-MM-dd");
       const endDayOfYear = format(getEndOfYear(currentYear), "yyyy-MM-dd");
       const response = await fetch(
-        `api/time/${email}/from/${startDayOfYear}/to/${endDayOfYear}`
+        `api/v1/time/${email}/from/${startDayOfYear}/to/${endDayOfYear}`
       );
       const data = await response.json();
       return data.data;

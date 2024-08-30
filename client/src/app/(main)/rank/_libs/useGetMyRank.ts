@@ -20,7 +20,7 @@ export default function useGetMyRank(duration: RankDuration) {
     const { from, to } = getFromTo(duration);
 
     const response = await fetch(
-      `api/time/myRank/${email}/from/${from}/to/${to}`
+      `api/v1/time/myRank/${email}/from/${from}/to/${to}`
     );
     const data = (await response.json()) as { data: MyRankEntity };
 

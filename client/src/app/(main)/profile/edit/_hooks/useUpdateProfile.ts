@@ -13,7 +13,7 @@ export function useUpdateProfile() {
   const { mutate } = useMutation({
     mutationFn: async (updatedProfileData: ProfileFormDto) => {
       const updatedForm = mapToProfileBody(updatedProfileData);
-      const response = await fetch(`api/profile`, {
+      const response = await fetch(`api/v1/profile`, {
         method: "POST",
         body: JSON.stringify(updatedForm),
       });
