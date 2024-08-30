@@ -132,6 +132,8 @@ export const useFetch = (include: boolean = true) => {
   //   process.env.NEXT_PUBLIC_BASE_URL
   // );
 
+  console.log(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,

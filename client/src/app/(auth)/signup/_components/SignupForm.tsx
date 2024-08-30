@@ -37,7 +37,7 @@ export default function SignupForm() {
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log("data", data);
       if (data.statusCode === 200) {
         setForm({
           ...form,

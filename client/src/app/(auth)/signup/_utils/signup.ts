@@ -2,11 +2,7 @@ import { type SignupForm } from "@/app/(auth)/signup/_components/SignupButton";
 
 export const signup = async (form: SignupForm) => {
   const response = await fetch(
-    `${
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:8080"
-        : "http://43.203.82.210:8080"
-    }/api/auth/signup`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,
     {
       body: JSON.stringify({
         ...form,
