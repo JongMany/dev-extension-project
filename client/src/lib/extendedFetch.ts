@@ -39,7 +39,7 @@ const refreshAccessToken = async (session: any) => {
 // TODO: 리팩토링..!
 const useCheckTokenInClient: ReturnFetch = (args) => {
   const { data: session, update } = useSession();
-
+  console.log("args", args);
   return returnFetch({
     ...args,
     interceptors: {
