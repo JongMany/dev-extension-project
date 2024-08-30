@@ -132,15 +132,14 @@ export const useFetch = (include: boolean = true) => {
   //   process.env.NEXT_PUBLIC_BASE_URL
   // );
 
-  console.log(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+  console.log(`BASEURL, ${process.env.NEXT_PUBLIC_BASE_URL}`);
 
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-      baseUrl:
-        // `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
-        `${process.env.NEXT_PUBLIC_BASE_URL}` ||
-        "http://43.203.82.210:8080/api",
+      baseUrl: "https://www.study-log.net",
+      // `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
+      // `${process.env.NEXT_PUBLIC_BASE_URL}` || "https://www.study-log.net",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
