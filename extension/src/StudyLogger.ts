@@ -250,7 +250,7 @@ export default class StudyLogger {
     const body = { apiKey: this.config.get("studyLog.apiKey"), payload };
     // console.log(body);
     // const res = await fetch("http://localhost:8080/time/save", {
-    const res = await fetch("https://www.study-log.net/api/time/save", {
+    const res = await fetch("https://www.study-log.net/api/v1/time/save", {
       // const res = await fetch("http://43.203.82.210:8080/time/save", {
       // body: JSON.stringify(body),
       // body: JSON.stringify({ apiKey: "aaaa1111", payload }),
