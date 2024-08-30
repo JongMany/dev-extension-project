@@ -27,8 +27,9 @@ export default function SignupForm() {
   };
 
   const checkDuplicate = (name: keyof Signup) => async () => {
+    console.log("name", name);
     try {
-      const response = await fetch(`api/v1/auth/duplicate-check/${name}`, {
+      const response = await fetch(`/api/v1/auth/duplicate-check/${name}`, {
         method: "POST",
         body: JSON.stringify({
           [name]: form[name].text,

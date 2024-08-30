@@ -10,11 +10,7 @@ export default async function ProfileView({ email }: Props) {
   let UserInfoComponent;
   try {
     const response = await fetch(
-      `${
-        process.env.NODE_ENV === "production"
-          ? "http://43.203.82.210:8080"
-          : "http://localhost:8080"
-      }api/v1/user/nickname/${email}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/user/nickname/${email}`
     );
     const data = await response.json();
 
