@@ -40,7 +40,7 @@ COPY --from=client-build /app/next.config.mjs ./next.config.mjs
 COPY --from=client-build /app/package.json ./package.json
 
 # 환경 변수 파일 복사
-COPY --from=client-build /app/.env .env
+# COPY --from=client-build /app/.env .env
 
 
 # 포트 설정
