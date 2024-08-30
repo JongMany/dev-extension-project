@@ -17,8 +17,8 @@ COPY . .
 # COPY ./config ./config
 # 빌드 시 사용할 환경 변수 파일 복사
 # 기본적으로 development 환경 변수 파일을 사용
-ARG ENV_FILE=.env.production
-COPY config/$ENV_FILE .env
+# ARG ENV_FILE=.env.production
+# COPY config/$ENV_FILE .env
 
 # Next.js 애플리케이션 빌드
 RUN npm run build:prod
