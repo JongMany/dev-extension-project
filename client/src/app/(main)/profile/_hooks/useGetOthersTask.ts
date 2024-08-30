@@ -6,7 +6,7 @@ export default function useGetOthersTask(email: string) {
   const { fetch } = useFetch();
   const fetchOtherTask = async (email: string) => {
     try {
-      const response = await fetch(`/goal/${email}`, {
+      const response = await fetch(`api/goal/${email}`, {
         method: "GET",
         cache: "default",
         credentials: "include",

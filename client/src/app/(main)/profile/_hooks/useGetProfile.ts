@@ -8,7 +8,7 @@ export const useGetProfile = (email: string) => {
   const { data, isFetching, isError, error } = useQuery({
     queryKey: ["profile", email],
     queryFn: async () => {
-      const response = await fetch(`/profile/${email}`, {
+      const response = await fetch(`api/profile/${email}`, {
         credentials: "include",
         method: "GET",
         cache: "default",

@@ -9,7 +9,7 @@ const refreshAccessToken = async (session: any) => {
   const { update, data: sessionData } = session;
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/auth/refresh`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/refresh`,
     {
       method: "POST",
       credentials: "include",
@@ -80,7 +80,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_BASE_URL || "http://43.203.82.210:8080"
-          }/auth/refresh`,
+          }/api/auth/refresh`,
           {
             method: "POST",
             credentials: "include",
@@ -134,7 +134,9 @@ export const useFetch = (include: boolean = true) => {
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-      baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://43.203.82.210:8080",
+      baseUrl:
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
+        "http://43.203.82.210:8080/api",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

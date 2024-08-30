@@ -67,7 +67,7 @@ export const fetchServer = async (path: string, init?: RequestInit) => {
 
   const fetchFn = httpClient({
     // baseUrl: "https://jsonplaceholder.typicode.com/posts",
-    baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

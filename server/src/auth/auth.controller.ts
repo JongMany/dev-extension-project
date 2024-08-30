@@ -8,7 +8,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { AuthService } from 'src/auth/auth.service';
 import {
@@ -21,8 +21,8 @@ import {
 import { SigninDto } from 'src/auth/dto/signin.dto';
 import { SignupDto } from 'src/auth/dto/signup.dto';
 import { JwtRefreshGuard } from 'src/auth/guards/jwt-refresh.guard';
-import { JwtAcessStrategy } from 'src/auth/jwt-access.strategy';
-import { JwtRefreshStrategy } from 'src/auth/jwt-refresh.strategy';
+// import { JwtAcessStrategy } from 'src/auth/jwt-access.strategy';
+// import { JwtRefreshStrategy } from 'src/auth/jwt-refresh.strategy';
 import { JwtDto } from 'src/types/jwtDto.types';
 
 @Controller('auth')
@@ -38,7 +38,8 @@ export class AuthController {
     // console.log('signupDto', signupDto);
 
     try {
-      await this.authService.signup(signupDto);
+      const user = await this.authService.signup(signupDto);
+      console.log('user', user);
       return res.status(HttpStatus.CREATED).json({ message: 'User created' });
     } catch (error) {
       console.log('error', error);

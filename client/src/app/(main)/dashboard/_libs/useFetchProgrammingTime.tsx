@@ -19,7 +19,7 @@ export default function useFetchProgrammingTime() {
     const email = session?.user.email;
     if (!email) return;
     const response = await fetch(
-      `/time/overall/${email}/from/${from}/to/${to}`
+      `api/time/overall/${email}/from/${from}/to/${to}`
     );
 
     const data = (await response.json()) as { data: IProgramData[] };

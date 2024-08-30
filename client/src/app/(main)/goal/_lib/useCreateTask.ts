@@ -11,13 +11,13 @@ interface Task {
 }
 
 const useCreateTask = () => {
-  const { fetch } = useFetch();
+  const { fetch } = use);
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const createTask = async (task: Task) => {
     console.log(task, "task");
-    const response = await fetch(`/goal`, {
+    const response = await fetch(`api/goal`, {
       method: "POST",
       body: JSON.stringify({ ...task }),
       // credentials: "include",

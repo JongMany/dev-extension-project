@@ -6,7 +6,7 @@ export const signup = async (form: SignupForm) => {
       process.env.NODE_ENV === "development"
         ? "http://localhost:8080"
         : "http://43.203.82.210:8080"
-    }/auth/signup`,
+    }/api/auth/signup`,
     {
       body: JSON.stringify({
         ...form,

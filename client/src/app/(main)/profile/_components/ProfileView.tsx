@@ -14,7 +14,7 @@ export default async function ProfileView({ email }: Props) {
         process.env.NODE_ENV === "production"
           ? "http://43.203.82.210:8080"
           : "http://localhost:8080"
-      }/user/nickname/${email}`
+      }api/user/nickname/${email}`
     );
     const data = await response.json();
 

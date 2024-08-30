@@ -9,7 +9,7 @@ export function useGetAllTasks() {
   return useQuery({
     queryKey,
     queryFn: async () => {
-      const res = await fetch(`/goal/all`, {
+      const res = await fetch(`api/goal/all`, {
         method: "GET",
         cache: "default",
         credentials: "include",
@@ -33,7 +33,7 @@ export function useGetAllTasks() {
 }
 
 export const getTask = async () => {
-  const res = await fetch(`/goal/all`, {
+  const res = await fetch(`api/goal/all`, {
     method: "GET",
     cache: "default",
     credentials: "include",

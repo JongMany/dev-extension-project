@@ -11,7 +11,7 @@ export const useUpdateTaskDueDate = () => {
   const queryClient = useQueryClient();
 
   const updateFn = async (updatedDateTask: UpdateDateTask) => {
-    return fetch(`/goal/${updatedDateTask.taskId}`, {
+    return fetch(`api/goal/${updatedDateTask.taskId}`, {
       method: "PATCH",
       body: JSON.stringify({
         dueDate: updatedDateTask.updatedDate,

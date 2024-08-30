@@ -6,7 +6,7 @@ const useDeleteTask = (taskId: string) => {
   const queryClient = useQueryClient();
 
   const deleteTask = async () => {
-    return fetch(`/goal/${taskId}`, {
+    return fetch(`api/goal/${taskId}`, {
       method: "DELETE",
     });
   };

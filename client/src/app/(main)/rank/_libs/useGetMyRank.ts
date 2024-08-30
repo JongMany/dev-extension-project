@@ -19,7 +19,9 @@ export default function useGetMyRank(duration: RankDuration) {
     const email = session?.user.email!;
     const { from, to } = getFromTo(duration);
 
-    const response = await fetch(`/time/myRank/${email}/from/${from}/to/${to}`);
+    const response = await fetch(
+      `api/time/myRank/${email}/from/${from}/to/${to}`
+    );
     const data = (await response.json()) as { data: MyRankEntity };
 
     if (!data) return null;

@@ -1,33 +1,33 @@
-import {ProfileFormDto} from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
-import {useFetch} from "@/lib/extendedFetch";
+import { ProfileFormDto } from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useFetch } from "@/lib/extendedFetch";
 
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const {data} = useSession();
-  const {fetch} = useFetch();
+  const { data } = useSession();
+  const { fetch } = useFetch();
 
-  const {mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async (updatedProfileData: ProfileFormDto) => {
-      const updatedForm = mapToProfileBody(updatedProfileData)
-      const response = await fetch(`/profile`, {
+      const updatedForm = mapToProfileBody(updatedProfileData);
+      const response = await fetch(`api/profile`, {
         method: "POST",
         body: JSON.stringify(updatedForm),
       });
       const data = await response.json();
-      console.log(data)
+      console.log(data);
     },
     onSuccess: async () => {
       router.replace(`/profile/${data?.user?.email}`);
       await queryClient.invalidateQueries({
-        queryKey: ["profile", data?.user?.email]
-      })
-    }
+        queryKey: ["profile", data?.user?.email],
+      });
+    },
   });
-  return {mutate}
+  return { mutate };
 }
 
 function mapToProfileBody(profileFormDto: ProfileFormDto) {
@@ -36,6 +36,6 @@ function mapToProfileBody(profileFormDto: ProfileFormDto) {
     company: profileFormDto.company,
     instaId: profileFormDto.instagramId,
     introduction: profileFormDto.introduction,
-    link: profileFormDto.link.filter(data => data)
-  }
+    link: profileFormDto.link.filter((data) => data),
+  };
 }
