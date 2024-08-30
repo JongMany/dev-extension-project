@@ -3,12 +3,12 @@ name: Dockerizing to Amazon ECR
 on:
   push:
     branches: ["main"]
-    paths:
-      - "client/**"
+    # paths:
+    #   - "client/**"
   pull_request:
     branches: ["main"]
-    paths:
-      - "client/**"
+    # paths:
+    #   - "client/**"
 
 env:
   AWS_REGION: ap-northeast-2
@@ -40,7 +40,7 @@ jobs:
           ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./server/Dockerfile.prod ./server
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./client/Dockerfile.prod ./client
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
