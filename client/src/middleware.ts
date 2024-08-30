@@ -24,13 +24,13 @@ export async function middleware(request: NextRequest) {
   }
   if (pathname === "/profile") {
     return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL}/profile/${session?.user.nickname}`
+      `${process.env.NEXT_PUBLIC_MY_URL}/profile/${session?.user.nickname}`
     );
   }
   if (session && pathname === "/") {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/main`);
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_MY_URL}/main`);
   } else if (!session && pathname !== "/") {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`);
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_MY_URL}`);
   } else {
     return NextResponse.next();
   }
