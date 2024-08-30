@@ -2,7 +2,7 @@
   "name": "study-log",
   "displayName": "study-log",
   "description": "logging about prgramming time",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.86.0"
   },
