@@ -90,6 +90,7 @@ jobs:
           echo NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env          
           echo NEXT_PUBLIC_NEXTAUTH_SECRET="${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> .env          
           echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
+          echo NEXT_PUBLIC_MY_URL="${{ secrets.NEXT_PUBLIC_MY_URL }}" >> .env
       - name: Set permissions for .env file
         run: chmod 600 .env
       - name: Verify .env file contents

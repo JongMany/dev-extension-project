@@ -5,25 +5,15 @@ import { useRouter } from "next/navigation";
 
 export default function SignoutButton() {
   const router = useRouter();
-  const signoutHandler = () => {
-    const URL =
-      process.env.NODE_ENV === "production"
-        ? "https:/www.study-log.net/signin"
-        : "http://localhost:3000/signin"
 
+  const signoutHandler = () => {
+    const URL = `${process.env.NEXTAUTH_URL}/signin`;
     signOut({
       callbackUrl: URL,
       redirect: false,
     }).then(() => {
-      const URL = process.env.NODE_ENV === "production"
-        ? "https:/www.study-log.net/signin"
-        : "http://localhost:3000/signin"
-      router.replace(URL);
-      // router.replace(process.env.NEXTAUTH_URL || "http://43.203.55.144/signin");
+      router.replace(`${process.env.NEXT_PUBLIC_MY_URL}/signin`);
     });
-
-    // localStorage.removeItem("email");
-    // localStorage.removeItem("accessToken");
   };
 
   return (
