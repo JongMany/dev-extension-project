@@ -1,9 +1,9 @@
-import { type SignupForm } from "@/app/(auth)/signup/_components/SignupButton";
+import { type SignUpForm } from "@/app/(auth)/signup/_components/SignUpButton";
 
-export const signup = async (form: SignupForm) => {
+export const signUp = async (form: SignUpForm) => {
   const response = await fetch(
-    // `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,
-    `/api/v1/auth/signup`,
+    // `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signUp`,
+    `/api/v1/auth/signUp`,
     {
       body: JSON.stringify({
         ...form,

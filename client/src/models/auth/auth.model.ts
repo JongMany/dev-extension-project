@@ -1,17 +1,17 @@
-export interface Signin {
+export interface SignIn {
   apiKey: string;
   password: string;
   email: string;
 }
 
-export interface Signup {
-  apiKey: SignupItemForm;
-  password: SignupItemForm;
-  email: SignupItemForm;
-  nickname: SignupItemForm;
+export interface SignUp {
+  apiKey: SignUpItemForm;
+  password: SignUpItemForm;
+  email: SignUpItemForm;
+  nickname: SignUpItemForm;
 }
 
-type SignupItemForm = {
+type SignUpItemForm = {
   text: string;
   checkDuplicate: boolean;
 };

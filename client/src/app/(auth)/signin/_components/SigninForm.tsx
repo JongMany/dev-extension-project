@@ -1,17 +1,17 @@
 "use client";
 
-import SigninButton from "@/app/(auth)/(signin)/_components/SigninButton";
-import { type Signin } from "@/models/auth/auth.model";
+import SignInButton from "@/app/(auth)/(signin)/_components/SignInButton";
+import { type SignIn } from "@/models/auth/auth.model";
 import { type ChangeEventHandler, useState } from "react";
 
-const initialState: Signin = {
+const initialState: SignIn = {
   apiKey: "",
   password: "",
   email: "",
 };
 
-export default function SigninForm() {
-  const [form, setForm] = useState(initialState);
+export default function SignInForm() {
+  const [form, setForm] = useState<SignIn>(initialState);
 
   const formChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -61,7 +61,7 @@ export default function SigninForm() {
           value={form.apiKey}
         />
       </div>
-      <SigninButton form={form} />
+      <SignInButton form={form} />
     </form>
   );
 }

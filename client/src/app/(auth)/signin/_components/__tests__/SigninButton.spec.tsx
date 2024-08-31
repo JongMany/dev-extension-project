@@ -1,13 +1,13 @@
-import SigninButton from "@/app/(auth)/(signin)/_components/SigninButton";
-import { Signin } from "@/models/auth/auth.model";
+import SignInButton from "@/app/(auth)/(signin)/_components/SignInButton";
+import { SignIn } from "@/models/auth/auth.model";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { signIn } from "next-auth/react";
 
 const pushMock = vi.fn((href: string) => {});
 
-describe("SigninButton", () => {
-  let form: Signin;
+describe("SignInButton", () => {
+  let form: SignIn;
 
   beforeEach(() => {
     form = {
@@ -28,13 +28,13 @@ describe("SigninButton", () => {
   });
 
   it("should render the component", () => {
-    render(<SigninButton form={form} />);
+    render(<SignInButton form={form} />);
     const button = screen.getByText("로그인");
     expect(button).toBeInTheDocument();
   });
 
   it("버튼을 클릭한 경우, signIn 함수에 'credentials'와 form 데이터를 인자로 넘겨서 호출합니다.", async () => {
-    render(<SigninButton form={form} />);
+    render(<SignInButton form={form} />);
     const button = screen.getByRole("button");
     await userEvent.click(button);
 
@@ -54,7 +54,7 @@ describe("SigninButton", () => {
       };
     });
 
-    render(<SigninButton form={form} />);
+    render(<SignInButton form={form} />);
 
     const button = screen.getByRole("button");
     await userEvent.click(button);
@@ -70,7 +70,7 @@ describe("SigninButton", () => {
     vi.mock("next-auth/react", () => ({
       signIn: vi.fn(() => Promise.resolve({ error: "CredentialSignIn" })),
     }));
-    render(<SigninButton form={form} />);
+    render(<SignInButton form={form} />);
     const button = screen.getByRole("button");
     await userEvent.click(button);
     expect(signIn).toHaveNthReturnedWith(1, { error: "CredentialSignIn" });
