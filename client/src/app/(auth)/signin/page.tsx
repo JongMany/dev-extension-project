@@ -9,7 +9,7 @@ export default function Home() {
           Study Log | 당신의 개발 시간을 관리해드립니다.
         </h1>
         <div className="flex flex-col items-center">
-          <h2 className="py-4 font-bold text-2xl">로그인</h2>
+          <h2 className="py-4 font-bold text-xl">로그인</h2>
           <SignInForm />
           <hr className="border-b-1 my-2" />
           <div className="flex flex-col items-center decoration-solid underline gap-y-1 underline-offset-4">
