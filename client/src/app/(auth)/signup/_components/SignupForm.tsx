@@ -1,32 +1,32 @@
 "use client";
 
 import { type ChangeEventHandler, useState } from "react";
-import { type Signup } from "@/models/auth/auth.model";
-import SignupButton from "@/app/(auth)/signup/_components/SignupButton";
+import { type SignUp } from "@/models/auth/auth.model";
+import SignUpButton from "@/app/(auth)/signup/_components/SignUpButton";
 import CheckDuplicateButton from "@/app/(auth)/signup/_components/CheckDuplicateButton";
 import { useFetch } from "@/lib/extendedFetch";
 
-const initialState: Signup = {
+const initialState: SignUp = {
   apiKey: { text: "", checkDuplicate: false },
   password: { text: "", checkDuplicate: true },
   email: { text: "", checkDuplicate: false },
   nickname: { text: "", checkDuplicate: false },
 };
 
-export default function SignupForm() {
+export default function SignUpForm() {
   const [form, setForm] = useState(initialState);
   const { fetch } = useFetch();
   const formChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     setForm({
       ...form,
       [e.target.name]: {
-        ...form[e.target.name as keyof Signup],
+        ...form[e.target.name as keyof SignUp],
         text: e.target.value,
       },
     });
   };
 
-  const checkDuplicate = (name: keyof Signup) => async () => {
+  const checkDuplicate = (name: keyof SignUp) => async () => {
     console.log("name", name);
     try {
       const response = await fetch(`/api/v1/auth/duplicate-check/${name}`, {
@@ -62,7 +62,7 @@ export default function SignupForm() {
 
   return (
     <form className="flex flex-col items-center">
-      <div className="w-[100%] px-8 pb-4 grid grid-cols-signup gap-y-4">
+      <div className="w-[100%] px-8 pb-4 grid grid-cols-signUp gap-y-4">
         <label htmlFor="email" className="mr-4 font-semibold text-base">
           이메일
         </label>
@@ -146,7 +146,7 @@ export default function SignupForm() {
             : "중복 검사 완료"}
         </div>
       </div>
-      <SignupButton form={form} />
+      <SignUpButton form={form} />
     </form>
   );
 }

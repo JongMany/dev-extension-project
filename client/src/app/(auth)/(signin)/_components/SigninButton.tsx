@@ -1,12 +1,12 @@
 import { useRouter } from "next/navigation";
-import { type Signin } from "@/models/auth/auth.model";
+import { type SignIn } from "@/models/auth/auth.model";
 import { signIn } from "next-auth/react";
 
 type Props = {
-  form: Signin;
+  form: SignIn;
 };
 
-export default function SigninButton({ form }: Props) {
+export default function SignInButton({ form }: Props) {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
