@@ -1,6 +1,7 @@
-import { MenuItem } from "@/app/(main)/_components/MenuItem";
+
 import Link from "next/link";
 import { auth } from "@/auth";
+import {MenuItem} from "@components/shared/header/menu/MenuItem";
 
 export const Menu = async () => {
   const session = await auth();

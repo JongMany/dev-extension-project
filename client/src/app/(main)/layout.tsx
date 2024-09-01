@@ -1,7 +1,8 @@
-import Footer from "@/app/(main)/_components/Footer";
-import { Header } from "@/app/(main)/_components/Header";
+
 import { PropsWithChildren } from "react";
 import Warp from "@/app/(main)/main/_components/Warp";
+import { Header } from "@/components/shared/header";
+import Footer from "@components/shared/footer/Footer";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
