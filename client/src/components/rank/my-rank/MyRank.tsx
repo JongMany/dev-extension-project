@@ -2,10 +2,12 @@
 import React, { MouseEvent, useState } from "react";
 
 import { RankDuration } from "@/entities/duration";
-import { formatSecondsToTime } from "@/utils/date/date";
+import { formatSecondsToTime } from "@utils/shared/date/date";
 import { MyRank as IMyRank } from "@/entities/ranking";
-import { getRankTextColor } from "@/app/(main)/rank/_utils/rankStyle";
-import useGetMyRank from "@/app/(main)/rank/_libs/useGetMyRank";
+
+
+import {getRankTextColor} from "@utils/rank/make-ranking-style/rankStyle";
+import useQueryMyRank from "@hooks/rank/useQueryMyRank";
 
 const rankMapper = {
   DAY: "일간",
@@ -17,7 +19,7 @@ const defaultBtnStyle = "transition-all duration-300";
 
 export default function MyRank() {
   const [selectedDuration, setSelectedDuration] = useState<RankDuration>("DAY");
-  const { isLoading, isError, data } = useGetMyRank(selectedDuration);
+  const { isLoading, isError, data } = useQueryMyRank(selectedDuration);
 
   const selectRankDuration = (e: MouseEvent<HTMLButtonElement>) => {
     const duration = e.currentTarget.name as RankDuration;

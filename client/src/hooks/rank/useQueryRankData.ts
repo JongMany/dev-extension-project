@@ -5,11 +5,11 @@ import {
   getThisMonthLastDay,
   getThisWeekMonday,
   getThisWeekSunday,
-} from "@/utils/date/date";
+} from "@utils/shared/date/date";
 import { useQueries } from "@tanstack/react-query";
 import { format } from "date-fns";
 
-export default function useGetRankData() {
+export default function useQueryRankData() {
   const { fetch } = useFetch();
   const today = new Date();
 

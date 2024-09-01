@@ -6,7 +6,7 @@ import {
   getThisWeekSunday,
   getThisYearFirstDay,
   getThisYearLastDay,
-} from "@/utils/date/date";
+} from "@utils/shared/date/date";
 import { format } from "date-fns";
 
 export function getFromDate(duration: Duration) {

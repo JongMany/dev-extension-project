@@ -12,7 +12,7 @@ import {
   TitleComponent,
 } from "echarts/components";
 import { EChartsOption } from "echarts-for-react";
-import {formatSecondsToTime} from "@utils/date/date";
+import {formatSecondsToTime} from "@utils/shared/date/date";
 
 type Props = {
   data: { language: string; duration: number }[];
