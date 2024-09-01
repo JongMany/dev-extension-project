@@ -7,7 +7,7 @@ import { MyRank as IMyRank } from "@/entities/ranking";
 
 
 import {getRankTextColor} from "@utils/rank/make-ranking-style/rankStyle";
-import useGetMyRank from "@hooks/rank/useGetMyRank";
+import useQueryMyRank from "@hooks/rank/useQueryMyRank";
 
 const rankMapper = {
   DAY: "일간",
@@ -19,7 +19,7 @@ const defaultBtnStyle = "transition-all duration-300";
 
 export default function MyRank() {
   const [selectedDuration, setSelectedDuration] = useState<RankDuration>("DAY");
-  const { isLoading, isError, data } = useGetMyRank(selectedDuration);
+  const { isLoading, isError, data } = useQueryMyRank(selectedDuration);
 
   const selectRankDuration = (e: MouseEvent<HTMLButtonElement>) => {
     const duration = e.currentTarget.name as RankDuration;

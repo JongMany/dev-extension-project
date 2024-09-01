@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 
-export default function useGetMyRank(duration: RankDuration) {
+export default function useQueryMyRank(duration: RankDuration) {
   const { fetch } = useFetch();
   const { data: session } = useSession();
 
