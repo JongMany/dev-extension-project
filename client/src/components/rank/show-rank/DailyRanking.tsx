@@ -1,10 +1,9 @@
 "use client";
-import RankUI from "@/app/(main)/rank/_components/RankUI";
-import { getRankTextColor } from "@/app/(main)/rank/_utils/rankStyle";
 import { Rank } from "@/entities/ranking";
 
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import RankUI from "@components/rank/show-rank/RankUI";
 
 export default function DailyRanking() {
   const queryClient = useQueryClient();

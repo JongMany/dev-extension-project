@@ -1,10 +1,11 @@
 "use client";
 import React, { MouseEvent, useState } from "react";
-import useGetMyRank from "../_libs/useGetMyRank";
+
 import { RankDuration } from "@/entities/duration";
 import { formatSecondsToTime } from "@/utils/date/date";
 import { MyRank as IMyRank } from "@/entities/ranking";
 import { getRankTextColor } from "@/app/(main)/rank/_utils/rankStyle";
+import useGetMyRank from "@/app/(main)/rank/_libs/useGetMyRank";
 
 const rankMapper = {
   DAY: "일간",

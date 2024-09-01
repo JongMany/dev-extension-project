@@ -1,7 +1,5 @@
-import MyRank from "@/app/(main)/rank/_components/MyRank";
-import RankContainer from "@/app/(main)/rank/_components/RankContainer";
-import RankHeader from "@/app/(main)/rank/_components/RankHeader";
 import SessionProvider from "@/components/providers/SessionProvider";
+import {MyRank, RankContainer, RankHeader} from "@components/rank";
 
 export default function RankPage() {
   return (

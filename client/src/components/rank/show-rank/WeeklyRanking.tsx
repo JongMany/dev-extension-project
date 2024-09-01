@@ -1,8 +1,8 @@
-import RankUI from "@/app/(main)/rank/_components/RankUI";
+
 import { Rank } from "@/entities/ranking";
-import { formatSecondsToTime } from "@/utils/date/date";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import RankUI from "@components/rank/show-rank/RankUI";
 
 export default function WeeklyRanking() {
   const queryClient = useQueryClient();
