@@ -1,5 +1,4 @@
 import { useFrame } from "@react-three/fiber";
-// import { getRandomFloat, getRandomInt } from '../lib/utils';
 import React, { useMemo } from "react";
 import * as THREE from "three";
 import {
@@ -12,11 +11,7 @@ import {
   SPACE_WARP_Y_MIN,
   type WarpStateType,
 } from "../lib/constants";
-import {
-  getRandomFloat,
-  getRandomInt,
-} from "@/app/(main)/_components/warp/lib/utils";
-// import { WarpStateType } from 'shared/lib';
+import {getRandomFloat, getRandomInt} from "@components/shared/warp/lib/utils";
 
 const getSpaceWarpLinesInfo = () => {
   const positions = Array.from({ length: SPACE_WARP_LINES_NUM }, () => {

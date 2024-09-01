@@ -1,7 +1,9 @@
 "use client";
-import WarpScreen from "@/app/(main)/_components/warp/WarpScreen";
-import { WarpStateType } from "@/app/(main)/_components/warp/lib/constants";
+
+
 import React, { useEffect, useState } from "react";
+import WarpScreen from "@components/shared/warp/WarpScreen";
+import {WarpStateType} from "@components/shared/warp/lib/constants";
 
 export default function Warp() {
   const [isSwitching, setIsSwitching] = useState<WarpStateType>("end");
@@ -14,16 +16,16 @@ export default function Warp() {
   }, []);
 
   useEffect(() => {
-    const setReload = () => { 
+    const setReload = () => {
       console.log('reload');
       sessionStorage.setItem("isReload", "true");
-  }
+    }
 
     window.addEventListener("beforeunload", setReload);
 
     return () => window.removeEventListener("beforeunload", setReload);
   }, []);
   return (
-    <WarpScreen isSwitching={isSwitching} setIsSwitching={setIsSwitching} />
+      <WarpScreen isSwitching={isSwitching} setIsSwitching={setIsSwitching} />
   );
 }
