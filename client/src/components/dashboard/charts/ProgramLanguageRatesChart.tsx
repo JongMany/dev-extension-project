@@ -1,8 +1,9 @@
 "use client";
-import PieChartContainer from "@/app/(main)/dashboard/_components/charts/PieChartContainer";
+
 import { IProgramData } from "@/entities/programData";
 import { useDuration } from "@/store/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
+import PieChartContainer from "@components/shared/charts/PieChartContainer";
 
 export default function ProgramLanguageRatesChart() {
   const queryClient = useQueryClient();

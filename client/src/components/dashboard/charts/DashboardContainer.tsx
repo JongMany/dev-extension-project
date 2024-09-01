@@ -1,11 +1,12 @@
 "use client";
-import DashboardCard from "@/app/(main)/dashboard/_components/DashboardCard";
-import HierachyChart from "@/app/(main)/dashboard/_components/HierachyChart";
-import ProgramLanguageRatesChart from "@/app/(main)/dashboard/_components/ProgramLanguageRatesChart";
-import ProgramTimeSeriesChart from "@/app/(main)/dashboard/_components/ProgramTimeSeriesChart";
-import ProjectDepsChart from "@/app/(main)/dashboard/_components/ProjectDepsChart";
+
 import useFetchProgrammingTime from "@/app/(main)/dashboard/_libs/useFetchProgrammingTime";
 import React from "react";
+import DashboardCard from "@components/dashboard/charts/DashboardCard";
+import ProgramTimeSeriesChart from "@components/dashboard/charts/ProgramTimeSeriesChart";
+import ProgramLanguageRatesChart from "@components/dashboard/charts/ProgramLanguageRatesChart";
+import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
+import HierarchyChart from "@components/dashboard/charts/HierarchyChart";
 
 export default function DashboardContainer() {
   const { data, isFetching, isError } = useFetchProgrammingTime();
@@ -47,7 +48,7 @@ export default function DashboardContainer() {
         <DashboardCard>
           {isFetching && <>로딩 중...</>}
           {isError && <>에러 발생</>}
-          {data && <HierachyChart />}
+          {data && <HierarchyChart />}
         </DashboardCard>
       </div>
     </section>

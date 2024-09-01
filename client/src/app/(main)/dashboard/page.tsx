@@ -1,6 +1,6 @@
-import DashboardContainer from "@/app/(main)/dashboard/_components/DashboardContainer";
-import DashboardHeader from "@/app/(main)/dashboard/_components/DashboardHeader";
+
 import SessionProvider from "@/components/providers/SessionProvider";
+import {DashboardContainer, DashboardHeader} from "@components/dashboard";
 
 export default function DashboardPage() {
   // 대시보드
