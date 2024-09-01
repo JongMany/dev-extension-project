@@ -1,13 +1,10 @@
 "use client";
-import { useGetAllTasks } from "@/app/(main)/goal/_lib/useGetAllTasks";
-
-
-
 import moment from "moment";
 
 import React from "react";
 import { momentLocalizer } from "react-big-calendar";
 import TaskDNDCalendar from "@components/profile/calendar/TaskDNDCalendar";
+import {useGetAllTasks} from "@hooks/task/useGetAllTasks";
 
 export default function CalendarContainer() {
   const { data } = useGetAllTasks();
