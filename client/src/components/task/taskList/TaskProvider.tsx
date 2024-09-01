@@ -1,8 +1,9 @@
 
-import { useGetAllTasks } from "@/app/(main)/goal/_lib/useGetAllTasks";
+
 import { Task } from "@/entities/task";
 import { PropsWithChildren, createContext, useContext } from "react";
 import TaskItem from "@components/task/taskList/TaskItem";
+import {useGetAllTasks} from "@hooks/task/useGetAllTasks";
 
 type TaskContextType = {
   tasks: Task[] | undefined;

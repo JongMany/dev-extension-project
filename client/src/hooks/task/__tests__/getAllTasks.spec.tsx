@@ -1,8 +1,11 @@
-import { createWrapper } from "@/tests/utils/wrapper";
+
 import { renderHook, waitFor } from "@testing-library/react";
-import { server } from "../../../../../../vitest.setup";
+
 import { HttpResponse, http } from "msw";
-import { getTask, useGetAllTasks } from "@/app/(main)/goal/_lib/useGetAllTasks";
+
+import {createWrapper} from "@/tests/utils/wrapper";
+import {server} from "../../../../vitest.setup";
+import {getTask, useGetAllTasks} from "@hooks/task/useGetAllTasks";
 
 const goals = {
   goals: [

@@ -3,9 +3,10 @@ import { format } from "date-fns";
 
 import { useModal } from "@/lib/useModal";
 
-import useUpdateTask from "@/app/(main)/goal/_lib/useUpdateTask";
+
 import { Task } from "@/entities/task";
 import EditTaskModal from "@components/task/taskList/EditTaskModal";
+import useUpdateTask from "@hooks/task/useUpdateTask";
 
 // DND https://velog.io/@sumi-0011/framer-motion-dnd
 type Props = {

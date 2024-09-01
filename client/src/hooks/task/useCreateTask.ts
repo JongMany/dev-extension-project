@@ -16,7 +16,7 @@ const useCreateTask = () => {
   const router = useRouter();
 
   const createTask = async (task: Task) => {
-    console.log(task, "task");
+    
     const response = await fetch(`api/v1/goal`, {
       method: "POST",
       body: JSON.stringify({ ...task }),
