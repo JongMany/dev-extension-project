@@ -1,6 +1,6 @@
-import MainText from "@/app/(main)/main/_components/MainText";
-import TypingCarousel from "@/app/(main)/main/_components/TypingCarousel";
-import Image from "next/image";
+import MainText from "@components/main/MainText";
+import TypingCarousel from "@components/main/TypingCarousel";
+
 
 export default function HeadTitle() {
   return (
