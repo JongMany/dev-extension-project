@@ -1,8 +1,9 @@
 "use client";
 
-import TimeHeatmap from "@/app/(main)/profile/_components/TimeHeatmap";
+
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import TimeHeatmap from "@components/profile/timeHeatmap/TimeHeatmap";
 
 export default function TimeHeatmapContainer({ email }: { email: string }) {
   const { data: session } = useSession();

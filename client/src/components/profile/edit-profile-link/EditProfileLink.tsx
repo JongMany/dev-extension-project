@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const EditButton = () => {
+const EditProfileLink = () => {
   return (
     <Link href="/profile/edit">프로필 수정</Link>
   );
 };
 
-export default EditButton;
+export default EditProfileLink;

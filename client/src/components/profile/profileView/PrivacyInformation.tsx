@@ -2,9 +2,10 @@
 import React from "react";
 import Link from "next/link";
 
-import LineDivider from "@/app/(main)/profile/_components/LineDivider";
+
 import { useGetProfile } from "@/app/(main)/profile/_hooks/useGetProfile";
 import { useSession } from "next-auth/react";
+import LineDivider from "@components/shared/line-divider/LineDivider";
 
 const infoClassName = "flex items-start gap-x-1 break-all";
 
