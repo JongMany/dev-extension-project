@@ -1,10 +1,11 @@
 "use client";
 
 import { type ChangeEventHandler, useState } from "react";
-import { type SignUp } from "@/models/auth/auth.model";
+
 import SignUpButton from "@/app/(auth)/signup/_components/SignUpButton";
 import CheckDuplicateButton from "@/app/(auth)/signup/_components/CheckDuplicateButton";
 import { useFetch } from "@/lib/extendedFetch";
+import { SignUp } from "@/models/auth/dtos/auth.model";
 
 const initialState: SignUp = {
   apiKey: { text: "", checkDuplicate: false },
