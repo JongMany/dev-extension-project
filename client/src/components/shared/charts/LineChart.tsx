@@ -13,7 +13,7 @@ import { SVGRenderer } from "echarts/renderers";
 import { useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import { format } from "date-fns";
-import { formatSecondsToTime } from "@/utils/date/date";
+import { formatSecondsToTime } from "@utils/shared/date/date";
 
 echarts.use([
   TitleComponent,

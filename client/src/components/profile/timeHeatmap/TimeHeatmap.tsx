@@ -11,7 +11,7 @@ import {
   getEndOfYear,
   getStartOfYear,
   makeTimeStamp,
-} from "@/utils/date/date";
+} from "@utils/shared/date/date";
 
 const option = {
   range: 12,

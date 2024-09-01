@@ -6,7 +6,7 @@ import {
   getThisMonthLastDay,
   getThisWeekMonday,
   getThisWeekSunday,
-} from "@/utils/date/date";
+} from "@utils/shared/date/date";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";

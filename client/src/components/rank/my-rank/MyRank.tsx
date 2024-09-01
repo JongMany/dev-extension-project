@@ -2,10 +2,12 @@
 import React, { MouseEvent, useState } from "react";
 
 import { RankDuration } from "@/entities/duration";
-import { formatSecondsToTime } from "@/utils/date/date";
+import { formatSecondsToTime } from "@utils/shared/date/date";
 import { MyRank as IMyRank } from "@/entities/ranking";
-import { getRankTextColor } from "@/app/(main)/rank/_utils/rankStyle";
-import useGetMyRank from "@/app/(main)/rank/_libs/useGetMyRank";
+
+
+import {getRankTextColor} from "@utils/rank/make-ranking-style/rankStyle";
+import useGetMyRank from "@hooks/rank/useGetMyRank";
 
 const rankMapper = {
   DAY: "일간",

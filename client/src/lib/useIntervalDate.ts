@@ -1,5 +1,5 @@
 import { useDuration } from "@/store/useDuration";
-import { getFromDate, getToDate } from "@/utils/date/interval";
+import { getFromDate, getToDate } from "@utils/shared/date/interval";
 import { eachDayOfInterval, format } from "date-fns";
 
 export const useIntervalDate = () => {

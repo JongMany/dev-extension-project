@@ -5,7 +5,7 @@ import {
   getThisMonthLastDay,
   getThisWeekMonday,
   getThisWeekSunday,
-} from "@/utils/date/date";
+} from "@utils/shared/date/date";
 import { useQueries } from "@tanstack/react-query";
 import { format } from "date-fns";
 
