@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
-import { type SignIn } from "@/models/auth/auth.model";
+
 import { signIn } from "next-auth/react";
+import { SignIn } from "@/models/auth/dtos/auth.model";
 
 type Props = {
   form: SignIn;

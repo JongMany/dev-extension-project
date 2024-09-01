@@ -1,8 +1,9 @@
-import { Menu } from "@/app/(main)/_components/Menu";
-import { Profile } from "@/app/(main)/_components/Profile";
-import { StudyLogIcon } from "@/app/(main)/_components/StudyLogIcon";
-import SignoutButton from "@/components/shared/button/Signout";
 import React from "react";
+import { StudyLogIcon } from "@/components/shared/icon/StudyLogIcon";
+
+import { Profile } from "@/components/shared/header/profile/Profile";
+import { Menu } from "@/components/shared/header/menu/Menu";
+import SignOutButton from "@/components/shared/button/SignOut";
 
 export const Header = () => {
   return (
@@ -11,7 +12,7 @@ export const Header = () => {
       <Menu />
       <div className="flex gap-x-4 items-center">
         <Profile />
-        <SignoutButton />
+        <SignOutButton />
       </div>
     </header>
   );

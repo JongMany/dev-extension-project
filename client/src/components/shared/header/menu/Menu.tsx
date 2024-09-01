@@ -1,10 +1,11 @@
-import { MenuItem } from "@/app/(main)/_components/MenuItem";
+
 import Link from "next/link";
 import { auth } from "@/auth";
+import {MenuItem} from "@components/shared/header/menu/MenuItem";
 
 export const Menu = async () => {
   const session = await auth();
-  console.log('session', session);
+  console.log("session", session);
   const menuItems = [
     { text: "홈", href: "/main" },
     { text: "대시보드", href: "/dashboard" },
@@ -21,7 +22,6 @@ export const Menu = async () => {
             <Link href={item.href}>{item.text}</Link>
           </MenuItem>
         ))}
-        {/* <li></li> */}
       </ul>
     </div>
   );

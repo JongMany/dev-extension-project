@@ -1,7 +1,7 @@
 "use client";
 
-import { type SignUp } from "@/models/auth/auth.model";
 import { signUp } from "@/app/(auth)/signup/_utils/signUp";
+import { SignUp } from "@/models/auth/dtos/auth.model";
 import { useRouter } from "next/navigation";
 
 type Props = {
