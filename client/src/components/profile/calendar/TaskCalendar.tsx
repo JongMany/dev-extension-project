@@ -1,24 +1,20 @@
-"use client";
+
+import { useUpdateTaskDueDate } from "@/app/(main)/profile/_hooks/useUpdateTaskDueDate";
 import { CalendarTask } from "@/entities/task";
-import React, { useMemo, useState } from "react";
-import { Calendar, Views, DateLocalizer } from "react-big-calendar";
-import withDragAndDrop, {
-  EventInteractionArgs,
-} from "react-big-calendar/lib/addons/dragAndDrop";
+import { format } from "date-fns";
+import { useMemo, useState } from "react";
+import { Calendar, DateLocalizer, Views } from "react-big-calendar";
+import { EventInteractionArgs } from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import CalendarEvent from "@/app/(main)/profile/_components/CalendarEvent";
-import { format } from "date-fns";
-import { useUpdateTaskDueDate } from "@/app/(main)/profile/_hooks/useUpdateTaskDueDate";
-
-const DragAndDropCalendar = withDragAndDrop(Calendar);
+import CalendarEvent from "@components/profile/calendar/CalendarEvent";
 
 type Props = {
   localizer: DateLocalizer;
   tasks: CalendarTask[];
 };
 
-export default function TaskDNDCalendar({ localizer, tasks }: Props) {
+export default function TaskCalendar({ localizer, tasks }: Props) {
   const { defaultDate, scrollToTime } = useMemo(
     () => ({
       defaultDate: new Date(),
@@ -69,7 +65,7 @@ export default function TaskDNDCalendar({ localizer, tasks }: Props) {
 
   return (
     <div className="h-[700px]">
-      <DragAndDropCalendar
+      <Calendar
         localizer={localizer}
         defaultDate={defaultDate}
         date={date}
@@ -78,8 +74,6 @@ export default function TaskDNDCalendar({ localizer, tasks }: Props) {
         events={tasks}
         scrollToTime={scrollToTime}
         popup
-        onEventDrop={taskMoveHandler}
-        resizable={false}
         onNavigate={onNavigate}
         eventPropGetter={eventStyles}
         // titleAccessor={(event: any) => {

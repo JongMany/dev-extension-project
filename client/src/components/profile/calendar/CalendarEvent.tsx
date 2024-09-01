@@ -1,7 +1,6 @@
 "use client";
 
 import { useModal } from "@/lib/useModal";
-import ReactDOM from "react-dom";
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 

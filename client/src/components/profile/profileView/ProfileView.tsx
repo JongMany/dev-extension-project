@@ -1,7 +1,9 @@
-import PrivacyInformation from "@/app/(main)/profile/_components/PrivacyInformation";
+
 import { auth } from "@/auth";
-import LineDivider from "@/app/(main)/profile/_components/LineDivider";
+
 import SessionProvider from "@/components/providers/SessionProvider";
+import PrivacyInformation from "@components/profile/profileView/PrivacyInformation";
+import LineDivider from "@components/shared/line-divider/LineDivider";
 
 type Props = { email: string };
 
