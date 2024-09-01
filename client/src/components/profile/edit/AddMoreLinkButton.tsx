@@ -1,11 +1,10 @@
 import Button from "@components/shared/button/Button";
-import {useState} from "react";
 import {useSetErrorMsg} from "@/app/(main)/profile/edit/_hooks/useSetErrorMsg";
 
 type Props = {
   onClick: () => void;
 }
-const AddButton = ({onClick}: Props) => {
+const AddMoreLinkButton = ({onClick}: Props) => {
   const {errorMsg, setErrorMsg} = useSetErrorMsg();
 
   const clickHandler = () => {
@@ -26,4 +25,4 @@ const AddButton = ({onClick}: Props) => {
   );
 };
 
-export default AddButton;
+export default AddMoreLinkButton;

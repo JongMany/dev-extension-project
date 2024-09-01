@@ -2,12 +2,10 @@
 import {useFormWithList} from "@/lib/useForm";
 import {ProfileFormDto} from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
 import Input from "@components/shared/input/Input";
-import AddButton from "@/app/(main)/profile/edit/_components/AddButton";
 import {ChangeEvent, FormEvent} from "react";
 import SubmitButton from "@components/shared/button/SubmitButton";
-import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
 import {useUpdateProfile} from "@/app/(main)/profile/edit/_hooks/useUpdateProfile";
+import AddMoreLinkButton from "@components/profile/edit/AddMoreLinkButton";
 
 type Props = {
   profile: ProfileFormDto
@@ -58,7 +56,7 @@ const EditForm = ({profile}: Props) => {
                     value={form.introduction} placeholder="자기소개를 입력해주세요" onChange={onChange}/>
         </div>
         <div className="flex justify-center gap-x-4 relative">
-          <AddButton onClick={appendList("link")}/>
+          <AddMoreLinkButton onClick={appendList("link")}/>
           <SubmitButton>저장</SubmitButton>
         </div>
       </form>

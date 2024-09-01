@@ -1,9 +1,9 @@
 import getQueryClient from "@/lib/getQueryClient";
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
-import EditForm from "@/app/(main)/profile/edit/_components/EditForm";
 import {fetchServer} from "@/lib/fetchServer";
 import {auth} from "@/auth";
-import EditFormWrapper from "@/app/(main)/profile/edit/_components/EditFormWrapper";
+import {EditFormWrapper} from "@components/profile";
+
 
 async function EditProfilePage() {
   const session = await auth();
