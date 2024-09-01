@@ -1,8 +1,8 @@
 
 
 import Image from "next/image";
-import DescriptionCard from "@components/main/DescriptionCard";
-import {AnimatedText} from "@components/main/AnimatedText";
+import DescriptionCard from "@components/main/description/DescriptionCard";
+import {AnimatedText} from "@components/main/description/AnimatedText";
 // min-h-96
 export default function Description() {
   return (

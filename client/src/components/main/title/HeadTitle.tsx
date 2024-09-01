@@ -1,5 +1,5 @@
-import MainText from "@components/main/MainText";
-import TypingCarousel from "@components/main/TypingCarousel";
+import MainText from "@components/main/description/MainText";
+import TypingCarousel from "@components/main/description/TypingCarousel";
 
 
 export default function HeadTitle() {
