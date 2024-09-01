@@ -1,10 +1,11 @@
 "use client";
 
-import TaskForm from "@/app/(main)/goal/_components/form/TaskForm";
+
 import useCreateTask from "@/app/(main)/goal/_lib/useCreateTask";
 import { useFormWithDate } from "@/lib/useForm";
 import { format } from "date-fns";
 import { FormEvent } from "react";
+import TaskForm from "@components/task/form/TaskForm";
 
 const initialForm = {
   projectName: "",
