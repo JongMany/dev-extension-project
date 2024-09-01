@@ -4,7 +4,7 @@ import * as echarts from "echarts/core";
 import { PieChart } from "echarts/charts";
 
 import { SVGRenderer } from "echarts/renderers";
-import { formatSecondsToTime } from "../../../../../utils/date/date";
+
 import {
   GridComponent,
   LegendComponent,
@@ -12,6 +12,7 @@ import {
   TitleComponent,
 } from "echarts/components";
 import { EChartsOption } from "echarts-for-react";
+import {formatSecondsToTime} from "@utils/date/date";
 
 type Props = {
   data: { language: string; duration: number }[];

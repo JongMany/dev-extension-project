@@ -1,4 +1,5 @@
-import DurationSelector from "@/app/(main)/dashboard/_components/DurationSelector";
+import DurationSelector from "@components/dashboard/header/DurationSelector";
+
 
 export default function DashboardHeader() {
   return (

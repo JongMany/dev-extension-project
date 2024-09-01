@@ -1,17 +1,16 @@
 "use client";
-import TransitionChart, {
-  HierarchyData,
-} from "@/app/(main)/dashboard/_components/charts/TransitionChart";
+
 import { IProgramData } from "@/entities/programData";
 import { useDuration } from "@/store/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import TransitionChart, {HierarchyData} from "@components/shared/charts/TransitionChart";
 interface ProjectData {
   project: string[];
   duration: number;
 }
 
-export default function HierachyChart() {
+export default function HierarchyChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =

@@ -1,10 +1,10 @@
 "use client";
 
-import DailyRanking from "@/app/(main)/rank/_components/DailyRanking";
-import MonthlyRanking from "@/app/(main)/rank/_components/MonthlyRanking";
-import RankCard from "@/app/(main)/rank/_components/RankCard";
-import WeeklyRanking from "@/app/(main)/rank/_components/WeeklyRanking";
 import useGetRankData from "@/app/(main)/rank/_libs/useGetRankData";
+import RankCard from "@components/rank/show-rank/RankCard";
+import DailyRanking from "@components/rank/show-rank/DailyRanking";
+import WeeklyRanking from "@components/rank/show-rank/WeeklyRanking";
+import MonthlyRanking from "@components/rank/show-rank/MonthlyRanking";
 
 export default function RankContainer() {
   const queries = useGetRankData();

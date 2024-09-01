@@ -1,10 +1,6 @@
 "use client";
 
-import LineChart, {
-  DefaultLineData,
-  DefaultLineProp,
-  LangaugeLineProp,
-} from "@/app/(main)/dashboard/_components/charts/LineChart";
+
 import { languageMapper } from "@/app/(main)/dashboard/_utils/mapper";
 import { IProgramData } from "@/entities/programData";
 import { useIntervalDate } from "@/lib/useIntervalDate";
@@ -12,6 +8,7 @@ import { useDuration } from "@/store/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { MouseEvent, useState } from "react";
+import LineChart, {DefaultLineProp, LangaugeLineProp} from "@components/shared/charts/LineChart";
 
 type ChartOption = "ALL" | "LANGUAGE" | "PROJECT";
 
@@ -34,7 +31,7 @@ export default function ProgramTimeSeriesChart() {
     }
   };
 
-  const timeSeriesData = fillEmpyDatesAndConvertProgramDataToTimeSeries(
+  const timeSeriesData = fillEmptyDatesAndConvertProgramDataToTimeSeries(
     programData,
     dates
   );
@@ -110,7 +107,7 @@ function fillEmptyDay(programData: IProgramData[], dates: string[]) {
   return result;
 }
 
-function fillEmpyDatesAndConvertProgramDataToTimeSeries(
+function fillEmptyDatesAndConvertProgramDataToTimeSeries(
   programData: IProgramData[],
   dates: string[]
 ): DefaultLineProp {

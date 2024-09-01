@@ -1,9 +1,15 @@
-import EditButton from "@/app/(main)/profile/_components/EditButton";
+
 
 import SessionProvider from "@/components/providers/SessionProvider";
 import { auth } from "@/auth";
 
-import {ProfileView, TimeHeatmapContainer, CalendarContainer, SharedCalendarContainer} from "@components/profile";
+import {
+  ProfileView,
+  TimeHeatmapContainer,
+  CalendarContainer,
+  SharedCalendarContainer,
+  EditProfileLink
+} from "@components/profile";
 
 
 type Props = { params: { email: string } };
@@ -17,7 +23,7 @@ export default async function ProfilePage({ params }: Props) {
       <nav className="flex flex-col w-[250px] items-center px-4 mb-4 border-r-[1px]">
         <h1 className="text-2xl font-bold mb-6">Profile</h1>
         <ProfileView email={decodedEmail} />
-        {session?.user?.email === decodedEmail ? <EditButton /> : null}
+        {session?.user?.email === decodedEmail ? <EditProfileLink /> : null}
       </nav>
       <section className="min-w-[700px] flex-1 px-4 py-2">
         <TimeHeatmapContainer email={decodedEmail} />
