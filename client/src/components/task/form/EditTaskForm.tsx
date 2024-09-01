@@ -2,13 +2,14 @@ import { useCallback, type FormEvent } from "react";
 
 import { type ITask } from "@/app/(main)/goal/_model/form.type";
 import useUpdateTask from "@/app/(main)/goal/_lib/useUpdateTask";
-import TaskForm from "@/app/(main)/goal/_components/form/TaskForm";
 import Button from "@/components/shared/button/Button";
 import SubmitButton from "@/components/shared/button/SubmitButton";
 import { useFormWithDate } from "@/lib/useForm";
 import { useModal } from "@/lib/useModal";
-import DeleteTaskConfirmationModal from "@/app/(main)/goal/_components/taskList/DeleteTaskConfirmationModal";
+
 import useDeleteTask from "@/app/(main)/goal/_lib/useDeleteTask";
+import DeleteTaskConfirmationModal from "@components/task/taskList/DeleteTaskConfirmationModal";
+import TaskForm from "@components/task/form/TaskForm";
 
 type Props = {
   task: ITask;

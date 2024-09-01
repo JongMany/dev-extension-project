@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TaskContainer from "@/app/(main)/goal/_components/taskList/TaskContainer";
+import {TaskContainer} from "@components/task";
 
 export default async function GoalPage() {
   return (

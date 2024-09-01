@@ -1,7 +1,8 @@
 "use client";
 
-import TaskProvider from "@/app/(main)/goal/_components/taskList/TaskProvider";
+
 import { useSession } from "next-auth/react";
+import TaskProvider from "@components/task/taskList/TaskProvider";
 
 export default function TaskContainer() {
   const { data: session } = useSession();
