@@ -1,7 +1,8 @@
-import { Rank } from "@/entities/ranking";
+"use client";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import RankUI from "@components/rank/show-rank/RankUI";
+import {Rank} from "@/models/rank/entity/ranking";
 
 export default function MonthlyRanking() {
   const queryClient = useQueryClient();

@@ -2,7 +2,7 @@
 import React, { MouseEvent, useState } from "react";
 
 import { formatSecondsToTime } from "@utils/shared/date/date";
-import { MyRank as IMyRank } from "@/entities/ranking";
+import { MyRank as IMyRank } from "@/models/rank/entity/ranking";
 
 import {getRankTextColor} from "@utils/rank/make-ranking-style/rankStyle";
 import useQueryMyRank from "@hooks/rank/useQueryMyRank";

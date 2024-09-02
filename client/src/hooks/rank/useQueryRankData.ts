@@ -1,4 +1,4 @@
-import { RankEntity } from "@/entities/ranking";
+
 
 import {
   getThisMonthFirstDay,
@@ -9,6 +9,7 @@ import {
 import { useQueries } from "@tanstack/react-query";
 import { format } from "date-fns";
 import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {RankEntity} from "@/models/rank/entity/ranking";
 
 export default function useQueryRankData() {
   const { fetch } = useFetch();

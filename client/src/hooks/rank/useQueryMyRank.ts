@@ -1,6 +1,4 @@
 
-import { MyRank, MyRankEntity } from "@/entities/ranking";
-
 import {
   getThisMonthFirstDay,
   getThisMonthLastDay,
@@ -13,6 +11,7 @@ import { useSession } from "next-auth/react";
 import {useFetch} from "@utils/shared/fetch/extendedFetch";
 
 import {RankDuration} from "@/models/rank/vo/duration.vo";
+import {MyRank, MyRankEntity} from "@/models/rank/entity/ranking";
 
 export default function useQueryMyRank(duration: RankDuration) {
   const { fetch } = useFetch();

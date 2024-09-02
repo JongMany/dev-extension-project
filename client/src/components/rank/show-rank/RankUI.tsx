@@ -1,9 +1,8 @@
-
-import { Rank } from "@/entities/ranking";
 import { formatSecondsToTime } from "@utils/shared/date/date";
 import Link from "next/link";
 import React from "react";
 import {getRankTextColor, getRankUserNameColor} from "@utils/rank/make-ranking-style/rankStyle";
+import {Rank} from "@/models/rank/entity/ranking";
 
 type Props = {
   title: "일간 랭킹" | "주간 랭킹" | "월간 랭킹";
