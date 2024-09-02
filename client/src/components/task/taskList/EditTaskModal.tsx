@@ -1,7 +1,8 @@
 import { ModalWrapper } from "@/components/shared/modal/Modal";
-import { type ITask } from "@/app/(main)/goal/_model/form.type";
+
 import { type ModalProps } from "@/types/modal/modalProps.type";
 import EditTaskForm from "@components/task/form/EditTaskForm";
+import {ITask} from "@/models/task/taskForm.dto";
 
 type Props = {
   task: ITask;

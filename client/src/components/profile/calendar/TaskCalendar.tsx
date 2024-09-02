@@ -1,5 +1,5 @@
 
-import { useUpdateTaskDueDate } from "@/app/(main)/profile/_hooks/useUpdateTaskDueDate";
+
 import { CalendarTask } from "@/entities/task";
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
@@ -8,6 +8,7 @@ import { EventInteractionArgs } from "react-big-calendar/lib/addons/dragAndDrop"
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import CalendarEvent from "@components/profile/calendar/CalendarEvent";
+import {useUpdateTaskDueDate} from "@hooks/profile/useUpdateTaskDueDate";
 
 type Props = {
   localizer: DateLocalizer;

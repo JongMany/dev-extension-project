@@ -4,11 +4,10 @@ import React from 'react';
 import {useSession} from "next-auth/react";
 import {useQueryClient} from "@tanstack/react-query";
 
-import {mapToProfileFormDto} from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
 import {type Profile} from "@/models/profile/profile.model";
 import EmptyView from "@components/profile/edit/EmptyView";
 import EditForm from "@components/profile/edit/EditForm";
-
+import {mapToProfileFormDto} from "@utils/profile/mapToProfileDto";
 
 const EditFormWrapper = () => {
   const auth = useSession();

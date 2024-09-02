@@ -1,4 +1,3 @@
-
 import BackButton from "@/components/shared/button/BackButton";
 import SubmitButton from "@/components/shared/button/SubmitButton";
 import Input from "@/components/shared/input/Input";
@@ -6,7 +5,8 @@ import Input from "@/components/shared/input/Input";
 import React, { ReactElement } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {ITaskForm} from "@/app/(main)/goal/_model/form.type";
+import {ITaskForm} from "@/models/task/taskForm.dto";
+
 
 type Props = {
   form: ITaskForm;

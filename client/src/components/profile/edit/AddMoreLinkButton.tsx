@@ -1,5 +1,5 @@
 import Button from "@components/shared/button/Button";
-import {useSetErrorMsg} from "@/app/(main)/profile/edit/_hooks/useSetErrorMsg";
+import {useSetErrorMsg} from "@hooks/shared/useSetErrorMsg";
 
 type Props = {
   onClick: () => void;

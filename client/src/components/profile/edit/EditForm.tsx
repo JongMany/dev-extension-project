@@ -1,14 +1,16 @@
 "use client"
 import {useFormWithList} from "@/lib/useForm";
-import {ProfileFormDto} from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
+
 import Input from "@components/shared/input/Input";
 import {ChangeEvent, FormEvent} from "react";
 import SubmitButton from "@components/shared/button/SubmitButton";
-import {useUpdateProfile} from "@/app/(main)/profile/edit/_hooks/useUpdateProfile";
+
 import AddMoreLinkButton from "@components/profile/edit/AddMoreLinkButton";
+import {useUpdateProfile} from "@hooks/profile/useUpdateProfile";
+import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
 
 type Props = {
-  profile: ProfileFormDto
+  profile: ProfileFormDto;
 }
 
 const EditForm = ({profile}: Props) => {
