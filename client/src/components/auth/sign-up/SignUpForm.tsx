@@ -1,37 +1,28 @@
 "use client";
 
-import { type ChangeEventHandler, useState } from "react";
-
-
+import { type ChangeEventHandler } from "react";
 import CheckDuplicateButton from "@components/auth/sign-up/CheckDuplicateButton";
 import SignUpButton from "@components/auth/sign-up/SignUpButton";
 import {SignUpFormVO} from "@/models/auth/sign-up/vo/signUp.vo";
 import {useFetch} from "@hooks/shared/useFetch";
 import {showToast} from "@utils/shared/toast/showToast";
-
-const initialState: SignUpFormVO = {
-  apiKey: { text: "", checkDuplicate: false },
-  password: { text: "", checkDuplicate: true },
-  email: { text: "", checkDuplicate: false },
-  nickname: { text: "", checkDuplicate: false },
-};
+import {useSignUpForm} from "@hooks/auth/useSignUpForm";
 
 export default function SignUpForm() {
-  const [form, setForm] = useState(initialState);
+
+  const {form, changeSignUpForm, setCheckDuplicate, validateBeforeCheckDuplicate} = useSignUpForm();
   const { fetch } = useFetch();
   const formChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: {
-        ...form[e.target.name as keyof SignUpFormVO],
-        text: e.target.value,
-      },
-    });
+    changeSignUpForm(e.target.name as keyof SignUpFormVO, e.target.value);
   };
 
   const checkDuplicate = (name: keyof SignUpFormVO) => async () => {
-
     try {
+      if(!validateBeforeCheckDuplicate(name)) {
+        showToast('warning', <p>유효성 검사를 통과히지 못했습니다.</p>)
+        return;
+      }
+
       const response = await fetch(`/api/v1/auth/duplicate-check/${name}`, {
         method: "POST",
         body: JSON.stringify({
@@ -42,26 +33,14 @@ export default function SignUpForm() {
       const data = await response.json();
 
       if (data.statusCode === 200) {
-        setForm({
-          ...form,
-          [name]: {
-            ...form[name],
-            checkDuplicate: true,
-          },
-        });
+        setCheckDuplicate(name, true);
       } else {
-
         showToast('warning', <p>이미 존재하는 유저입니다.</p>)
-        setForm({
-          ...form,
-          [name]: {
-            ...form[name],
-            checkDuplicate: false,
-          },
-        });
+        setCheckDuplicate(name, false);
       }
     } catch (error) {
-      console.log("error", error);
+      showToast('error', <p>에러 발생</p>)
+      console.error("error", error);
     }
   };
 
