@@ -1,5 +1,5 @@
 "use client";
-import { CalendarTask } from "@/entities/task";
+
 import React, { useMemo, useState } from "react";
 import { Calendar, Views, DateLocalizer } from "react-big-calendar";
 import withDragAndDrop, {
@@ -7,11 +7,10 @@ import withDragAndDrop, {
 } from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-
 import { format } from "date-fns";
-
 import CalendarEvent from "@components/profile/calendar/CalendarEvent";
 import {useUpdateTaskDueDate} from "@hooks/profile/useUpdateTaskDueDate";
+import {CalendarTask} from "@/models/task/entity/task.entity";
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
