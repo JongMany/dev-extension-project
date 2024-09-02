@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
 
-const liClassName =
+const listItemClassName =
   "transition-all duration-300 hover:font-bold hover:underline underline-offset-4 decoration-2 decoration-solid decoration-black text-xl";
 
 type Props = {
@@ -16,7 +16,7 @@ export const MenuItem = ({ children, href }: PropsWithChildren<Props>) => {
 
   return (
     <li
-      className={`${liClassName} ${isMatchPath ? "underline font-bold" : ""}`}
+      className={`${listItemClassName} ${isMatchPath ? "underline font-bold" : ""}`}
     >
       {children}
     </li>
