@@ -7,6 +7,9 @@ WORKDIR /app
 # package.json과 package-lock.json 복사
 COPY package*.json ./
 
+# 빌드 시점 환경변수 정의
+ARG NEXT_PUBLIC_BASE_URL
+
 # Next.js 종속성 설치
 RUN npm install
 
@@ -19,6 +22,9 @@ COPY . .
 # 기본적으로 development 환경 변수 파일을 사용
 # ARG ENV_FILE=.env.production
 # COPY config/$ENV_FILE .env
+
+# 환경변수를 설정하여 빌드 시점에 적용
+ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
 
 # Next.js 애플리케이션 빌드
 RUN npm run build:prod
