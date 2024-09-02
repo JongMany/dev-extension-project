@@ -1,12 +1,13 @@
 "use client";
 
-import { SignUp } from "@/models/auth/dto/auth.dto";
 import { useRouter } from "next/navigation";
 import {signUp} from "@/service/auth/signUp";
-import {SignUpForm} from "@/models/auth/dto/signUp.dto";
+
+import {SignUpFormVO} from "@/models/auth/sign-up/vo/signUp.vo";
+import {SignUpFormDTO} from "@/models/auth/sign-up/dto/request/signUp.dto";
 
 type Props = {
-  form: SignUp;
+  form: SignUpFormVO;
 };
 
 export default function SignUpButton({ form }: Props) {
@@ -32,14 +33,14 @@ export default function SignUpButton({ form }: Props) {
 }
 
 /** 모든 form의 checkDuplicate가 true인 경우에만 유효성 통과 */
-function validateForm(form: SignUp) {
+function validateForm(form: SignUpFormVO) {
   return Object.values(form).every((field) => field.checkDuplicate);
 }
 
 /** 회원가입 포맷으로 변경  */
-function formatSignUpForm(form: SignUp) {
+function formatSignUpForm(form: SignUpFormVO) {
   return Object.entries(form).reduce((acc, [key, value]) => {
-    acc[key as keyof SignUpForm] = value.text;
+    acc[key as keyof SignUpFormDTO] = value.text;
     return acc;
-  }, {} as SignUpForm);
+  }, {} as SignUpFormDTO);
 }

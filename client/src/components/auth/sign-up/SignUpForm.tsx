@@ -1,12 +1,13 @@
 "use client";
 
 import { type ChangeEventHandler, useState } from "react";
-import { SignUp } from "@/models/auth/dto/auth.dto";
+
 import {useFetch} from "@utils/shared/fetch/extendedFetch";
 import CheckDuplicateButton from "@components/auth/sign-up/CheckDuplicateButton";
 import SignUpButton from "@components/auth/sign-up/SignUpButton";
+import {SignUpFormVO} from "@/models/auth/sign-up/vo/signUp.vo";
 
-const initialState: SignUp = {
+const initialState: SignUpFormVO = {
   apiKey: { text: "", checkDuplicate: false },
   password: { text: "", checkDuplicate: true },
   email: { text: "", checkDuplicate: false },
@@ -20,14 +21,14 @@ export default function SignUpForm() {
     setForm({
       ...form,
       [e.target.name]: {
-        ...form[e.target.name as keyof SignUp],
+        ...form[e.target.name as keyof SignUpFormVO],
         text: e.target.value,
       },
     });
   };
 
-  const checkDuplicate = (name: keyof SignUp) => async () => {
-    console.log("name", name);
+  const checkDuplicate = (name: keyof SignUpFormVO) => async () => {
+
     try {
       const response = await fetch(`/api/v1/auth/duplicate-check/${name}`, {
         method: "POST",
