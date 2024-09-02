@@ -14,7 +14,7 @@ type Props = {
 };
 export default function PrivacyInformation({ email }: Props) {
   const { profile } = useGetProfile(email);
-
+  console.log("Privacy", process.env.NEXT_PUBLIC_BASE_URL)
   if (!email) {
     return null;
   }
