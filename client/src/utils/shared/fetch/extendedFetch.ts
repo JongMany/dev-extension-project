@@ -1,40 +1,8 @@
-// "use client";
+"use client";
 import { useSession } from "next-auth/react";
 import returnFetch, { ReturnFetch } from "return-fetch";
+import {isBrowser} from "@utils/shared/common/checkIsBrowser";
 
-// const refreshAccessToken = async (session: any) => {
-//   // if (!session) return;
-//
-//   const accessToken = session?.data?.user.accessToken;
-//   const { update, data: sessionData } = session;
-//
-//   const response = await fetch(
-//     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/refresh`,
-//     {
-//       method: "POST",
-//       credentials: "include",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//       cache: "no-store",
-//       mode: "cors",
-//     }
-//   );
-//
-//   const data = await response.json();
-//   const newAccessToken = data.accessToken;
-//
-//   await update({
-//     ...sessionData,
-//     user: { ...sessionData?.user, accessToken: newAccessToken },
-//   });
-//   // if (session.data) {
-//   //   session.data.accessToken = newAccessToken;
-//   // }
-//   return newAccessToken;
-// };
 
 // TODO: 리팩토링..!
 const useCheckTokenInClient: ReturnFetch = (args) => {
@@ -65,19 +33,14 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
         ];
       },
       response: async (response, requestArgs, fetch) => {
-        // console.log(response);
         if (response.statusText !== "Unauthorized") {
-          // console.log("response", response);
           return response;
         }
         const accessToken = session?.user?.accessToken;
         const refreshToken = session?.user?.refreshToken;
-        // if (!accessToken && window === undefined) {
-        // }
         const [url, option] = requestArgs;
-        // const authSession = await auth();
-        // console.log(refreshToken);
 
+        console.log("response", process.env.NEXT_PUBLIC_BASE_URL);
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net"
@@ -100,7 +63,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 
         const data = await res.json();
         const newAccessToken = data.accessToken;
-        // console.log("refresh token", newAccessToken, data);
+
         await update({
           ...session,
           user: { ...session?.user, accessToken: newAccessToken },
@@ -112,12 +75,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
             ...option?.headers,
             Authorization: `Bearer ${newAccessToken}`,
           },
-          // method: "POST",
-          // credentials: "include",
-          // cache: "no-store",
-          // mode: "cors",
         });
-        // console.log("newResponse", newResponse);
         return newResponse;
       },
     },
@@ -126,12 +84,9 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 
 export const useFetch = (include: boolean = true) => {
 
-  const URL =process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net";
-    // process.env.NODE_ENV === "production"
-    //   ? "https:/www.study-log.net"
-    //   : "http://localhost:8080";
+  const URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net";
+  console.log('useFetch', process.env, 'url:', URL, 'env url:', process.env.NEXT_PUBLIC_BASE_URL, process.env.NODE_ENV, isBrowser());
 
-  console.log('useFetch', URL, process.env.NEXT_PUBLIC_BASE_URL);
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
