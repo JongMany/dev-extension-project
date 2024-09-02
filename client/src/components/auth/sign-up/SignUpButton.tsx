@@ -18,7 +18,6 @@ export default function SignUpButton({ form }: Props) {
     const signUpForm = formatSignUpForm(form);
 
     if (!isValidate) {
-      console.log("유효성 검사 실패");
       return;
     }
     // TODO: 회원 가입 요청

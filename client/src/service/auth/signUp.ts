@@ -1,10 +1,11 @@
 import {SignUpFormDTO} from "@/models/auth/sign-up/dto/request/signUp.dto";
 
 export const signUp = async (form: SignUpFormDTO) => {
+  // const URL = process.env.NODE_ENV === "development" ? "http://locahost:8080" : ""
 
   const response = await fetch(
-      // `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signUp`,
-      `/api/v1/auth/signUp`,
+      // `${NEXT_PUBLIC_BASE_URL}/api/v1/auth/signUp`,
+      `${process.env.NEXT_PUBLIC_BASE_URL||""}/api/v1/auth/signup`,
       {
         body: JSON.stringify({
           ...form,
@@ -14,7 +15,6 @@ export const signUp = async (form: SignUpFormDTO) => {
           "Content-Type": "application/json",
         },
         method: "POST",
-
       }
   );
 
