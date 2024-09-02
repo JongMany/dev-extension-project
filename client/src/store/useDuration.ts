@@ -1,5 +1,5 @@
-import { Duration } from "@/entities/duration";
 import { create } from "zustand";
+import {Duration} from "@/models/rank/vo/duration.vo";
 
 type State = {
   duration: Duration;

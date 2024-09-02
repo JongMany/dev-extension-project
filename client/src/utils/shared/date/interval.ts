@@ -1,4 +1,4 @@
-import { Duration } from "@/entities/duration";
+
 import {
   getThisMonthFirstDay,
   getThisMonthLastDay,
@@ -8,6 +8,7 @@ import {
   getThisYearLastDay,
 } from "@utils/shared/date/date";
 import { format } from "date-fns";
+import {Duration} from "@/models/rank/vo/duration.vo";
 
 export function getFromDate(duration: Duration) {
   let from;

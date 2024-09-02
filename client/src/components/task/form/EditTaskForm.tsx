@@ -7,7 +7,7 @@ import DeleteTaskConfirmationModal from "@components/task/taskList/DeleteTaskCon
 import TaskForm from "@components/task/form/TaskForm";
 import useUpdateTask from "@hooks/task/useUpdateTask";
 import useDeleteTask from "@hooks/task/useDeleteTask";
-import {ITask} from "@/models/task/taskForm.dto";
+import {ITask} from "@/models/task/dto/taskForm.dto";
 import {useFormWithDate} from "@hooks/shared/useForm";
 import {useModal} from "@hooks/shared/useModal";
 

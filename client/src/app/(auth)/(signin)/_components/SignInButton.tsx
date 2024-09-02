@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-import { SignIn } from "@/models/auth/dtos/auth.model";
+import { SignIn } from "@/models/auth/dto/auth.dto";
 import { signIn } from "next-auth/react";
 
 type Props = {

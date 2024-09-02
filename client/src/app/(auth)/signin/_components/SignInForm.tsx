@@ -1,7 +1,7 @@
 "use client";
 
 import SignInButton from "@/app/(auth)/(signin)/_components/SignInButton";
-import { SignIn } from "@/models/auth/dtos/auth.model";
+import { SignIn } from "@/models/auth/dto/auth.dto";
 
 import { type ChangeEventHandler, useState } from "react";
 
