@@ -1,82 +1,84 @@
 "use client";
-import { useSession } from "next-auth/react";
-import returnFetch, { ReturnFetch } from "return-fetch";
-import {isBrowser} from "@utils/shared/common/checkIsBrowser";
+import {useSession} from "next-auth/react";
+import returnFetch, {ReturnFetch, ReturnFetchDefaultOptions} from "return-fetch";
+import {fetchFreshAccessToken} from "@/service/auth/fetchFreshAccessToken";
 
+function configureRequestOptionsBasedOnAuthToken(accessToken: string|undefined, options: RequestInit| undefined, args: ReturnFetchDefaultOptions | undefined) {
+  if (accessToken) {
+    return {
+      ...args,
+      ...options,
+      headers: {
+        ...options?.headers,
+        ...args?.headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  } else {
+    return {...args, ...options}
+  }
+}
 
 // TODO: 리팩토링..!
 const useCheckTokenInClient: ReturnFetch = (args) => {
   const { data: session, update } = useSession();
-  console.log("args", args);
+
   return returnFetch({
     ...args,
     interceptors: {
       request: async (requestArgs) => {
         const [url, option] = requestArgs;
-        // console.log("request url", url, option);
         const accessToken = session?.user?.accessToken;
 
         return [
           url,
-          accessToken
-            ? {
-                // credentials: "include",
-                ...args,
-                ...option,
-                headers: {
-                  ...option?.headers,
-                  ...args?.headers,
-                  Authorization: `Bearer ${accessToken}`,
-                },
-              }
-            : { ...args, ...option },
+          configureRequestOptionsBasedOnAuthToken(accessToken, option, args)
         ];
       },
       response: async (response, requestArgs, fetch) => {
         if (response.statusText !== "Unauthorized") {
           return response;
         }
-        const accessToken = session?.user?.accessToken;
+
+        const staleAccessToken = session?.user?.accessToken;
         const refreshToken = session?.user?.refreshToken;
         const [url, option] = requestArgs;
 
-        console.log("response", process.env.NEXT_PUBLIC_BASE_URL);
-        const res = await fetch(
-          `${
-            process.env.NEXT_PUBLIC_BASE_URL
-          }/api/v1/auth/refresh`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${session?.user.accessToken}`,
-              // refreshToken: session?.user.refreshToken,
-              // Cookie: `refreshToken=${session?.user.refreshToken}`,
-            },
-            cache: "no-store",
-            mode: "cors",
-            body: JSON.stringify({ refreshToken: session?.user.refreshToken }),
-          }
-        );
+        // const res = await fetch(
+        //   `${
+        //     process.env.NEXT_PUBLIC_BASE_URL
+        //   }/api/v1/auth/refresh`,
+        //   {
+        //     method: "POST",
+        //     credentials: "include",
+        //     headers: {
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //       Authorization: `Bearer ${staleAccessToken!}`,
+        //     },
+        //     cache: "no-store",
+        //     mode: "cors",
+        //     body: JSON.stringify({ refreshToken }),
+        //   }
+        // );
+        //
+        // const data = await res.json();
+        // const freshAccessToken = data.accessToken;
+        const freshAccessToken = await fetchFreshAccessToken(staleAccessToken!, refreshToken!)
 
-        const data = await res.json();
-        const newAccessToken = data.accessToken;
-
+        // 새롭게 받은 accessToken 으로 업데이트하기
         await update({
           ...session,
-          user: { ...session?.user, accessToken: newAccessToken },
+          user: { ...session?.user, accessToken: freshAccessToken },
         });
 
-        const newResponse = await fetch(url, {
+        return await fetch(url, {
           ...option,
           headers: {
             ...option?.headers,
-            Authorization: `Bearer ${newAccessToken}`,
+            Authorization: `Bearer ${freshAccessToken}`,
           },
         });
-        return newResponse;
       },
     },
   });
