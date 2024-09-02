@@ -1,13 +1,17 @@
 "use client";
-import moment from "moment";
 
+import moment from "moment";
 import React from "react";
 import { momentLocalizer } from "react-big-calendar";
-import TaskDNDCalendar from "@components/profile/calendar/TaskDNDCalendar";
-import {useGetAllTasks} from "@hooks/task/useGetAllTasks";
+import TaskCalendar from "@components/profile/main/calendar/TaskCalendar";
+import useGetOthersTask from "@hooks/task/useGetOthersTask";
 
-export default function CalendarContainer() {
-  const { data } = useGetAllTasks();
+type Props = {
+  email: string;
+};
+
+export default function SharedCalendarContainer({ email }: Props) {
+  const { data } = useGetOthersTask(email);
   const tasks =
     data?.tasks.map((task, idx) => ({
       id: task._id,
@@ -24,7 +28,7 @@ export default function CalendarContainer() {
   return (
     <section>
       <h4>일정</h4>
-      <TaskDNDCalendar localizer={localizer} tasks={tasks} />
+      <TaskCalendar localizer={localizer} tasks={tasks} />
     </section>
   );
 }
