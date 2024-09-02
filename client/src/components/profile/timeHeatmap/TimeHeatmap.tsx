@@ -3,7 +3,7 @@ import CalHeatmap from "cal-heatmap";
 import Tooltip from "cal-heatmap/plugins/Tooltip";
 import "cal-heatmap/cal-heatmap.css";
 import { useEffect } from "react";
-import { format, min } from "date-fns";
+import { format } from "date-fns";
 import { useFetch } from "@/lib/extendedFetch";
 import {
   convertProgrammingTime,
