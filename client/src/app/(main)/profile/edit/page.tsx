@@ -11,7 +11,7 @@ async function EditProfilePage() {
   await queryClient.prefetchQuery({
     queryKey: ["profile", session?.user.email],
     queryFn: async () => {
-      const response = await fetchServer(`api/v1/profile/${session?.user.email}`, {});
+      const response = await fetchServer(`/v1/profile/${session?.user.email}`, {});
       const data = await response?.json();
       return data;
     },

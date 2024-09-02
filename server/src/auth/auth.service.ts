@@ -53,7 +53,8 @@ export class AuthService {
     const payload = { id: email };
     const accessToken = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
-      expiresIn: '5m',
+      // expiresIn: '5m',
+      expiresIn: '30s',
       // expiresIn: '5s',
     });
     const user = await this.userRepository.updateAccessToken(
