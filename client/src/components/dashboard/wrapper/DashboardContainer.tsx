@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import DashboardCard from "@components/dashboard/charts/DashboardCard";
+import DashboardCard from "@components/dashboard/wrapper/DashboardCard";
 import ProgramTimeSeriesChart from "@components/dashboard/charts/ProgramTimeSeriesChart";
 import ProgramLanguageRatesChart from "@components/dashboard/charts/ProgramLanguageRatesChart";
 import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
