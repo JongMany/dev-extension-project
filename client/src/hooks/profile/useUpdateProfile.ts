@@ -1,8 +1,9 @@
-import { ProfileFormDto } from "@/app/(main)/profile/edit/_lib/mapToProfileDto";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useFetch } from "@/lib/extendedFetch";
+import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
 
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
