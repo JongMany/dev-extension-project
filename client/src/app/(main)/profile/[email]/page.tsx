@@ -18,6 +18,8 @@ export default async function ProfilePage({ params }: Props) {
   const { email } = params;
   const session = await auth();
   const decodedEmail = decodeURIComponent(email);
+
+
   return (
     <main className="flex flex-1 min-h-[90vh] justify-between">
       <nav className="flex flex-col w-[250px] items-center px-4 mb-4 border-r-[1px]">

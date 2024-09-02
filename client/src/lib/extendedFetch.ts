@@ -1,40 +1,40 @@
-"use client";
+// "use client";
 import { useSession } from "next-auth/react";
 import returnFetch, { ReturnFetch } from "return-fetch";
 
-const refreshAccessToken = async (session: any) => {
-  // if (!session) return;
-
-  const accessToken = session?.data?.user.accessToken;
-  const { update, data: sessionData } = session;
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/refresh`,
-    {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      cache: "no-store",
-      mode: "cors",
-    }
-  );
-
-  const data = await response.json();
-  const newAccessToken = data.accessToken;
-
-  await update({
-    ...sessionData,
-    user: { ...sessionData?.user, accessToken: newAccessToken },
-  });
-  // if (session.data) {
-  //   session.data.accessToken = newAccessToken;
-  // }
-  return newAccessToken;
-};
+// const refreshAccessToken = async (session: any) => {
+//   // if (!session) return;
+//
+//   const accessToken = session?.data?.user.accessToken;
+//   const { update, data: sessionData } = session;
+//
+//   const response = await fetch(
+//     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/refresh`,
+//     {
+//       method: "POST",
+//       credentials: "include",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//       cache: "no-store",
+//       mode: "cors",
+//     }
+//   );
+//
+//   const data = await response.json();
+//   const newAccessToken = data.accessToken;
+//
+//   await update({
+//     ...sessionData,
+//     user: { ...sessionData?.user, accessToken: newAccessToken },
+//   });
+//   // if (session.data) {
+//   //   session.data.accessToken = newAccessToken;
+//   // }
+//   return newAccessToken;
+// };
 
 // TODO: 리팩토링..!
 const useCheckTokenInClient: ReturnFetch = (args) => {
@@ -45,7 +45,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
     interceptors: {
       request: async (requestArgs) => {
         const [url, option] = requestArgs;
-        console.log("request url", url, option);
+        // console.log("request url", url, option);
         const accessToken = session?.user?.accessToken;
 
         return [
@@ -76,7 +76,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
         // }
         const [url, option] = requestArgs;
         // const authSession = await auth();
-        console.log(refreshToken);
+        // console.log(refreshToken);
 
         const res = await fetch(
           `${
@@ -131,7 +131,7 @@ export const useFetch = (include: boolean = true) => {
     //   ? "https:/www.study-log.net"
     //   : "http://localhost:8080";
 
-  console.log('useFetch', URL);
+  console.log('useFetch', URL, process.env.NEXT_PUBLIC_BASE_URL);
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
