@@ -3,16 +3,17 @@ import Input from "@components/shared/input/Input";
 import {ChangeEvent, FormEvent} from "react";
 import SubmitButton from "@components/shared/button/SubmitButton";
 
-import AddMoreLinkButton from "@components/profile/edit/AddMoreLinkButton";
+import AddMoreLinkButton from "@components/profile/edit/add-link-button/AddMoreLinkButton";
 import {useUpdateProfile} from "@hooks/profile/useUpdateProfile";
-import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
 import {useFormWithList} from "@hooks/shared/useForm";
+import {ProfileFormVO} from "@/models/profile/vo/profile.vo";
+import {toProfileFormRequestDTO} from "@/models/profile/formatModel";
 
 type Props = {
-  profile: ProfileFormDto;
+  profile: ProfileFormVO;
 }
 
-const EditForm = ({profile}: Props) => {
+const EditProfileForm = ({profile}: Props) => {
   const {form, onChange, changeList, appendList} = useFormWithList(profile);
   const {mutate} = useUpdateProfile();
 
@@ -22,9 +23,7 @@ const EditForm = ({profile}: Props) => {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: mutation 호출, invalidateQueries
-    // router.replace(`/profile/${data?.user?.email}`);
-    mutate(form);
+    mutate(toProfileFormRequestDTO(form));
   }
 
   return (
@@ -64,4 +63,4 @@ const EditForm = ({profile}: Props) => {
   );
 };
 
-export default EditForm;
+export default EditProfileForm;

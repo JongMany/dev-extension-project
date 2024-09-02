@@ -2,8 +2,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
 import {useFetch} from "@hooks/shared/useFetch";
+import {ProfileFormRequestDTO} from "@/models/profile/dto/request/profile.dto";
 
 
 export function useUpdateProfile() {
@@ -13,14 +13,13 @@ export function useUpdateProfile() {
   const { fetch } = useFetch();
 
   const { mutate } = useMutation({
-    mutationFn: async (updatedProfileData: ProfileFormDto) => {
-      const updatedForm = mapToProfileBody(updatedProfileData);
+    mutationFn: async (updatedProfileData: ProfileFormRequestDTO) => {
+      const updatedForm = sanitizeProfileFormRequestDTO(updatedProfileData);
       const response = await fetch(`api/v1/profile`, {
         method: "POST",
         body: JSON.stringify(updatedForm),
       });
       const data = await response.json();
-      console.log(data);
     },
     onSuccess: async () => {
       router.replace(`/profile/${data?.user?.email}`);
@@ -32,7 +31,7 @@ export function useUpdateProfile() {
   return { mutate };
 }
 
-function mapToProfileBody(profileFormDto: ProfileFormDto) {
+function sanitizeProfileFormRequestDTO(profileFormDto: ProfileFormRequestDTO) {
   return {
     address: profileFormDto.address,
     company: profileFormDto.company,
