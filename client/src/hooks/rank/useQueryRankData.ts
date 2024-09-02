@@ -8,8 +8,9 @@ import {
 } from "@utils/shared/date/date";
 import { useQueries } from "@tanstack/react-query";
 import { format } from "date-fns";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+
 import {RankEntity} from "@/models/rank/entity/ranking";
+import {useFetch} from "@hooks/shared/useFetch";
 
 export default function useQueryRankData() {
   const { fetch } = useFetch();

@@ -1,6 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {useFetch} from "@hooks/shared/useFetch";
+
 
 export const useGetProfile = (email: string) => {
   const { fetch } = useFetch();

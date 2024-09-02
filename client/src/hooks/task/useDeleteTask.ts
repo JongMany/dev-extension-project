@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {useFetch} from "@hooks/shared/useFetch";
+
 
 
 const useDeleteTask = (taskId: string) => {

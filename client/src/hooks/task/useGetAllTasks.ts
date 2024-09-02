@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+
 import {Task} from "@/models/task/entity/task.entity";
+import {useFetch} from "@hooks/shared/useFetch";
 
 export function useGetAllTasks() {
   const queryKey = ["tasks", "all"];

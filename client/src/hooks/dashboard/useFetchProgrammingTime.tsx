@@ -5,8 +5,9 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { toZonedTime } from "date-fns-tz";
 import {useGetFromToDate} from "@hooks/shared/useIntervalDate";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+
 import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+import {useFetch} from "@hooks/shared/useFetch";
 
 export default function useFetchProgrammingTime() {
   const { duration } = useDuration();

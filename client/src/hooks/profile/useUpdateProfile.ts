@@ -3,7 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {useFetch} from "@hooks/shared/useFetch";
+
 
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
