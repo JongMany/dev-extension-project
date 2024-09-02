@@ -5,13 +5,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import GraphChart from "@components/shared/charts/GraphChart";
 import {filterDuplicatedDependencies} from "@utils/chart/graph";
-import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
+
 
 export default function ProjectDepsChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =
-    queryClient.getQueryData<IProgramData[]>(["programmingTime", duration]) ||
+    queryClient.getQueryData<UserProgrammingInfoResponseDTO[]>(["programmingTime", duration]) ||
     [];
 
   const depsLink = makeDepsGraphItems(programData);
@@ -37,7 +38,7 @@ export function removeDuplicateIn2DArray(arr2D: string[][]) {
   });
 }
 
-function makeDepsGraphItems(programData: IProgramData[]) {
+function makeDepsGraphItems(programData: UserProgrammingInfoResponseDTO[]) {
   const deps = programData.map((data) => [
     ...data.project,
     `${data.fileName}.${data.programLanguage}`,

@@ -6,8 +6,9 @@ import { useSession } from "next-auth/react";
 import { toZonedTime } from "date-fns-tz";
 import {useGetFromToDate} from "@hooks/shared/useIntervalDate";
 
-import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+
 import {useFetch} from "@hooks/shared/useFetch";
+import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
 
 export default function useFetchProgrammingTime() {
   const { duration } = useDuration();
@@ -23,7 +24,7 @@ export default function useFetchProgrammingTime() {
       `api/v1/time/overall/${email}/from/${from}/to/${to}`
     );
 
-    const data = (await response.json()) as { data: IProgramData[] };
+    const data = (await response.json()) as { data: UserProgrammingInfoResponseDTO[] };
     const convertedData = data.data.map((d) => {
       const zonedTime = toZonedTime(
         new Date(d.programmingTime).toISOString(),

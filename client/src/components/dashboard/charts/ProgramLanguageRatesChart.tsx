@@ -4,13 +4,14 @@
 import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import PieChartContainer from "@components/shared/charts/PieChartContainer";
-import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
+
 
 export default function ProgramLanguageRatesChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =
-    queryClient.getQueryData<IProgramData[]>(["programmingTime", duration]) ||
+    queryClient.getQueryData<UserProgrammingInfoResponseDTO[]>(["programmingTime", duration]) ||
     [];
 
   const languageRates = convertProgramDataToLanguageRates(programData);
@@ -18,7 +19,7 @@ export default function ProgramLanguageRatesChart() {
   return <PieChartContainer data={languageRates} />;
 }
 
-function convertProgramDataToLanguageRates(programData: IProgramData[]) {
+function convertProgramDataToLanguageRates(programData: UserProgrammingInfoResponseDTO[]) {
   const languageMap = programData.reduce((acc, cur) => {
     const language =
       languageMapper[cur.programLanguage as keyof typeof languageMapper] ||
