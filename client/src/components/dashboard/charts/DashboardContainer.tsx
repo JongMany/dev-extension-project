@@ -1,12 +1,12 @@
 "use client";
 
-import useFetchProgrammingTime from "@/app/(main)/dashboard/_libs/useFetchProgrammingTime";
 import React from "react";
 import DashboardCard from "@components/dashboard/charts/DashboardCard";
 import ProgramTimeSeriesChart from "@components/dashboard/charts/ProgramTimeSeriesChart";
 import ProgramLanguageRatesChart from "@components/dashboard/charts/ProgramLanguageRatesChart";
 import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
 import HierarchyChart from "@components/dashboard/charts/HierarchyChart";
+import useFetchProgrammingTime from "@hooks/dashboard/useFetchProgrammingTime";
 
 export default function DashboardContainer() {
   const { data, isFetching, isError } = useFetchProgrammingTime();
