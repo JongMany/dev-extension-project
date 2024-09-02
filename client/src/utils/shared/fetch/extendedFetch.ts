@@ -43,7 +43,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
         console.log("response", process.env.NEXT_PUBLIC_BASE_URL);
         const res = await fetch(
           `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net"
+            process.env.NEXT_PUBLIC_BASE_URL
           }/api/v1/auth/refresh`,
           {
             method: "POST",
@@ -84,23 +84,15 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 
 export const useFetch = (include: boolean = true) => {
 
-  const URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net";
-  console.log('useFetch', process.env, 'url:', URL, 'env url:', process.env.NEXT_PUBLIC_BASE_URL, process.env.NODE_ENV, isBrowser());
+  const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return {
     fetch: useCheckTokenInClient({
-      // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-      // baseUrl: "https://www.study-log.net",
       baseUrl: URL,
-      // `${process.env.NEXT_PUBLIC_BASE_URL}/api` ||
-      // `${process.env.NEXT_PUBLIC_BASE_URL}` || "https://www.study-log.net",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      // credentials: include ? "include" : false, // 또는 'same-origin'
-      // mode: "cors",
     }),
   };
-  // return { fetch };
 };
