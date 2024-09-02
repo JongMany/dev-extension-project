@@ -5,7 +5,7 @@ import Input from "@/components/shared/input/Input";
 import React, { ReactElement } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {ITaskForm} from "@/models/task/taskForm.dto";
+import {ITaskForm} from "@/models/task/dto/taskForm.dto";
 
 
 type Props = {

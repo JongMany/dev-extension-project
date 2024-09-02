@@ -1,0 +1,1 @@
+export {default as SignInForm} from '@/components/auth/sign-in/sign-in-form/SignInForm';

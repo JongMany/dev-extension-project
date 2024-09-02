@@ -1,4 +1,5 @@
-import { isBrowser } from "@/lib/checkIsBrowser";
+import {isBrowser} from "@utils/shared/common/checkIsBrowser";
+
 
 export async function initMocks() {
   if (isBrowser()) {

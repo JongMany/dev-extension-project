@@ -1,9 +1,10 @@
 "use client";
 
-import { IProgramData } from "@/entities/programData";
-import { useDuration } from "@/store/useDuration";
+
+import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import PieChartContainer from "@components/shared/charts/PieChartContainer";
+import {IProgramData} from "@/models/programming-info/entity/programData.entity";
 
 export default function ProgramLanguageRatesChart() {
   const queryClient = useQueryClient();

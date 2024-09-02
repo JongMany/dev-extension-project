@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
-import {hasEmptyInStringList} from "@/lib/validateArrays";
+import {hasEmptyInStringList} from "@utils/shared/common/validateArrays";
+
 
 type FormType = { [key: string | symbol]: any }
 

@@ -10,17 +10,17 @@ export type Task = {
   __v: number;
 };
 
-export type TaskEntity = {
-  _id: string;
-  dueDate: Date;
-  createdAt: Date;
-  projectName: string;
-  task: string;
-  owner: string;
-  email: string;
-  isCompleted: boolean;
-  __v: number;
-};
+// export type TaskEntity = {
+//   _id: string;
+//   dueDate: Date;
+//   createdAt: Date;
+//   projectName: string;
+//   task: string;
+//   owner: string;
+//   email: string;
+//   isCompleted: boolean;
+//   __v: number;
+// };
 
 export type CalendarTask = {
   id: string;

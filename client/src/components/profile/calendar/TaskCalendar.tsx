@@ -1,6 +1,3 @@
-
-
-import { CalendarTask } from "@/entities/task";
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
 import { Calendar, DateLocalizer, Views } from "react-big-calendar";
@@ -9,6 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import CalendarEvent from "@components/profile/calendar/CalendarEvent";
 import {useUpdateTaskDueDate} from "@hooks/profile/useUpdateTaskDueDate";
+import {CalendarTask} from "@/models/task/entity/task.entity";
 
 type Props = {
   localizer: DateLocalizer;

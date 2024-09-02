@@ -1,4 +1,4 @@
-import { type SignUpForm } from "@/app/(auth)/signup/_components/SignUpButton";
+import {SignUpForm} from "@/models/auth/dto/signUp.dto";
 
 export const signUp = async (form: SignUpForm) => {
   const response = await fetch(
@@ -13,7 +13,7 @@ export const signUp = async (form: SignUpForm) => {
         "Content-Type": "application/json",
       },
       method: "POST",
-      // cache: "no-cache",
+
     }
   );
 

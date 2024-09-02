@@ -1,12 +1,10 @@
 "use client";
 import { format } from "date-fns";
 
-import { useModal } from "@/lib/useModal";
-
-
-import { Task } from "@/entities/task";
 import EditTaskModal from "@components/task/taskList/EditTaskModal";
 import useUpdateTask from "@hooks/task/useUpdateTask";
+import {useModal} from "@hooks/shared/useModal";
+import {Task} from "@/models/task/entity/task.entity";
 
 // DND https://velog.io/@sumi-0011/framer-motion-dnd
 type Props = {

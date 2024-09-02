@@ -1,15 +1,12 @@
 "use client";
-
-
-
-import { IProgramData } from "@/entities/programData";
-import { useIntervalDate } from "@/lib/useIntervalDate";
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { MouseEvent, useState } from "react";
 import LineChart, {DefaultLineProp, LangaugeLineProp} from "@components/shared/charts/LineChart";
 import {languageMapper} from "@/constants/languageMapper";
+import {useIntervalDate} from "@hooks/shared/useIntervalDate";
+import {IProgramData} from "@/models/programming-info/entity/programData.entity";
 
 type ChartOption = "ALL" | "LANGUAGE" | "PROJECT";
 

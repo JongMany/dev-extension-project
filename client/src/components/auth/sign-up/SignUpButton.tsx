@@ -1,8 +1,9 @@
 "use client";
 
-import { signUp } from "@/app/(auth)/signup/_utils/signUp";
-import { SignUp } from "@/models/auth/dtos/auth.model";
+import { SignUp } from "@/models/auth/dto/auth.dto";
 import { useRouter } from "next/navigation";
+import {signUp} from "@/service/auth/signUp";
+import {SignUpForm} from "@/models/auth/dto/signUp.dto";
 
 type Props = {
   form: SignUp;
@@ -35,12 +36,6 @@ function validateForm(form: SignUp) {
   return Object.values(form).every((field) => field.checkDuplicate);
 }
 
-export type SignUpForm = {
-  apiKey: string;
-  password: string;
-  email: string;
-  nickname: string;
-};
 /** 회원가입 포맷으로 변경  */
 function formatSignUpForm(form: SignUp) {
   return Object.entries(form).reduce((acc, [key, value]) => {

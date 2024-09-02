@@ -1,4 +1,4 @@
-import {Profile} from "@/models/profile/profile.model";
+import {Profile} from "@/models/profile/entity/profile.entity";
 
 export interface ProfileFormDto {
   address: string;

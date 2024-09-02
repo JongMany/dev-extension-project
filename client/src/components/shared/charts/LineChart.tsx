@@ -1,5 +1,3 @@
-import { IProgramData } from "@/entities/programData";
-import { PropertyType } from "@/utilityTypes/utility";
 import { EChartsOption } from "echarts";
 import { LinesChart } from "echarts/charts";
 import {
@@ -14,6 +12,8 @@ import { useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import { format } from "date-fns";
 import { formatSecondsToTime } from "@utils/shared/date/date";
+import {PropertyType} from "types/utility/utility";
+
 
 echarts.use([
   TitleComponent,

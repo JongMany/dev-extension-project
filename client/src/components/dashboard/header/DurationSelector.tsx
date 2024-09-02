@@ -1,5 +1,5 @@
 "use client";
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 import React from "react";
 
 export default function DurationSelector() {
