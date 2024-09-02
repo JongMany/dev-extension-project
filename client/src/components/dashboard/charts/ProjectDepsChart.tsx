@@ -1,12 +1,11 @@
 "use client";
 
-
-import { IProgramData } from "@/entities/programData";
 import { useDuration } from "@/store/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import GraphChart from "@components/shared/charts/GraphChart";
 import {filterDuplicatedDependencies} from "@utils/chart/graph";
+import {IProgramData} from "@/models/programming-info/entity/programData.entity";
 
 export default function ProjectDepsChart() {
   const queryClient = useQueryClient();

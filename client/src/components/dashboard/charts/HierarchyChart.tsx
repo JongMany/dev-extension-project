@@ -1,10 +1,11 @@
 "use client";
 
-import { IProgramData } from "@/entities/programData";
+
 import { useDuration } from "@/store/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import TransitionChart, {HierarchyData} from "@components/shared/charts/TransitionChart";
+import {IProgramData} from "@/models/programming-info/entity/programData.entity";
 interface ProjectData {
   project: string[];
   duration: number;
