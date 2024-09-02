@@ -36,11 +36,11 @@ const nextConfig = {
     return config;
   }
 };
-// console.log(
-//     'env',
-//     process.env.NEXT_AUTH_URL,
-//     process.env.NEXTAUTH_URL,
-//     process.env.NEXT_PUBLIC_BASE_URL
-// );
+console.log(
+    'env',
+    process.env.NEXT_AUTH_URL,
+    process.env.NEXTAUTH_URL,
+    process.env.NEXT_PUBLIC_BASE_URL
+);
 
 export default nextConfig;
