@@ -3,20 +3,18 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import theme from "./styles/theme";
-import { WarpStateType } from "./lib/constants";
-import {
-  AMBIENT_LIGHT_INTENSITY,
-  BLOOM_INTENSITY,
-  BLOOM_LUMINANCE_SMOOTHING,
-  BLOOM_LUMINANCE_THRESHOLD,
-  BLOOM_MIMPAP_BLUR,
-  SPACE_WARP_CAMERA_FAR,
-  SPACE_WARP_CAMERA_POSITION,
-  SPACE_WARP_CAMERA_UP,
-} from "./lib/constants";
+
+
 import BrightSphere from "./ui/BrightSphere";
 import SpaceWarp from "./ui/SpaceWarp";
+import theme from "@/constants/warpTheme";
+import {
+  AMBIENT_LIGHT_INTENSITY,
+  BLOOM_INTENSITY, BLOOM_LUMINANCE_SMOOTHING, BLOOM_LUMINANCE_THRESHOLD, BLOOM_MIMPAP_BLUR,
+  SPACE_WARP_CAMERA_FAR,
+  SPACE_WARP_CAMERA_POSITION,
+  SPACE_WARP_CAMERA_UP, WarpStateType
+} from "@/constants/warpStatus";
 
 interface PropsType {
   isSwitching: WarpStateType;

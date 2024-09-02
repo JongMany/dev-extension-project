@@ -1,9 +1,9 @@
 "use client";
 
-
 import React, { useEffect, useState } from "react";
 import WarpScreen from "@components/shared/warp/WarpScreen";
-import {WarpStateType} from "@components/shared/warp/lib/constants";
+import {WarpStateType} from "@/constants/warpStatus";
+
 
 export default function Warp() {
   const [isSwitching, setIsSwitching] = useState<WarpStateType>("end");
