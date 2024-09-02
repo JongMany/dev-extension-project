@@ -83,23 +83,34 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Create .env file
+#      - name: Create .env.local file
+#        run: |
+#          echo NEXT_AUTH_SECRET="${{ secrets.NEXT_AUTH_SECRET }}" >> .env.production
+#          echo NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" >> .env.production
+#          echo NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env.production
+#          echo NEXT_PUBLIC_NEXTAUTH_SECRET="${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> .env.production
+#          echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env.production
+#          echo NEXT_PUBLIC_MY_URL="${{ secrets.NEXT_PUBLIC_MY_URL }}" >> .env.production
+      - name: Create .env.production file in config directory
         run: |
-          echo NEXT_AUTH_SECRET="${{ secrets.NEXT_AUTH_SECRET }}" >> .env          
-          echo NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" >> .env          
-          echo NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env          
-          echo NEXT_PUBLIC_NEXTAUTH_SECRET="${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> .env          
-          echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
-          echo NEXT_PUBLIC_MY_URL="${{ secrets.NEXT_PUBLIC_MY_URL }}" >> .env
-      - name: Set permissions for .env file
-        run: chmod 600 .env
+          mkdir -p config
+          echo NEXT_AUTH_SECRET="${{ secrets.NEXT_AUTH_SECRET }}" >> config/.env.production          
+          echo NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" >> config/.env.production          
+          echo NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> config/.env.production          
+          echo NEXT_PUBLIC_NEXTAUTH_SECRET="${{ secrets.NEXT_PUBLIC_NEXTAUTH_SECRET }}" >> config/.env.production        
+          echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> config/.env.production
+          echo NEXT_PUBLIC_MY_URL="${{ secrets.NEXT_PUBLIC_MY_URL }}" >> config/.env.production
+
+      - name: Set permissions for .env.production file
+        run: chmod 600 config/.env.production
       - name: Verify .env file contents
-        run: cat .env
+        run: cat config/.env.production
 
       - name: Pull image from Amazon ECR and restart Docker Container
         run: |
           docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           docker stop study-log-client || true && docker rm study-log-client || true
           docker run -d --name study-log-client -p 3000:3000 --restart unless-stopped \
-            --env-file .env \
+#            --env-file .env.production \
+            --env-file config/.env.production \
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
