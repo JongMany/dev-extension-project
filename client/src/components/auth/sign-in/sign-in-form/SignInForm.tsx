@@ -1,17 +1,18 @@
 "use client";
 
-import { SignIn } from "@/models/auth/dto/auth.dto";
+
 import { type ChangeEventHandler, useState } from "react";
 import SignInButton from "@components/auth/sign-in/sign-in-form/SignInButton";
+import {SignInVO} from "@/models/auth/sign-in/vo/signIn.vo";
 
-const initialState: SignIn = {
+const initialState: SignInVO = {
   apiKey: "",
   password: "",
   email: "",
 };
 
 export default function SignInForm() {
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState<SignInVO>(initialState);
 
   const formChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
