@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { toZonedTime } from "date-fns-tz";
-import { useGetFromToDate } from "@/lib/useIntervalDate";
+import {useGetFromToDate} from "@hooks/shared/useIntervalDate";
 
 export default function useFetchProgrammingTime() {
   const { duration } = useDuration();

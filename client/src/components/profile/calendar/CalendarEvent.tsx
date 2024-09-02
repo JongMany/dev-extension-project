@@ -1,8 +1,8 @@
 "use client";
 
-import { useModal } from "@/lib/useModal";
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
+import {useModal} from "@hooks/shared/useModal";
 
 type Props = {
   event: any;

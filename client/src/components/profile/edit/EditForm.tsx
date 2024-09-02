@@ -1,6 +1,4 @@
 "use client"
-import {useFormWithList} from "@/lib/useForm";
-
 import Input from "@components/shared/input/Input";
 import {ChangeEvent, FormEvent} from "react";
 import SubmitButton from "@components/shared/button/SubmitButton";
@@ -8,6 +6,7 @@ import SubmitButton from "@components/shared/button/SubmitButton";
 import AddMoreLinkButton from "@components/profile/edit/AddMoreLinkButton";
 import {useUpdateProfile} from "@hooks/profile/useUpdateProfile";
 import {ProfileFormDto} from "@utils/profile/mapToProfileDto";
+import {useFormWithList} from "@hooks/shared/useForm";
 
 type Props = {
   profile: ProfileFormDto;
