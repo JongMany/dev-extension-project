@@ -1,8 +1,8 @@
-export interface SignIn {
-  apiKey: string;
-  password: string;
-  email: string;
-}
+// export interface SignIn {
+//   apiKey: string;
+//   password: string;
+//   email: string;
+// }
 
 export interface SignUp {
   apiKey: SignUpItemForm;
