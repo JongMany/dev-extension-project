@@ -1,6 +1,6 @@
 import { type RankDuration } from "@/entities/duration";
 import { MyRank, MyRankEntity } from "@/entities/ranking";
-import { useFetch } from "@/lib/extendedFetch";
+
 import {
   getThisMonthFirstDay,
   getThisMonthLastDay,
@@ -10,6 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
+import {useFetch} from "@utils/shared/fetch/extendedFetch";
 
 export default function useQueryMyRank(duration: RankDuration) {
   const { fetch } = useFetch();

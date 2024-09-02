@@ -4,7 +4,7 @@ import Tooltip from "cal-heatmap/plugins/Tooltip";
 import "cal-heatmap/cal-heatmap.css";
 import { useEffect } from "react";
 import { format } from "date-fns";
-import { useFetch } from "@/lib/extendedFetch";
+
 import {
   convertProgrammingTime,
   getCurrentYear,
@@ -12,6 +12,7 @@ import {
   getStartOfYear,
   makeTimeStamp,
 } from "@utils/shared/date/date";
+import {useFetch} from "@utils/shared/fetch/extendedFetch";
 
 const option = {
   range: 12,

@@ -1,5 +1,5 @@
 import { IProgramData } from "@/entities/programData";
-import { useFetch } from "@/lib/extendedFetch";
+
 import { useDuration } from "@/store/useDuration";
 
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { toZonedTime } from "date-fns-tz";
 import {useGetFromToDate} from "@hooks/shared/useIntervalDate";
+import {useFetch} from "@utils/shared/fetch/extendedFetch";
 
 export default function useFetchProgrammingTime() {
   const { duration } = useDuration();

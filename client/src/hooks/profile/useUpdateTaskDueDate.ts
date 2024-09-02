@@ -1,5 +1,6 @@
-import { useFetch } from "@/lib/extendedFetch";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useFetch} from "@utils/shared/fetch/extendedFetch";
 
 type UpdateDateTask = {
   taskId: string;

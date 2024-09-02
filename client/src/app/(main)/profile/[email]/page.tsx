@@ -1,5 +1,3 @@
-
-
 import SessionProvider from "@/components/providers/SessionProvider";
 import { auth } from "@/auth";
 
@@ -10,7 +8,6 @@ import {
   SharedCalendarContainer,
   EditProfileLink
 } from "@components/profile";
-
 
 type Props = { params: { email: string } };
 
