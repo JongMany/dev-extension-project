@@ -1,5 +1,5 @@
 "use client";
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { MouseEvent, useState } from "react";

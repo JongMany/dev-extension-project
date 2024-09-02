@@ -1,4 +1,4 @@
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";

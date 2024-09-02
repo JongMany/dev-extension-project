@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import TransitionChart, {HierarchyData} from "@components/shared/charts/TransitionChart";

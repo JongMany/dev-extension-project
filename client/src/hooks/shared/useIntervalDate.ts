@@ -1,4 +1,4 @@
-import { useDuration } from "@/store/useDuration";
+import { useDuration } from "@/store/duration/useDuration";
 import { getFromDate, getToDate } from "@utils/shared/date/interval";
 import { eachDayOfInterval, format } from "date-fns";
 
