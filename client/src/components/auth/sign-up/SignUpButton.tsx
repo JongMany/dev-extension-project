@@ -14,14 +14,14 @@ export default function SignUpButton({ form }: Props) {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const isValidate = validateForm(form);
-    const signUpForm = formatSignUpForm(form);
+    const isValidate = validateSignUpVOForm(form);
 
     if (!isValidate) {
       return;
     }
 
-    const data = await signUp(signUpForm);
+    const signUpFormDTO = generateSignUpFormDTO(form);
+    const data = await signUp(signUpFormDTO);
     if (data.message === "User created") {
       router.replace("/");
     }
@@ -32,12 +32,12 @@ export default function SignUpButton({ form }: Props) {
 }
 
 /** 모든 form의 checkDuplicate가 true인 경우에만 유효성 통과 */
-function validateForm(form: SignUpFormVO) {
+function validateSignUpVOForm(form: SignUpFormVO) {
   return Object.values(form).every((field) => field.checkDuplicate);
 }
 
 /** 회원가입 포맷으로 변경  */
-function formatSignUpForm(form: SignUpFormVO) {
+function generateSignUpFormDTO(form: SignUpFormVO) {
   return Object.entries(form).reduce((acc, [key, value]) => {
     acc[key as keyof SignUpFormDTO] = value.text;
     return acc;
