@@ -125,21 +125,13 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 };
 
 export const useFetch = (include: boolean = true) => {
-  // console.log(
-  //   "useFetch",
-  //   process.env.NEXT_PUBLIC_BASE_URL,
-  //   process.env.NEXT_AUTH_URL,
-  //   process.env.NEXT_PUBLIC_BASE_URL
-  // );
 
-  console.log(
-    `BASEURL, ${process.env.NEXT_PUBLIC_BASE_URL}`,
-    `${process.env.NEXTAUTH_URL}`
-  );
-  const URL =
-    process.env.NODE_ENV === "production"
-      ? "https:/www.study-log.net"
-      : "http://localhost:8080";
+  const URL =process.env.NEXT_PUBLIC_BASE_URL;
+    // process.env.NODE_ENV === "production"
+    //   ? "https:/www.study-log.net"
+    //   : "http://localhost:8080";
+
+  console.log('useFetch', URL);
   return {
     fetch: useCheckTokenInClient({
       // baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
