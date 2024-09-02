@@ -1,17 +1,17 @@
 import { useFrame } from "@react-three/fiber";
 import React, { useMemo } from "react";
 import * as THREE from "three";
+
 import {
-  SPACE_WARP_LINES_NUM,
   SPACE_WARP_LINE_COLORS,
   SPACE_WARP_LINE_LENGTH,
+  SPACE_WARP_LINES_NUM,
   SPACE_WARP_XZ_MAX,
   SPACE_WARP_XZ_MIN,
   SPACE_WARP_Y_MAX,
-  SPACE_WARP_Y_MIN,
-  type WarpStateType,
-} from "../lib/constants";
-import {getRandomFloat, getRandomInt} from "@components/shared/warp/lib/utils";
+  SPACE_WARP_Y_MIN, WarpStateType
+} from "@/constants/warpStatus";
+import {getRandomFloat, getRandomInt} from "@utils/warp/utils";
 
 const getSpaceWarpLinesInfo = () => {
   const positions = Array.from({ length: SPACE_WARP_LINES_NUM }, () => {

@@ -6,7 +6,7 @@ type Props = {} & ButtonHTMLAttributes<HTMLButtonElement>;
 export default function Button({
                                  children,
                                  onClick,
-                                 className="",
+                                 className = "",
                                  ...props
                                }: PropsWithChildren<Props>) {
   return (

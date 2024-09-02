@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import {SignInForm} from "@components/auth/sign-in";
+import {Hourglass} from "@components/shared/loader/Hourglass";
 
 export default function Home() {
   return (
