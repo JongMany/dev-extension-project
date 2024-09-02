@@ -1,6 +1,7 @@
 // https://git.hust.cc/echarts-for-react/examples/graph
 import ReactECharts from "echarts-for-react";
-import { makeDepsGraphLinkAndNode } from "@/app/(main)/dashboard/_utils/graph";
+import {makeDepsGraphLinkAndNode} from "@utils/chart/graph";
+
 
 const makeGraphChartOption = (depsData: any) => {
   const option = {
