@@ -9,7 +9,7 @@ const refreshAccessToken = async (session: any) => {
   const { update, data: sessionData } = session;
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/refresh`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/refresh`,
     {
       method: "POST",
       credentials: "include",
@@ -126,7 +126,7 @@ const useCheckTokenInClient: ReturnFetch = (args) => {
 
 export const useFetch = (include: boolean = true) => {
 
-  const URL =process.env.NEXT_PUBLIC_BASE_URL;
+  const URL =process.env.NEXT_PUBLIC_BASE_URL || "https://www.study-log.net";
     // process.env.NODE_ENV === "production"
     //   ? "https:/www.study-log.net"
     //   : "http://localhost:8080";
