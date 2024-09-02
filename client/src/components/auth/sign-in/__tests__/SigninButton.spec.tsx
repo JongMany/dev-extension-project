@@ -1,8 +1,8 @@
-import SignInButton from "@/app/(auth)/(signin)/_components/SignInButton";
-import { SignIn } from "@/models/auth/auth.model";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { signIn } from "next-auth/react";
+import SignInButton from "@components/auth/sign-in/sign-in-form/SignInButton";
+import {SignIn} from "@/models/auth/dto/auth.dto";
 
 const pushMock = vi.fn((href: string) => {});
 

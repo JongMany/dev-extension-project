@@ -1,5 +1,7 @@
-import SignInForm from "@/app/(auth)/(signin)/_components/SignInForm";
+
 import Link from "next/link";
+import {SignInForm} from "@components/auth/sign-in";
+
 
 export default function Home() {
   return (
