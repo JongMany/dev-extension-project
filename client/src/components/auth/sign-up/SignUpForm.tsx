@@ -7,6 +7,7 @@ import CheckDuplicateButton from "@components/auth/sign-up/CheckDuplicateButton"
 import SignUpButton from "@components/auth/sign-up/SignUpButton";
 import {SignUpFormVO} from "@/models/auth/sign-up/vo/signUp.vo";
 import {useFetch} from "@hooks/shared/useFetch";
+import {showToast} from "@utils/shared/toast/showToast";
 
 const initialState: SignUpFormVO = {
   apiKey: { text: "", checkDuplicate: false },
@@ -39,7 +40,7 @@ export default function SignUpForm() {
       });
 
       const data = await response.json();
-      console.log("data", data);
+
       if (data.statusCode === 200) {
         setForm({
           ...form,
@@ -49,6 +50,8 @@ export default function SignUpForm() {
           },
         });
       } else {
+
+        showToast('warning', <p>이미 존재하는 유저입니다.</p>)
         setForm({
           ...form,
           [name]: {
