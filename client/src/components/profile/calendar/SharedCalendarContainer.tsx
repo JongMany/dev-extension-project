@@ -1,10 +1,11 @@
 "use client";
 
-import useGetOthersTask from "@/app/(main)/profile/_hooks/useGetOthersTask";
+
 import moment from "moment";
 import React from "react";
 import { momentLocalizer } from "react-big-calendar";
 import TaskCalendar from "@components/profile/calendar/TaskCalendar";
+import useGetOthersTask from "@hooks/profile/useGetOthersTask";
 
 type Props = {
   email: string;

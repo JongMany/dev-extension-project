@@ -9,8 +9,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 
 import { format } from "date-fns";
-import { useUpdateTaskDueDate } from "@/app/(main)/profile/_hooks/useUpdateTaskDueDate";
+
 import CalendarEvent from "@components/profile/calendar/CalendarEvent";
+import {useUpdateTaskDueDate} from "@hooks/profile/useUpdateTaskDueDate";
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
