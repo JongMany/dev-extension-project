@@ -1,7 +1,15 @@
 import dotenv from "dotenv";
-dotenv.config({
-  path: `./config/.env.development`,
-});
+import path from 'path';
+
+// NODE_ENV 값을 가져옵니다. 기본값은 'development'로 설정합니다.
+const env = process.env.NODE_ENV || 'development';
+
+// 해당하는 .env 파일 경로를 설정합니다.
+const envFilePath = path.resolve(`./config/.env.${env}`);
+
+dotenv.config({ path: envFilePath });
+
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -26,20 +34,13 @@ const nextConfig = {
       }
     }
     return config;
-  },
-  env: {
-    PORT: "80",
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    NEXT_PUBLIC_AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL, // Added if required
-    MODE: process.env.MODE,
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
-  },
-  // rewrites: [
-  //   {
-  //     source: "/api/auth/:path*",
-  //     destination: "/routes/auth/:path*", //change "routes" to your liking
-  //   },
-  // ],
+  }
 };
+console.log(
+    'env',
+    process.env.NEXT_AUTH_URL,
+    process.env.NEXTAUTH_URL,
+    process.env.NEXT_PUBLIC_BASE_URL
+);
 
 export default nextConfig;
