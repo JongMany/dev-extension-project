@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import {FormEvent} from "react";
 
 type Props = {
   form: SignInRequestDTO;
@@ -7,14 +8,14 @@ type Props = {
 
 export default function SignInButton({ form }: Props) {
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     const response = await signIn("credentials", {
-      email: form.email,
-      password: form.password,
-      apiKey: form.apiKey,
+      ...form,
       redirect: false,
     });
+    
     if (response?.error) {
       console.log(response.error);
     } else {

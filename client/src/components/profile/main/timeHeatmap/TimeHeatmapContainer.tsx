@@ -3,7 +3,7 @@
 
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import TimeHeatmap from "@components/profile/timeHeatmap/TimeHeatmap";
+import TimeHeatmap from "@components/profile/main/timeHeatmap/TimeHeatmap";
 
 export default function TimeHeatmapContainer({ email }: { email: string }) {
   const { data: session } = useSession();
