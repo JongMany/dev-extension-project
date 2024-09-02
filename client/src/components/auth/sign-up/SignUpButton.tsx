@@ -20,12 +20,12 @@ export default function SignUpButton({ form }: Props) {
     if (!isValidate) {
       return;
     }
-    // TODO: 회원 가입 요청
 
     const data = await signUp(signUpForm);
     if (data.message === "User created") {
       router.replace("/");
     }
+    // TODO: 회원가입 실패 시, TOAST!
   };
 
   return <button onClick={handleSubmit}>회원가입</button>;
