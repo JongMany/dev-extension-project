@@ -1,4 +1,5 @@
 "use client";
+
 import {useSession} from "next-auth/react";
 import returnFetch, {ReturnFetch, ReturnFetchDefaultOptions} from "return-fetch";
 import {fetchFreshAccessToken} from "@/service/auth/fetchFreshAccessToken";
@@ -20,7 +21,7 @@ function configureRequestOptionsBasedOnAuthToken(accessToken: string|undefined, 
 }
 
 // TODO: 리팩토링..!
-const useCheckTokenInClient: ReturnFetch = (args) => {
+export const useCheckTokenInClient: ReturnFetch = (args) => {
   const { data: session, update } = useSession();
 
   return returnFetch({

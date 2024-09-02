@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {IEditTaskForm} from "@/models/task/dto/taskForm.dto";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {useFetch} from "@hooks/shared/useFetch";
+
 
 const useUpdateTask = (taskId: string) => {
   const { fetch } = useFetch();

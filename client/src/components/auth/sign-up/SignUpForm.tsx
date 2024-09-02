@@ -2,10 +2,11 @@
 
 import { type ChangeEventHandler, useState } from "react";
 
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+
 import CheckDuplicateButton from "@components/auth/sign-up/CheckDuplicateButton";
 import SignUpButton from "@components/auth/sign-up/SignUpButton";
 import {SignUpFormVO} from "@/models/auth/sign-up/vo/signUp.vo";
+import {useFetch} from "@hooks/shared/useFetch";
 
 const initialState: SignUpFormVO = {
   apiKey: { text: "", checkDuplicate: false },

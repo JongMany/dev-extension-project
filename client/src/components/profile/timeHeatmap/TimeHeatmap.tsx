@@ -12,7 +12,8 @@ import {
   getStartOfYear,
   makeTimeStamp,
 } from "@utils/shared/date/date";
-import {useFetch} from "@utils/shared/fetch/extendedFetch";
+import {useFetch} from "@hooks/shared/useFetch";
+
 
 const option = {
   range: 12,
