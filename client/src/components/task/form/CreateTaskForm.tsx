@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { FormEvent } from "react";
-import TaskForm from "@components/task/form/TaskForm";
+import TaskFormUI from "@components/task/form/TaskFormUI";
 import useCreateTask from "@hooks/task/useCreateTask";
 import {useFormWithDate} from "@hooks/shared/useForm";
 import {type CreateTaskFormVO} from "@/models/task/vo/createTaskForm.vo";
@@ -41,7 +41,7 @@ export default function CreateTaskForm() {
   };
 
   return (
-    <TaskForm
+    <TaskFormUI
       form={toTaskFormVO(form)}
       submitHandler={submitTaskHandler}
       onChange={onChange}

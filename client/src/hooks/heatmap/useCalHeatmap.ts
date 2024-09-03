@@ -7,7 +7,7 @@ import {HeatmapProgramTimeResponseDTO} from "@/models/heatmap-time/dto/response/
 import {useFetchHeatmapData} from "@hooks/heatmap/useFetchHeatmapData";
 
 export const useCalHeatmap = (email: string) => {
-  const {loadStatus, heatmapData} = useFetchHeatmapData(email);
+  const {isFetching, data: heatmapData} = useFetchHeatmapData(email);
   const cal = new CalHeatmap();
   cal.on("click", () => {
   });
@@ -56,11 +56,11 @@ export const useCalHeatmap = (email: string) => {
       }
     }
 
-    if(loadStatus === "finish" || loadStatus === 'error') {
+    if(!isFetching) {
       paint();
     }
 
-  }, [loadStatus]);
+  }, [isFetching, heatmapData]);
 
   return {cal};
 }
