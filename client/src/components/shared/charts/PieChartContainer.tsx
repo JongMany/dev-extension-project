@@ -13,9 +13,10 @@ import {
 } from "echarts/components";
 import { EChartsOption } from "echarts-for-react";
 import {formatSecondsToTime} from "@utils/shared/date/date";
+import {ProgrammingLanguageProportionVO} from "@/models/programming-info/vo/programmingLanguageProportion.vo";
 
 type Props = {
-  data: { language: string; duration: number }[];
+  data: ProgrammingLanguageProportionVO[];
 };
 
 echarts.use([
