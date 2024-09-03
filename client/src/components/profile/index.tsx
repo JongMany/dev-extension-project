@@ -4,4 +4,4 @@ export {default as CalendarContainer} from "@components/profile/main/calendar/Ca
 export {default as SharedCalendarContainer} from "@components/profile/main/calendar/SharedCalendarContainer"
 export {default as EditProfileLink} from "@components/profile/main/edit-profile-link/EditProfileLink"
 
-export {default as EditFormWrapper } from "@components/profile/edit/ProfileEditor"
+export {default as ProfileEditor } from "@components/profile/edit/ProfileEditor"
