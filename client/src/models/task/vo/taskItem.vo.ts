@@ -1,4 +1,4 @@
-export type TaskEntity = {
+export type TaskItemVO = {
   _id: string;
   dueDate: string;
   createdAt: string;
@@ -7,12 +7,4 @@ export type TaskEntity = {
   owner: string;
   email: string;
   isCompleted: boolean;
-  __v: number;
-};
-
-export type TaskListEntity = {
-  tasks: TaskEntity[];
 }
-
-
-

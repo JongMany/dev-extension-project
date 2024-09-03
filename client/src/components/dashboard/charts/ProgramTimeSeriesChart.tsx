@@ -6,7 +6,8 @@ import { MouseEvent, useState } from "react";
 import LineChart, {DefaultLineProp, LangaugeLineProp} from "@components/shared/charts/LineChart";
 import {languageMapper} from "@/constants/languageMapper";
 import {useIntervalDate} from "@hooks/shared/useIntervalDate";
-import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
+
 
 type ChartOption = "ALL" | "LANGUAGE" | "PROJECT";
 
@@ -16,7 +17,7 @@ export default function ProgramTimeSeriesChart() {
   const dates = useIntervalDate();
   const { duration } = useDuration();
   const programData =
-    queryClient.getQueryData<IProgramData[]>(["programmingTime", duration]) ||
+    queryClient.getQueryData<UserProgrammingInfoResponseDTO[]>(["programmingTime", duration]) ||
     [];
 
   // 빈 날짜에 해당하는 데이터를 채워넣어야 함
@@ -35,7 +36,7 @@ export default function ProgramTimeSeriesChart() {
   );
 
   const timeSeriesDataPerLanguage =
-    fillEmpytDatesAndConvertProgramDataToTimeSeriesByLanguage(
+    fillEmptytDatesAndConvertProgramDataToTimeSeriesByLanguage(
       programData,
       dates
     );
@@ -72,8 +73,8 @@ export default function ProgramTimeSeriesChart() {
   );
 }
 
-function fillEmptyDay(programData: IProgramData[], dates: string[]) {
-  const result: IProgramData[] = [];
+function fillEmptyDay(programData: UserProgrammingInfoResponseDTO[], dates: string[]) {
+  const result: UserProgrammingInfoResponseDTO[] = [];
   const programDateSet = new Set(
     programData.map((data) => format(data.programDay, "yyyy-MM-dd"))
   );
@@ -106,7 +107,7 @@ function fillEmptyDay(programData: IProgramData[], dates: string[]) {
 }
 
 function fillEmptyDatesAndConvertProgramDataToTimeSeries(
-  programData: IProgramData[],
+  programData: UserProgrammingInfoResponseDTO[],
   dates: string[]
 ): DefaultLineProp {
   const filledProgramData = fillEmptyDay(programData, dates);
@@ -164,8 +165,8 @@ function fillEmptyDayByLanguage(
   return result;
 }
 
-const fillEmpytDatesAndConvertProgramDataToTimeSeriesByLanguage = (
-  programData: IProgramData[],
+const fillEmptytDatesAndConvertProgramDataToTimeSeriesByLanguage = (
+  programData: UserProgrammingInfoResponseDTO[],
   dates: string[]
 ): LangaugeLineProp => {
   /* 언어별로 데이터 모으기 */

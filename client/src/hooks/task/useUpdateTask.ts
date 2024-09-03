@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {IEditTaskForm} from "@/models/task/dto/taskForm.dto";
 import {useFetch} from "@hooks/shared/useFetch";
-
+import { EditTaskFormRequestDTO} from "@/models/task/dto/request/editTaskForm.dto";
 
 const useUpdateTask = (taskId: string) => {
   const { fetch } = useFetch();
   const queryClient = useQueryClient();
 
-  const updateFn = async (taskForm: IEditTaskForm) => {
+  const updateFn = async (taskForm: EditTaskFormRequestDTO) => {
     console.log(taskForm);
     return fetch(`api/v1/goal/${taskId}`, {
       method: "PATCH",
@@ -16,7 +15,7 @@ const useUpdateTask = (taskId: string) => {
   };
 
   const { mutate } = useMutation({
-    mutationFn: (taskForm: IEditTaskForm) => updateFn(taskForm),
+    mutationFn: (taskForm: EditTaskFormRequestDTO) => updateFn(taskForm),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["tasks"],

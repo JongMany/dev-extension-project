@@ -1,3 +1,4 @@
+"use client";
 import BackButton from "@/components/shared/button/BackButton";
 import SubmitButton from "@/components/shared/button/SubmitButton";
 import Input from "@/components/shared/input/Input";
@@ -5,11 +6,11 @@ import Input from "@/components/shared/input/Input";
 import React, { ReactElement } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {ITaskForm} from "@/models/task/dto/taskForm.dto";
+import {TaskFormVO} from "@/models/task/vo/taskForm.vo";
 
 
 type Props = {
-  form: ITaskForm;
+  form: TaskFormVO;
   submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

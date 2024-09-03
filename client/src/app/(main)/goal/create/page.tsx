@@ -1,4 +1,4 @@
-import CreateTaskForm from "@components/task/form/CreateTaskForm";
+import {CreateTaskForm} from "@components/task";
 
 export default function CreateGoalPage() {
   return (

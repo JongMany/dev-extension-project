@@ -2,26 +2,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import {useFetch} from "@hooks/shared/useFetch";
-
-
-interface Task {
-  projectName: string;
-  task: string;
-  owner: string;
-  dueDate: string;
-  createdAt: string;
-}
+import {CreateTaskFormRequestDTO} from "@/models/task/dto/request/createTaskForm.dto";
 
 const useCreateTask = () => {
   const { fetch } = useFetch();
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const createTask = async (task: Task) => {
+  const createTask = async (createTaskFormRequestDTO: CreateTaskFormRequestDTO) => {
     
     const response = await fetch(`api/v1/goal`, {
       method: "POST",
-      body: JSON.stringify({ ...task }),
+      body: JSON.stringify({ ...createTaskFormRequestDTO }),
       // credentials: "include",
       cache: "no-cache",
     });

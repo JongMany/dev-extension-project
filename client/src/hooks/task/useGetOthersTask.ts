@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {Task} from "@/models/task/entity/task.entity";
+import {TaskEntity} from "@/models/task/entity/task.entity";
 import {useFetch} from "@hooks/shared/useFetch";
 
 export default function useGetOthersTask(email: string) {
@@ -19,8 +19,8 @@ export default function useGetOthersTask(email: string) {
       console.log(data);
       // return data;
       return {
-        tasks: data.tasks || ([] as Task[]),
-      } as { tasks: Task[] };
+        tasks: data.tasks || ([] as TaskEntity[]),
+      } as { tasks: TaskEntity[] };
     } catch (error) {
       console.error(error);
     }

@@ -4,7 +4,8 @@ import { useDuration } from "@/store/duration/useDuration";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import TransitionChart, {HierarchyData} from "@components/shared/charts/TransitionChart";
-import {IProgramData} from "@/models/programming-info/entity/programData.entity";
+import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
+
 interface ProjectData {
   project: string[];
   duration: number;
@@ -14,7 +15,7 @@ export default function HierarchyChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =
-    queryClient.getQueryData<IProgramData[]>(["programmingTime", duration]) ||
+    queryClient.getQueryData<UserProgrammingInfoResponseDTO[]>(["programmingTime", duration]) ||
     [];
   const hierarchyData = getHierarchyData(programData);
 
@@ -52,7 +53,7 @@ function removeCommonPrefix(programData: ProjectData[]) {
   return programData;
 }
 
-function getHierarchyData(programData: IProgramData[]): HierarchyData {
+function getHierarchyData(programData: UserProgrammingInfoResponseDTO[]): HierarchyData {
   const projectAndDuration = programData.map((data) => {
     return {
       project: [...data.project, `${data.fileName}.${data.programLanguage}`],
