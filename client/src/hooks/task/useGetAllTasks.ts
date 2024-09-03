@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {TaskEntity} from "@/models/task/entity/task.entity";
+import {TaskListEntity} from "@/models/task/entity/task.entity";
 import {useFetch} from "@hooks/shared/useFetch";
 
 export function useGetAllTasks() {
@@ -18,18 +18,18 @@ export function useGetAllTasks() {
           tags: queryKey,
         },
       });
+
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await res.json();
+
+      const data: TaskListEntity = await res.json();
       return {
-        tasks: data.tasks || ([] as TaskEntity[]),
-      } as { tasks: TaskEntity[] };
+        tasks: data.tasks || []
+      };
     },
     staleTime: 1000 * 60 * 2,
-    // retry: 1,
-    // retry: false,
-    // initialData: { goals: [] },
+
   });
 }
 

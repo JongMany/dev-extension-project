@@ -1,3 +1,4 @@
+"use client";
 import BackButton from "@/components/shared/button/BackButton";
 import SubmitButton from "@/components/shared/button/SubmitButton";
 import Input from "@/components/shared/input/Input";

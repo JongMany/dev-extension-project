@@ -25,6 +25,7 @@ export default function useFetchProgrammingTime() {
     );
 
     const data = (await response.json()) as { data: UserProgrammingInfoResponseDTO[] };
+    console.log(data);
     const convertedData = data.data.map((d) => {
       const zonedTime = toZonedTime(
         new Date(d.programmingTime).toISOString(),

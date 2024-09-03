@@ -1,14 +1,14 @@
 "use client";
 import { format } from "date-fns";
 
-import EditTaskModal from "@components/task/taskList/EditTaskModal";
+import EditTaskModal from "@components/task/form/EditTaskModal";
 import useUpdateTask from "@hooks/task/useUpdateTask";
 import {useModal} from "@hooks/shared/useModal";
-import {TaskEntity} from "@/models/task/entity/task.entity";
+import {TaskItemVO} from "@/models/task/vo/taskItem.vo";
 
 // DND https://velog.io/@sumi-0011/framer-motion-dnd
 type Props = {
-  task: TaskEntity;
+  task: TaskItemVO;
 };
 
 export default function TaskItem({ task }: Props) {
@@ -44,7 +44,6 @@ export default function TaskItem({ task }: Props) {
         </div>
       </article>
       {isOpen && (
-        // <ServerModal />
         <EditTaskModal
           isOpen={isOpen}
           closeModal={closeModal}

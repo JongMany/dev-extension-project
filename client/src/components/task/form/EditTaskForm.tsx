@@ -7,12 +7,12 @@ import DeleteTaskConfirmationModal from "@components/task/taskList/DeleteTaskCon
 import TaskForm from "@components/task/form/TaskForm";
 import useUpdateTask from "@hooks/task/useUpdateTask";
 import useDeleteTask from "@hooks/task/useDeleteTask";
-import {ITask} from "@/models/task/dto/taskForm.dto";
 import {useFormWithDate} from "@hooks/shared/useForm";
 import {useModal} from "@hooks/shared/useModal";
+import {EditTaskFormVO} from "@/models/task/vo/editTaskForm.vo";
 
 type Props = {
-  task: ITask;
+  task: EditTaskFormVO;
   closeForm: () => void;
 };
 export default function EditTaskForm({ task, closeForm }: Props) {
