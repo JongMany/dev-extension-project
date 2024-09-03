@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {Task} from "@/models/task/entity/task.entity";
+import {TaskEntity} from "@/models/task/entity/task.entity";
 import {useFetch} from "@hooks/shared/useFetch";
 
 export function useGetAllTasks() {
@@ -23,8 +23,8 @@ export function useGetAllTasks() {
       }
       const data = await res.json();
       return {
-        tasks: data.tasks || ([] as Task[]),
-      } as { tasks: Task[] };
+        tasks: data.tasks || ([] as TaskEntity[]),
+      } as { tasks: TaskEntity[] };
     },
     staleTime: 1000 * 60 * 2,
     // retry: 1,

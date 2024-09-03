@@ -5,8 +5,9 @@ import { FormEvent } from "react";
 import TaskForm from "@components/task/form/TaskForm";
 import useCreateTask from "@hooks/task/useCreateTask";
 import {useFormWithDate} from "@hooks/shared/useForm";
+import {type CreateTaskFormVO} from "@/models/task/vo/createTaskForm.vo";
 
-const initialForm = {
+const initialForm: CreateTaskFormVO = {
   projectName: "",
   task: "",
   owner: "",
@@ -29,7 +30,6 @@ export default function CreateTaskForm() {
       createdAt,
       dueDate,
     };
-
     createTask(task);
   };
 

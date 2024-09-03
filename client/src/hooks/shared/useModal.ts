@@ -1,5 +1,5 @@
+"use client";
 import { useState } from "react";
-
 export const useModal = () => {
   const [isOpen, toggleModal] = useState(false);
 

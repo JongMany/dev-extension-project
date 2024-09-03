@@ -1,10 +1,10 @@
 import { PropsWithChildren, createContext, useContext } from "react";
 import TaskItem from "@components/task/taskList/TaskItem";
 import {useGetAllTasks} from "@hooks/task/useGetAllTasks";
-import {Task} from "@/models/task/entity/task.entity";
+import {TaskEntity} from "@/models/task/entity/task.entity";
 
 type TaskContextType = {
-  tasks: Task[] | undefined;
+  tasks: TaskEntity[] | undefined;
   isFetching: boolean;
   isError: boolean;
 };
@@ -16,7 +16,6 @@ export default function TaskProvider({ children }: PropsWithChildren) {
   const { data, isFetching, isError } = useGetAllTasks();
 
   const providedValue = { tasks: data?.tasks, isFetching, isError };
-  console.log(providedValue);
 
   return (
     <TaskContext.Provider value={providedValue}>
