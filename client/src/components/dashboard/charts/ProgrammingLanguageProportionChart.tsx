@@ -7,7 +7,7 @@ import PieChartContainer from "@components/shared/charts/PieChartContainer";
 import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
 
 
-export default function ProgramLanguageRatesChart() {
+export default function ProgrammingLanguageProportionChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =

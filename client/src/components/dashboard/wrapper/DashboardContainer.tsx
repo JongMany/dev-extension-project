@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardCard from "@components/dashboard/wrapper/DashboardCard";
 import ProgramTimeSeriesChart from "@components/dashboard/charts/ProgramTimeSeriesChart";
-import ProgramLanguageRatesChart from "@components/dashboard/charts/ProgramLanguageRatesChart";
+import ProgrammingLanguageProportionChart from "@components/dashboard/charts/ProgrammingLanguageProportionChart";
 import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
 import HierarchyChart from "@components/dashboard/charts/HierarchyChart";
 import useFetchProgrammingTime from "@hooks/dashboard/useFetchProgrammingTime";
@@ -16,7 +16,7 @@ export default function DashboardContainer() {
   return (
       <section className="grid grid-cols-2">
         <QueryBasedRenderer isLoading={isFetching} isError={isError} data={data} Loader={<Hourglass/>}
-                            ErrorComponent={<>Error...</>} EmptyView={<>Emtpy View</>}>
+                            ErrorComponent={<>Error...</>} EmptyView={<>Empty View</>}>
           <div className="col-span-2">
             <DashboardCard>
               <ProgramTimeSeriesChart/>
@@ -24,7 +24,7 @@ export default function DashboardContainer() {
           </div>
           <div>
             <DashboardCard>
-              <ProgramLanguageRatesChart/>
+              <ProgrammingLanguageProportionChart/>
             </DashboardCard>
           </div>
           <div>
