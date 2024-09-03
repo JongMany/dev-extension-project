@@ -1,5 +1,10 @@
 import {TaskEntity} from "@/models/task/entity/task.entity";
 import {TaskItemVO} from "@/models/task/vo/taskItem.vo";
+import {CreateTaskFormVO} from "@/models/task/vo/createTaskForm.vo";
+import {EditTaskFormVO} from "@/models/task/vo/editTaskForm.vo";
+import {TaskFormVO} from "@/models/task/vo/taskForm.vo";
+import {CreateTaskFormRequestDTO} from "@/models/task/dto/request/createTaskForm.dto";
+import {format} from "date-fns";
 
 export const toTaskItemVO = (taskEntity: TaskEntity):TaskItemVO => {
   return {
@@ -11,5 +16,25 @@ export const toTaskItemVO = (taskEntity: TaskEntity):TaskItemVO => {
     owner: taskEntity.owner,
     email: taskEntity.email,
     projectName: taskEntity.projectName
+  }
+}
+
+export const toTaskFormVO = (taskFormVO: CreateTaskFormVO | EditTaskFormVO): TaskFormVO => {
+  return {
+    projectName: taskFormVO.projectName,
+    task: taskFormVO.task,
+    owner: taskFormVO.owner,
+    dueDate: taskFormVO.dueDate,
+  }
+}
+
+export const toCreateTaskFormRequestDTO = (createTaskFormVO: CreateTaskFormVO, createdAt: string): CreateTaskFormRequestDTO => {
+  return {
+    // projectName: createTaskFormVO.projectName,
+    // task: createTaskFormVO.task,
+    // owner: createTaskFormVO.owner,
+    ...createTaskFormVO,
+    dueDate: format(createTaskFormVO.dueDate, "yyyy-MM-dd"),
+    createdAt
   }
 }

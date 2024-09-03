@@ -10,6 +10,7 @@ import useDeleteTask from "@hooks/task/useDeleteTask";
 import {useFormWithDate} from "@hooks/shared/useForm";
 import {useModal} from "@hooks/shared/useModal";
 import {EditTaskFormVO} from "@/models/task/vo/editTaskForm.vo";
+import {toTaskFormVO} from "@/models/task/formatModel";
 
 type Props = {
   task: EditTaskFormVO;
@@ -45,7 +46,7 @@ export default function EditTaskForm({ task, closeForm }: Props) {
   return (
     <>
       <TaskForm
-        form={form}
+        form={toTaskFormVO(form)}
         submitHandler={updateTaskHandler}
         onChange={onChange}
         changeDate={changeDate}
