@@ -8,6 +8,8 @@ import {useFormWithDate} from "@hooks/shared/useForm";
 import {type CreateTaskFormVO} from "@/models/task/vo/createTaskForm.vo";
 import {toCreateTaskFormRequestDTO, toTaskFormVO} from "@/models/task/formatModel";
 import {showToast} from "@utils/shared/toast/showToast";
+import {validateCreateTaskFormVO} from "@utils/task/validateTaskFormVO";
+import {sanitizeCreateTaskFormVO} from "@utils/task/sanitizeTaskFormVO";
 
 const initialForm: CreateTaskFormVO = {
   projectName: "",
@@ -15,52 +17,6 @@ const initialForm: CreateTaskFormVO = {
   owner: "",
   dueDate: new Date(),
 };
-
-
-const sanitizeCreateTaskFormVO = (createTaskFormVO: CreateTaskFormVO): CreateTaskFormVO => {
-  return {
-    ...createTaskFormVO,
-    projectName: createTaskFormVO.projectName.trim(),
-    task: createTaskFormVO.task.trim(),
-    owner: createTaskFormVO.owner.trim(),
-  }
-}
-
-const validateCreateTaskFormVO = (createTaskFormVO: CreateTaskFormVO) => {
-  if(createTaskFormVO.task.length < 2) {
-    return {
-      message: '업무는 2글자 이상이어야 합니다.',
-      status: 'Error',
-    }
-  }
-
-  if(createTaskFormVO.owner.length < 2) {
-    return {
-      message: '담당자는 2글자 이상이어야 합니다.',
-      status: 'Error',
-    }
-  }
-
-
-  if(!createTaskFormVO.dueDate) {
-    return {
-      message: '일정이 선택되어야 합니다.',
-      status: 'Error',
-    }
-  }
-
-  if(createTaskFormVO.projectName.length < 2) {
-    return {
-      message: '프로젝트명은 2글자 이상이어야 합니다.',
-      status: 'Error',
-    }
-  }
-
-  return {
-    message: '성공적으로 업로드되었습니다.',
-    status: 'Success'
-  }
-}
 
 export default function CreateTaskForm() {
   const { form, onChange, changeDate } = useFormWithDate(initialForm);
