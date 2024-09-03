@@ -64,7 +64,7 @@ const validateEditTaskFormVO = (editTaskFormVO: EditTaskFormVO) => {
   }
 
   return {
-    message: '성공적으로 업로드되었습니다.',
+    message: '성공적으로 수정되었습니다.',
     status: 'Success'
   }
 }
