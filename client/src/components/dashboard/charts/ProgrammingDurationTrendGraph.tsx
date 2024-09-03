@@ -9,10 +9,10 @@ import {useIntervalDate} from "@hooks/shared/useIntervalDate";
 import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
 
 
-type ChartOption = "ALL" | "LANGUAGE" | "PROJECT";
+type ProgrammingDurationTrendGraphOption = "ALL" | "LANGUAGE" | "PROJECT";
 
 export default function ProgrammingDurationTrendGraph() {
-  const [chartOption, setChartOption] = useState<ChartOption>("ALL");
+  const [chartOption, setChartOption] = useState<ProgrammingDurationTrendGraphOption>("ALL");
   const queryClient = useQueryClient();
   const dates = useIntervalDate();
   const { duration } = useDuration();
@@ -25,8 +25,7 @@ export default function ProgrammingDurationTrendGraph() {
 
   const selectChartOption = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof HTMLButtonElement) {
-      console.log(event.target.name);
-      setChartOption(event.target.name as ChartOption);
+      setChartOption(event.target.name as ProgrammingDurationTrendGraphOption);
     }
   };
 
@@ -36,7 +35,7 @@ export default function ProgrammingDurationTrendGraph() {
   );
 
   const timeSeriesDataPerLanguage =
-    fillEmptytDatesAndConvertProgramDataToTimeSeriesByLanguage(
+      fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage(
       programData,
       dates
     );
@@ -165,7 +164,7 @@ function fillEmptyDayByLanguage(
   return result;
 }
 
-const fillEmptytDatesAndConvertProgramDataToTimeSeriesByLanguage = (
+const fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage = (
   programData: UserProgrammingInfoResponseDTO[],
   dates: string[]
 ): LangaugeLineProp => {
