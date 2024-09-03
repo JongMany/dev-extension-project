@@ -4,7 +4,7 @@ import Button from "@/components/shared/button/Button";
 import SubmitButton from "@/components/shared/button/SubmitButton";
 
 import DeleteTaskConfirmationModal from "@components/task/form/DeleteTaskConfirmationModal";
-import TaskForm from "@components/task/form/TaskForm";
+import TaskFormUI from "@components/task/form/TaskFormUI";
 import useUpdateTask from "@hooks/task/useUpdateTask";
 import useDeleteTask from "@hooks/task/useDeleteTask";
 import {useFormWithDate} from "@hooks/shared/useForm";
@@ -58,7 +58,7 @@ export default function EditTaskForm({task, closeForm}: Props) {
 
   return (
       <>
-        <TaskForm
+        <TaskFormUI
             form={toTaskFormVO(form)}
             submitHandler={updateTaskHandler}
             onChange={onChange}
