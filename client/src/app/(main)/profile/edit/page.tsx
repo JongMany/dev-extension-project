@@ -1,7 +1,7 @@
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
 
 import {auth} from "@/auth";
-import {EditFormWrapper} from "@components/profile";
+import {ProfileEditor} from "@components/profile";
 import getQueryClient from "@utils/shared/query-client/getQueryClient";
 import {fetchServer} from "@utils/shared/fetch/fetchServer";
 
@@ -22,7 +22,7 @@ async function EditProfilePage() {
   return <main>
     <h2 className="font-bold text-xl">프로필 편집</h2>
     <HydrationBoundary state={dehydratedState}>
-      <EditFormWrapper />
+      <ProfileEditor />
     </HydrationBoundary>
   </main>;
 }

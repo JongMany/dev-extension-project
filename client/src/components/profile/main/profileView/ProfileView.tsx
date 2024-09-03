@@ -1,6 +1,3 @@
-
-import { auth } from "@/auth";
-
 import SessionProvider from "@components/providers/SessionProvider";
 import PrivacyInformation from "@components/profile/main/profileView/PrivacyInformation";
 import LineDivider from "@components/shared/line-divider/LineDivider";
@@ -8,7 +5,7 @@ import LineDivider from "@components/shared/line-divider/LineDivider";
 type Props = { email: string };
 
 export default async function ProfileView({ email }: Props) {
-  const session = await auth();
+  // const session = await auth();
   let UserInfoComponent;
   try {
     const response = await fetch(
@@ -43,7 +40,6 @@ export default async function ProfileView({ email }: Props) {
     <>
       {UserInfoComponent}
       <LineDivider />
-      {/* <PrivacyInformationProvider></PrivacyInformationProvider> */}
       <SessionProvider>
         <PrivacyInformation email={email} />
       </SessionProvider>
