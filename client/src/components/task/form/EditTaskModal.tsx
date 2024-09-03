@@ -1,6 +1,5 @@
 import { ModalWrapper } from "@components/shared/modal/Modal";
 
-// import { type ModalProps } from "@types/modal/modalProps.type";
 import {EditTaskForm} from "@components/task";
 import {EditTaskFormVO} from "@/models/task/vo/editTaskForm.vo";
 
