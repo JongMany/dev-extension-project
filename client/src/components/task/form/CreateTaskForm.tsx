@@ -41,7 +41,8 @@ const validateCreateTaskFormVO = (createTaskFormVO: CreateTaskFormVO) => {
     }
   }
 
-  if(createTaskFormVO.dueDate) {
+
+  if(!createTaskFormVO.dueDate) {
     return {
       message: '일정이 선택되어야 합니다.',
       status: 'Error',

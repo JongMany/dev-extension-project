@@ -42,14 +42,14 @@ const validateEditTaskFormVO = (editTaskFormVO: EditTaskFormVO) => {
     }
   }
 
-  if(editTaskFormVO.dueDate) {
+  if(!editTaskFormVO.dueDate) {
     return {
       message: '일정이 선택되어야 합니다.',
       status: 'Error',
     }
   }
 
-  if(editTaskFormVO.createdAt) {
+  if(!editTaskFormVO.createdAt) {
     return {
       message: '생성일은 존재해야 합니다..',
       status: 'Error',
