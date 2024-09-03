@@ -11,7 +11,7 @@ import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/resp
 
 type ChartOption = "ALL" | "LANGUAGE" | "PROJECT";
 
-export default function ProgramTimeSeriesChart() {
+export default function ProgrammingDurationTrendGraph() {
   const [chartOption, setChartOption] = useState<ChartOption>("ALL");
   const queryClient = useQueryClient();
   const dates = useIntervalDate();
