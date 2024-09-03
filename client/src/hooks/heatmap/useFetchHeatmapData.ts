@@ -3,35 +3,33 @@ import {useEffect, useState} from "react";
 import {getCurrentYear, getEndOfYear, getStartOfYear} from "@utils/shared/date/date";
 import {format} from "date-fns";
 import {HeatmapProgramTimeResponseDTO} from "@/models/heatmap-time/dto/response/heatmapTime.dto";
+import {useQuery} from "@tanstack/react-query";
 
 export const useFetchHeatmapData = (email: string) => {
   const {fetch} = useFetch();
-  const [loadStatus, setLoadStatus] = useState<'none'|'loading'|'finish'|'error'>('none');
-  const [heatmapData, setHeatmapData] = useState<HeatmapProgramTimeResponseDTO[]>([]);
-  useEffect(() => {
-    async function fetchData() {
-      setLoadStatus('loading');
-      const currentYear = getCurrentYear();
-      const startDayOfYear = format(getStartOfYear(currentYear), "yyyy-MM-dd");
-      const endDayOfYear = format(getEndOfYear(currentYear), "yyyy-MM-dd");
-      try {
-        const response = await fetch(
-            `/api/v1/time/${email}/from/${startDayOfYear}/to/${endDayOfYear}`
-        );
-        const data = await response.json() as { data: HeatmapProgramTimeResponseDTO[] };
-        setHeatmapData(data.data);
-        setLoadStatus('finish');
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        setLoadStatus('error');
-        return [];
-      }
+  async function fetchData() {
+    const currentYear = getCurrentYear();
+    const startDayOfYear = format(getStartOfYear(currentYear), "yyyy-MM-dd");
+    const endDayOfYear = format(getEndOfYear(currentYear), "yyyy-MM-dd");
+    try {
+      const response = await fetch(
+          `/api/v1/time/${email}/from/${startDayOfYear}/to/${endDayOfYear}`
+      );
+      const data = await response.json() as { data: HeatmapProgramTimeResponseDTO[] };
+      return data.data;
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+      return [];
     }
-    fetchData();
-  }, []);
+  }
+  const {isFetching, isError, data} = useQuery({
+    queryKey: ['heatmap', email],
+    staleTime: 1000 * 30,
+    queryFn: () => fetchData()
+  })
+
 
   return {
-    heatmapData,
-    loadStatus
+    isFetching, isError, data
   }
 }
