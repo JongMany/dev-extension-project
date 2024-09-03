@@ -1,10 +1,13 @@
-import Button from "@/components/shared/button/Button";
-import { ModalWrapper } from "@/components/shared/modal/Modal";
-import { type ModalProps } from "@/types/modal/modalProps.type";
+import Button from "@components/shared/button/Button";
+import { ModalWrapper } from "@components/shared/modal/Modal";
+// import { type ModalProps } from "@types/modal/modalProps.type";
 
 type Props = {
   deleteTaskHandler: () => void;
-} & ModalProps;
+} & {
+  isOpen: boolean;
+  closeModal: () => void;
+};
 
 export default function DeleteTaskConfirmationModal({
   isOpen,

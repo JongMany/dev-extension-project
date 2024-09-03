@@ -5,6 +5,7 @@ import {EditTaskFormVO} from "@/models/task/vo/editTaskForm.vo";
 import {TaskFormVO} from "@/models/task/vo/taskForm.vo";
 import {CreateTaskFormRequestDTO} from "@/models/task/dto/request/createTaskForm.dto";
 import {format} from "date-fns";
+import {EditTaskFormRequestDTO} from "@/models/task/dto/request/editTaskForm.dto";
 
 export const toTaskItemVO = (taskEntity: TaskEntity):TaskItemVO => {
   return {
@@ -36,5 +37,11 @@ export const toCreateTaskFormRequestDTO = (createTaskFormVO: CreateTaskFormVO, c
     ...createTaskFormVO,
     dueDate: format(createTaskFormVO.dueDate, "yyyy-MM-dd"),
     createdAt
+  }
+}
+
+export const toEditTaskFormRequestDTO = (editTaskFormVO: EditTaskFormVO): EditTaskFormRequestDTO => {
+  return {
+    ...editTaskFormVO
   }
 }
