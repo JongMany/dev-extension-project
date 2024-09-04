@@ -8,6 +8,10 @@ import {languageMapper} from "@/constants/languageMapper";
 import {useIntervalDate} from "@hooks/shared/useIntervalDate";
 import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
 import {ProgrammingLanguageExt} from "@/models/programming-info/vo/programmingLanguageProportion.vo";
+import {
+  EntireLanguageDurationTrendVO, ProgrammingActiveData,
+  SeparateLanguageDurationTrendVO
+} from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
 
 
 // 프로젝트는 아직 구현 안됨
@@ -28,9 +32,8 @@ export default function ProgrammingDurationTrendGraph() {
     }
   };
 
-  const timeSeriesData = fillEmptyDatesAndConvertProgramDataToTimeSeries(
-      programData,
-      dates
+  const timeSeriesData = convertProgramDataToTimeSeries(
+      fillDefaultForInactiveDates(programData, dates)
   );
 
   const timeSeriesDataPerLanguage =
@@ -38,6 +41,7 @@ export default function ProgrammingDurationTrendGraph() {
           programData,
           dates
       );
+  console.log(timeSeriesDataPerLanguage)
 
   return (
       <div>
@@ -69,13 +73,13 @@ export default function ProgrammingDurationTrendGraph() {
   );
 }
 
-function fillEmptyDay(programData: UserProgrammingInfoResponseDTO[], dateSequence: string[]) {
+function fillDefaultForInactiveDates(programData: UserProgrammingInfoResponseDTO[], dateSequence: string[]) {
   const result: UserProgrammingInfoResponseDTO[] = [];
-  const programDates = programData.map((data) => format(data.programDay, "yyyy-MM-dd"))
-  const programDateSet = new Set(programDates);
+  const activeDates = programData.map((data) => format(data.programDay, "yyyy-MM-dd"))
+  const activeDateSet = new Set(activeDates);
 
   for (const date of dateSequence) {
-    if (programDateSet.has(date)) {
+    if (activeDateSet.has(date)) {
       const data = programData
           .filter((d) => format(d.programDay, "yyyy-MM-dd") === date)
           .map((item) => ({
@@ -96,28 +100,24 @@ function fillEmptyDay(programData: UserProgrammingInfoResponseDTO[], dateSequenc
       });
     }
   }
-
   return result;
 }
 
-function fillEmptyDatesAndConvertProgramDataToTimeSeries(
+function convertProgramDataToTimeSeries(
     programData: UserProgrammingInfoResponseDTO[],
-    dates: string[]
-): DefaultLineProp {
-  const filledProgramData = fillEmptyDay(programData, dates);
-  const timeSeriesData = filledProgramData.reduce((acc, cur) => {
+): EntireLanguageDurationTrendVO {
+  const timeSeriesData = programData.reduce((acc, cur) => {
     const date = cur.programDay;
-
     acc[date] = (acc[date] || 0) + cur.programDuration;
     return acc;
   }, {} as Record<string, number>);
-  const result = Object.entries(timeSeriesData).map(([date, duration]) => ({
+
+  const result: ProgrammingActiveData[] = Object.entries(timeSeriesData).map(([date, duration]) => ({
     date,
     duration,
     language: "전체",
   }));
-  // console.log(result);
-  // return result;
+
   return {data: result, option: "ALL"};
 }
 
@@ -127,7 +127,7 @@ type ProgramDataByLanguage = {
   language: string;
 };
 
-function fillEmptyDayByLanguage(
+function fillDefaultForInactiveDatesByLanguage(
     programData: ProgramDataByLanguage[],
     dates: string[],
     language: string
@@ -156,6 +156,7 @@ function fillEmptyDayByLanguage(
       });
     }
   }
+  console.log(result)
 
   return result;
 }
@@ -163,7 +164,7 @@ function fillEmptyDayByLanguage(
 const fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage = (
     programData: UserProgrammingInfoResponseDTO[],
     dates: string[]
-): LangaugeLineProp => {
+): SeparateLanguageDurationTrendVO => {
   /* 언어별로 데이터 모으기 */
 
   const timeSeriesData = programData.reduce((acc, cur) => {
@@ -206,13 +207,12 @@ const fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage = (
       .reduce((acc, cur) => {
         const key = Object.keys(cur)[0];
         const value = Object.values(cur)[0];
-        console.log(key, value);
         /* Mapper사용 */
         const language =
             languageMapper[key as keyof typeof languageMapper] || "other";
-        console.log("LANGUAGE", language);
-        // acc[language] = fillEmptyDayByLanguage(value, dates, value[0].language);
-        acc[language] = fillEmptyDayByLanguage(
+        // console.log("LANGUAGE", language);
+        // acc[language] = fillDefaultForInactiveDatesByLanguage(value, dates, value[0].language);
+        acc[language] = fillDefaultForInactiveDatesByLanguage(
             value,
             dates,
             languageMapper[value[0].language as keyof typeof languageMapper] ||
