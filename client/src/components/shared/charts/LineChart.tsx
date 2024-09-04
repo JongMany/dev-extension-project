@@ -13,6 +13,10 @@ import ReactECharts from "echarts-for-react";
 import { format } from "date-fns";
 import { formatSecondsToTime } from "@utils/shared/date/date";
 import {PropertyType} from "types/utility/utility";
+import {
+  EntireLanguageDurationTrendVO,
+  SeparateLanguageDurationTrendVO
+} from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
 
 
 echarts.use([
@@ -162,7 +166,7 @@ export type LangaugeLineProp = {
 } & { option: "LANGUAGE" };
 
 type Props = {
-  data: LangaugeLineProp | DefaultLineProp;
+  data: SeparateLanguageDurationTrendVO | EntireLanguageDurationTrendVO;
 };
 
 export default function LineChart({ data }: Props) {
