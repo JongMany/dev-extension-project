@@ -22,7 +22,7 @@ export default function ProgrammingDurationTrendGraph() {
   const queryClient = useQueryClient();
   const dates = useIntervalDate();
   const {duration} = useDuration();
-  const programData =
+  const userProgrammingInfoResponseDTO =
       queryClient.getQueryData<UserProgrammingInfoResponseDTO[]>(["programmingTime", duration]) ||
       [];
 
@@ -32,16 +32,15 @@ export default function ProgrammingDurationTrendGraph() {
     }
   };
 
-  const timeSeriesData = convertProgramDataToTimeSeries(
-      fillDefaultForInactiveDates(programData, dates)
+  const timeSeriesData = toEntireLanguageDurationTrendVO(
+      fillDefaultForInactiveDatesForAllLanguages(userProgrammingInfoResponseDTO, dates)
   );
 
   const timeSeriesDataPerLanguage =
-      fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage(
-          programData,
+      toSeparateLanguageDurationTrendVO(
+          groupByProgrammingLanguage(userProgrammingInfoResponseDTO),
           dates
       );
-  console.log(timeSeriesDataPerLanguage)
 
   return (
       <div>
@@ -73,7 +72,7 @@ export default function ProgrammingDurationTrendGraph() {
   );
 }
 
-function fillDefaultForInactiveDates(programData: UserProgrammingInfoResponseDTO[], dateSequence: string[]) {
+function fillDefaultForInactiveDatesForAllLanguages(programData: UserProgrammingInfoResponseDTO[], dateSequence: string[]) {
   const result: UserProgrammingInfoResponseDTO[] = [];
   const activeDates = programData.map((data) => format(data.programDay, "yyyy-MM-dd"))
   const activeDateSet = new Set(activeDates);
@@ -103,7 +102,7 @@ function fillDefaultForInactiveDates(programData: UserProgrammingInfoResponseDTO
   return result;
 }
 
-function convertProgramDataToTimeSeries(
+function toEntireLanguageDurationTrendVO(
     programData: UserProgrammingInfoResponseDTO[],
 ): EntireLanguageDurationTrendVO {
   const timeSeriesData = programData.reduce((acc, cur) => {
@@ -121,18 +120,33 @@ function convertProgramDataToTimeSeries(
   return {data: result, option: "ALL"};
 }
 
-type ProgramDataByLanguage = {
-  date: string;
-  duration: number;
-  language: string;
-};
 
-function fillDefaultForInactiveDatesByLanguage(
-    programData: ProgramDataByLanguage[],
+const groupByProgrammingLanguage = (userProgrammingInfoResponseDTO: UserProgrammingInfoResponseDTO[]) => {
+  return userProgrammingInfoResponseDTO.reduce((acc, cur) => {
+    const language = cur.programLanguage;
+    if (acc[language] === undefined) {
+      acc[language] = [];
+    }
+    const data = {
+      language: cur.programLanguage,
+      date: cur.programDay,
+      duration: cur.programDuration,
+    };
+    acc[language].push(data);
+    return acc;
+  }, {} as Record<string, {
+    language: string;
+    date: string;
+    duration: number
+  }[]>);
+}
+
+function fillDefaultForInactiveDatesForEachLanguage(
+    programData: ProgrammingActiveData[],
     dates: string[],
     language: string
 ) {
-  const result: ProgramDataByLanguage[] = [];
+  const result: ProgrammingActiveData[] = [];
   const programDateSet = new Set(
       programData.map((data) => format(data.date, "yyyy-MM-dd"))
   );
@@ -156,37 +170,19 @@ function fillDefaultForInactiveDatesByLanguage(
       });
     }
   }
-  console.log(result)
+
 
   return result;
 }
 
-const fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage = (
-    programData: UserProgrammingInfoResponseDTO[],
+const toSeparateLanguageDurationTrendVO = (
+    programmingInfoByLanguageDTO: Record<string, ProgrammingActiveData[]>,
     dates: string[]
 ): SeparateLanguageDurationTrendVO => {
   /* 언어별로 데이터 모으기 */
 
-  const timeSeriesData = programData.reduce((acc, cur) => {
-    const language = cur.programLanguage;
-    if (acc[language] === undefined) {
-      acc[language] = [];
-    }
-    const data = {
-      language: cur.programLanguage,
-      date: cur.programDay,
-      duration: cur.programDuration,
-    };
-    acc[language].push(data);
-    return acc;
-  }, {} as Record<string, {
-    language: string;
-    date: string;
-    duration: number
-  }[]>);
-
   /* 언어별로 모인 데이터를 날짜별로 재가공 */
-  const result = Object.entries(timeSeriesData)
+  const result = Object.entries(programmingInfoByLanguageDTO)
       .map(([language, value]) => {
         const timeObjectByDate = value.reduce((acc, cur) => {
           const date = cur.date;
@@ -210,9 +206,8 @@ const fillEmptyDatesAndConvertProgramDataToTimeSeriesByLanguage = (
         /* Mapper사용 */
         const language =
             languageMapper[key as keyof typeof languageMapper] || "other";
-        // console.log("LANGUAGE", language);
-        // acc[language] = fillDefaultForInactiveDatesByLanguage(value, dates, value[0].language);
-        acc[language] = fillDefaultForInactiveDatesByLanguage(
+
+        acc[language] = fillDefaultForInactiveDatesForEachLanguage(
             value,
             dates,
             languageMapper[value[0].language as keyof typeof languageMapper] ||
