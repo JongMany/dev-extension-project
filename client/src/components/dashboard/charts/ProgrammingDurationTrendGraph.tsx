@@ -9,9 +9,10 @@ import {useIntervalDate} from "@hooks/shared/useIntervalDate";
 import {UserProgrammingInfoResponseDTO} from "@/models/programming-info/dto/response/programData.entity";
 import {ProgrammingLanguageExt} from "@/models/programming-info/vo/programmingLanguageProportion.vo";
 import {
-  EntireLanguageDurationTrendVO, ProgrammingActiveData,
+  EntireLanguageDurationTrendVO, ProgrammingActiveData, ProgrammingActiveDataPerLanguage,
   SeparateLanguageDurationTrendVO
 } from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
+import {pipe} from "@utils/shared/common/pipe";
 
 
 // 프로젝트는 아직 구현 안됨
@@ -32,15 +33,27 @@ export default function ProgrammingDurationTrendGraph() {
     }
   };
 
+  // TODO: 이부분 함수형 프로그래밍으로 고치자..! (데이터 변환 코드를 해석하는 것이 어려울 수 있음)
   const timeSeriesData = toEntireLanguageDurationTrendVO(
       fillDefaultForInactiveDatesForAllLanguages(userProgrammingInfoResponseDTO, dates)
   );
 
+  console.log(
+      pipe(
+          groupByProgrammingLanguage,
+          toProgrammingActiveDataListPerLanguage,
+      )(userProgrammingInfoResponseDTO)
+  )
+  // TODO: 이부분 함수형 프로그래밍으로 고치자..! (데이터 변환 코드를 해석하는 것이 어려울 수 있음)
   const timeSeriesDataPerLanguage =
       toSeparateLanguageDurationTrendVO(
-          groupByProgrammingLanguage(userProgrammingInfoResponseDTO),
+          pipe(
+              groupByProgrammingLanguage,
+              toProgrammingActiveDataListPerLanguage,
+          )(userProgrammingInfoResponseDTO),
           dates
       );
+
 
   return (
       <div>
@@ -175,14 +188,8 @@ function fillDefaultForInactiveDatesForEachLanguage(
   return result;
 }
 
-const toSeparateLanguageDurationTrendVO = (
-    programmingInfoByLanguageDTO: Record<string, ProgrammingActiveData[]>,
-    dates: string[]
-): SeparateLanguageDurationTrendVO => {
-  /* 언어별로 데이터 모으기 */
-
-  /* 언어별로 모인 데이터를 날짜별로 재가공 */
-  const result = Object.entries(programmingInfoByLanguageDTO)
+function toProgrammingActiveDataListPerLanguage(programmingInfoByLanguageDTO: Record<string, ProgrammingActiveData[]>): ProgrammingActiveDataPerLanguage[] {
+  return Object.entries(programmingInfoByLanguageDTO)
       .map(([language, value]) => {
         const timeObjectByDate = value.reduce((acc, cur) => {
           const date = cur.date;
@@ -199,22 +206,29 @@ const toSeparateLanguageDurationTrendVO = (
         return {
           [language]: data,
         };
-      })
-      .reduce((acc, cur) => {
-        const key = Object.keys(cur)[0];
-        const value = Object.values(cur)[0];
-        /* Mapper사용 */
-        const language =
-            languageMapper[key as keyof typeof languageMapper] || "other";
+      });
+}
 
-        acc[language] = fillDefaultForInactiveDatesForEachLanguage(
-            value,
-            dates,
-            languageMapper[value[0].language as keyof typeof languageMapper] ||
-            "other"
-        );
-        return acc;
-      }, {});
+const toSeparateLanguageDurationTrendVO = (
+    programmingActiveDataListPerLanguage: ProgrammingActiveDataPerLanguage[],
+    dates: string[]
+): SeparateLanguageDurationTrendVO => {
+
+  const result: ProgrammingActiveDataPerLanguage = programmingActiveDataListPerLanguage.reduce((acc, cur) => {
+    const key = Object.keys(cur)[0];
+    const value = Object.values(cur)[0];
+
+    const programLanguage =
+        languageMapper[key as keyof typeof languageMapper] || "other";
+
+    acc[programLanguage] = fillDefaultForInactiveDatesForEachLanguage(
+        value,
+        dates,
+        languageMapper[value[0].language as keyof typeof languageMapper] ||
+        "other"
+    );
+    return acc;
+  }, {});
 
   return {data: result, option: "LANGUAGE"};
 };
