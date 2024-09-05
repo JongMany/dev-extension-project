@@ -5,7 +5,7 @@ import DashboardCard from "@components/dashboard/wrapper/DashboardCard";
 import ProgrammingDurationTrendGraph from "@components/dashboard/charts/ProgrammingDurationTrendGraph";
 import ProgrammingLanguageProportionChart from "@components/dashboard/charts/ProgrammingLanguageProportionChart";
 import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
-import HierarchyChart from "@components/dashboard/charts/HierarchyChart";
+import ProjectHierarchyChart from "@components/dashboard/charts/ProjectHierarchyChart";
 import useFetchProgrammingTime from "@hooks/dashboard/useFetchProgrammingTime";
 import {Hourglass} from "@components/shared/loader/Hourglass";
 import QueryBasedRenderer from "@components/shared/query-based-renderer/QueryBasedRenderer";
@@ -34,7 +34,7 @@ export default function DashboardContainer() {
           </div>
           <div className="col-span-2">
             <DashboardCard>
-              <HierarchyChart/>
+              <ProjectHierarchyChart/>
             </DashboardCard>
           </div>
         </QueryBasedRenderer>

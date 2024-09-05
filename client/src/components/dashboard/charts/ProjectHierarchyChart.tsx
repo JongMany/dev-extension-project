@@ -11,7 +11,7 @@ interface ProjectData {
   duration: number;
 }
 
-export default function HierarchyChart() {
+export default function ProjectHierarchyChart() {
   const queryClient = useQueryClient();
   const { duration } = useDuration();
   const programData =
