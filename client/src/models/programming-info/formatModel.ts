@@ -10,6 +10,11 @@ import {
 } from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
 import {pipe} from "@utils/shared/common/pipe";
 import {buildProjectHierarchyStructure, removeDuplicatePath} from "@utils/chart/hierachy";
+import {ProjectDependencyLinkVO} from "@/models/programming-info/vo/projectDependencyLink.vo";
+import {
+  filterDuplicatedDependencies,
+  removeDuplicateInDependencyPath
+} from "@utils/chart/projectDependency";
 
 export function convertProgramDataToLanguageProportion(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]): ProgrammingLanguageProportionVO[] {
 
@@ -109,3 +114,20 @@ export function toDurationByProject(userProgrammingInfoResponseDTOs: UserProgram
 }
 
 export const toProjectHierarchyVO = pipe(toDurationByProject, removeDuplicatePath, buildProjectHierarchyStructure)
+
+// dependency
+export function toProjectDependencyLinkVO(UserProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]): ProjectDependencyLinkVO[] {
+  const deps: ProjectDependencyLinkVO[]  = UserProgrammingInfoResponseDTOs.map((data) => [
+    ...data.project,
+    `${data.fileName}.${data.programLanguage}`,
+  ]);
+
+  if (deps.length === 0) {
+    return [];
+  }
+  if (deps.length === 1) {
+    return deps;
+  }
+
+  return filterDuplicatedDependencies(removeDuplicateInDependencyPath(deps));
+}

@@ -4,7 +4,7 @@ import React from "react";
 import DashboardCard from "@components/dashboard/wrapper/DashboardCard";
 import ProgrammingDurationTrendGraph from "@components/dashboard/charts/ProgrammingDurationTrendGraph";
 import ProgrammingLanguageProportionChart from "@components/dashboard/charts/ProgrammingLanguageProportionChart";
-import ProjectDepsChart from "@components/dashboard/charts/ProjectDepsChart";
+import ProjectDependencyChart from "@components/dashboard/charts/ProjectDependencyChart";
 import ProjectHierarchyChart from "@components/dashboard/charts/ProjectHierarchyChart";
 import useFetchProgrammingTime from "@hooks/dashboard/useFetchProgrammingTime";
 import {Hourglass} from "@components/shared/loader/Hourglass";
@@ -29,7 +29,7 @@ export default function DashboardContainer() {
           </div>
           <div>
             <DashboardCard>
-              <ProjectDepsChart/>
+              <ProjectDependencyChart/>
             </DashboardCard>
           </div>
           <div className="col-span-2">

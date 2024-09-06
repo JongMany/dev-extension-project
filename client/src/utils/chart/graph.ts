@@ -1,24 +1,3 @@
-const findDuplicateElementIndex = (deps: string[][]) => {
-  if (deps.length === 0) return -1;
-  let minLength = Math.min(...deps.map((depArr) => depArr.length));
-  let prefixLength = 0;
-
-  for (let i = 0; i < minLength; i++) {
-    let value = deps[0][i];
-    if (deps.every((arr) => arr[i] === value)) {
-      prefixLength++;
-    } else {
-      break;
-    }
-  }
-  return prefixLength;
-};
-
-export const filterDuplicatedDependencies = (deps: string[][]) => {
-  const prefixLength = findDuplicateElementIndex(deps);
-  return deps.map((dep) => dep.slice(prefixLength));
-};
-
 type Category = {
   name: string;
 };
