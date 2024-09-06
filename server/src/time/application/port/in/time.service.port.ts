@@ -1,4 +1,4 @@
-import {TimePayload} from "../../../dto/saveTime.dto";
+import {TimePayload} from "../../../domain/dto/saveProgrammingTime.dto";
 
 export abstract class TimeServicePort {
   abstract saveProgrammingTime(apiKey: string, payload: TimePayload): Promise<{ status: string }>;
@@ -8,7 +8,7 @@ export abstract class TimeServicePort {
   abstract getProgrammingDataDuringPeriod(
       email: string,
       [from, to]: [string, string],
-  ): Promise<{ fileName: any, programDuration: any, programLanguage: any, project: any, programDay: any, programmingTime: any }[]>;
+  ): Promise< {programmingLanguage: string, programDay: Date, programDuration: number, programmingDate: Date, fileName: string, project: string[]}[]>;
 
   abstract findMyRank(email: string, [from, to]: [string, string]):  Promise<any[] | {email: string, nickname: string, totalDuration: any, rank: any}>;
   abstract getRanking([from, to]: [string, string]): Promise<{email: any, nickname: any, totalDuration: any}[]>;

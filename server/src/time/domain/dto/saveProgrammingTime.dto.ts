@@ -1,6 +1,6 @@
 import { IsString, MaxLength, MinLength } from 'class-validator';
 
-export class SaveTimeDto {
+export class SaveProgrammingTimeDto {
   @IsString()
   @MinLength(8)
   @MaxLength(20)
