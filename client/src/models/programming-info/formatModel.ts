@@ -8,6 +8,8 @@ import {
   EntireLanguageDurationTrendVO,
   ProgrammingActiveData, ProgrammingActiveDataPerLanguage, SeparateLanguageDurationTrendVO
 } from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
+import {pipe} from "@utils/shared/common/pipe";
+import {buildProjectHierarchyStructure, removeDuplicatePath} from "@utils/chart/hierachy";
 
 export function convertProgramDataToLanguageProportion(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]): ProgrammingLanguageProportionVO[] {
 
@@ -94,3 +96,16 @@ export const toSeparateLanguageDurationTrendVO = (
 
   return {data: result, option: "LANGUAGE"};
 };
+
+
+// hierarchy
+export function toDurationByProject(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]) {
+  return userProgrammingInfoResponseDTOs.map((data) => {
+    return {
+      project: [...data.project, `${data.fileName}.${data.programLanguage}`],
+      duration: data.programDuration,
+    };
+  });
+}
+
+export const toProjectHierarchyVO = pipe(toDurationByProject, removeDuplicatePath, buildProjectHierarchyStructure)
