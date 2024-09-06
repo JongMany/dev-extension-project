@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { Document, Types } from 'mongoose';
 import { Goal } from 'src/goal/goal.schema';
 import { Profile } from 'src/profile/profile.schema';
-import { Time } from 'src/time/time.schema';
+import { Time } from 'src/time/domain/schema/time.schema';
 
 @Schema()
 // export class User extends Document {

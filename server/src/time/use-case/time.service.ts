@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { eachDayOfInterval, format } from 'date-fns';
 import { TimePayload } from 'src/time/dto/saveTime.dto';
-import { TimeRepository } from 'src/time/time.repository';
+import { TimeRepository } from 'src/time/adapter/out/time.repository';
 import { UserRepository } from 'src/user/adapter/out/user.repository';
 
 @Injectable()
@@ -38,16 +38,7 @@ export class TimeService {
         [from, to],
         userApiKey,
       );
-      // console.log('getTime', userApiKey, dates, times);
-      // times.reduce((acc, cur) => {
-      //   const day = format(cur.programDay, "yyyy/MM/dd");
-      //   if(!acc[day] {
-      //     acc[day] = cur.programDuration;
-      //   }) else {
-
-      //   }
-      //   return acc;
-      // }, {});
+      
       const timeMap: TimeMap = times.reduce((acc, cur) => {
         const day = format(cur.programDay, 'yyyy-MM-dd');
         console.log(day);

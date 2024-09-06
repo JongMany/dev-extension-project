@@ -11,7 +11,7 @@ import {
 import { Response } from 'express';
 
 import { SaveTimeDto } from 'src/time/dto/saveTime.dto';
-import { TimeService } from 'src/time/time.service';
+import { TimeService } from 'src/time/use-case/time.service';
 
 @Controller('time')
 export class TimeController {
