@@ -1,7 +1,7 @@
 import {CheckDuplicate} from "../../../../auth/dto/checkDuplicate.dto";
 import {Types, UpdateWriteOpResult, Document} from "mongoose";
 import {SignupDto} from "../../../../auth/dto/signup.dto";
-import {User, UserDocument} from "../../../domain/user.schema";
+import {User, UserDocument} from "../../../domain/schema/user.schema";
 
 export abstract class UserRepositoryPort {
   abstract checkDuplicate(input: CheckDuplicate): Promise<boolean>;

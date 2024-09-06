@@ -3,15 +3,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { format } from 'date-fns';
 import { Model } from 'mongoose';
 import { TimePayload } from 'src/time/dto/saveTime.dto';
-import { Time, TimeDocuemnt } from 'src/time/domain/schema/time.schema';
+import { Time } from 'src/time/domain/schema/time.schema';
 import { ko } from 'date-fns/locale';
 import {TimeRepositoryPort} from "../../application/port/out/time.respository.port";
+import {TimeEntity} from "../../domain/entity/time.entity";
 @Injectable()
 
 export class TimeRepository implements TimeRepositoryPort{
   constructor(
     @InjectModel(Time.name)
-    private timeModel: Model<TimeDocuemnt>,
+    private timeModel: Model<TimeEntity>,
   ) {}
 
   async saveProgrammingTime(apiKey: string, payload: TimePayload) {

@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import * as config from 'config';
 
 import { UserRepository } from 'src/user/adapter/out/user.repository';
-import { User } from 'src/user/domain/user.schema';
+import { User } from 'src/user/domain/schema/user.schema';
 
 @Injectable()
 export class JwtAcessStrategy extends PassportStrategy(Strategy, 'access') {

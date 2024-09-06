@@ -11,11 +11,11 @@ import {
 import { Response } from 'express';
 
 import { SaveTimeDto } from 'src/time/dto/saveTime.dto';
-import { TimeService } from 'src/time/use-case/time.service';
+import {TimeServicePort} from "../../application/port/in/time.service.port";
 
 @Controller('time')
 export class TimeController {
-  constructor(private timeService: TimeService) {}
+  constructor(private timeServicePort: TimeServicePort) {}
 
   @Post('save')
   async saveProgrammingTime(
@@ -27,7 +27,7 @@ export class TimeController {
     try {
       const apiKey = saveTimeDto.apiKey; // apiKey를 통해 유저를 구분
       const payload = saveTimeDto.payload; // 실제 저장할 데이터
-      const result = await this.timeService.saveProgrammingTime(
+      const result = await this.timeServicePort.saveProgrammingTime(
         apiKey,
         payload,
       );
@@ -56,7 +56,7 @@ export class TimeController {
   ) {
     // console.log('from', from, 'to', to);
     try {
-      const result = await this.timeService.getProgrammingDataDuringPeriod(
+      const result = await this.timeServicePort.getProgrammingDataDuringPeriod(
         email,
         [from, to],
       );
@@ -81,7 +81,7 @@ export class TimeController {
     @Res() res: Response,
   ) {
     try {
-      const result = await this.timeService.getRanking([from, to]);
+      const result = await this.timeServicePort.getRanking([from, to]);
       // console.log(result);
       return res.status(HttpStatus.OK).json({ data: result });
     } catch (error) {
@@ -99,7 +99,7 @@ export class TimeController {
     @Res() res: Response,
   ) {
     try {
-      const result = await this.timeService.findMyRank(email, [from, to]);
+      const result = await this.timeServicePort.findMyRank(email, [from, to]);
       return res.status(HttpStatus.OK).json({ data: result });
     } catch (error) {
       return res
@@ -109,7 +109,7 @@ export class TimeController {
   }
 
   @Get('/:email/from/:from/to/:to')
-  async getProgrammingTime2(
+  async getProgrammingTime(
     @Param('email') email: string,
     @Param('from') from: string,
     @Param('to') to: string,
@@ -117,7 +117,7 @@ export class TimeController {
   ) {
     // console.log('from', from, 'to', to);
     try {
-      const result = await this.timeService.getTimesDuringPeriod(email, [
+      const result = await this.timeServicePort.getTimesDuringPeriod(email, [
         from,
         to,
       ]);
@@ -133,7 +133,7 @@ export class TimeController {
     // return `from ${from} to ${to}`;
   }
   @Get('')
-  async getProgrammingTime() {
+  async getProgrammingTime2() {
     return 'get programming time123';
   }
 }

@@ -1,7 +1,7 @@
 import {Module, forwardRef} from '@nestjs/common';
 import {UserController} from './adapter/in/user.controller';
 import {MongooseModule} from '@nestjs/mongoose';
-import {User, UserSchema} from 'src/user/domain/user.schema';
+import {User, UserSchema} from 'src/user/domain/schema/user.schema';
 import {UserService} from './use-case/user.service';
 import {UserRepository} from 'src/user/adapter/out/user.repository';
 

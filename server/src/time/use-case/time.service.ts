@@ -1,23 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { eachDayOfInterval, format } from 'date-fns';
 import { TimePayload } from 'src/time/dto/saveTime.dto';
-import { TimeRepository } from 'src/time/adapter/out/time.repository';
 import { UserRepository } from 'src/user/adapter/out/user.repository';
+import {TimeServicePort} from "../application/port/in/time.service.port";
+import {TimeRepositoryPort} from "../application/port/out/time.respository.port";
 
 @Injectable()
-export class TimeService {
+export class TimeService implements TimeServicePort{
   constructor(
-    private readonly timeRepository: TimeRepository,
+    private readonly timeRepositoryPort: TimeRepositoryPort,
     private readonly userRepository: UserRepository,
   ) {}
   async saveProgrammingTime(apiKey: string, payload: TimePayload) {
     try {
-      const timeModel = await this.timeRepository.saveProgrammingTime(
+      const timeModel = await this.timeRepositoryPort.saveProgrammingTime(
         apiKey,
         payload,
       );
       console.log('timeModel', timeModel);
-      this.userRepository.saveProgrammingTime(apiKey, timeModel);
+      await this.userRepository.saveProgrammingTime(apiKey, timeModel);
       return { status: 'OK' };
     } catch (err) {
       console.log('error', err);
@@ -34,11 +35,11 @@ export class TimeService {
       const allDates = eachDayOfInterval({ start: from, end: to });
       const dates = allDates.map((date) => format(date, 'yyyy/MM/dd'));
 
-      const times = await this.timeRepository.getTimeDuringPeriod(
+      const times = await this.timeRepositoryPort.getTimeDuringPeriod(
         [from, to],
         userApiKey,
       );
-      
+
       const timeMap: TimeMap = times.reduce((acc, cur) => {
         const day = format(cur.programDay, 'yyyy-MM-dd');
         console.log(day);
@@ -70,20 +71,11 @@ export class TimeService {
       const allDates = eachDayOfInterval({ start: from, end: to });
       const dates = allDates.map((date) => format(date, 'yyyy/MM/dd'));
 
-      const times = await this.timeRepository.getTimeDuringPeriod(
+      const times = await this.timeRepositoryPort.getTimeDuringPeriod(
         [from, to],
         userApiKey,
       );
-      // console.log('getTime', userApiKey, dates, times);
-      // times.reduce((acc, cur) => {
-      //   const day = format(cur.programDay, "yyyy/MM/dd");
-      //   if(!acc[day] {
-      //     acc[day] = cur.programDuration;
-      //   }) else {
 
-      //   }
-      //   return acc;
-      // }, {});
       return times.map((time) => ({
         fileName: time.fileName,
         programDuration: time.programDuration,
@@ -103,7 +95,7 @@ export class TimeService {
       if (!userApiKey) {
         return [];
       }
-      const times = await this.timeRepository.getAllRank([from, to]);
+      const times = await this.timeRepositoryPort.getAllRank([from, to]);
       const result = times.find((time) => time._id.apiKey === userApiKey);
       const user = await this.userRepository.getEmailByApiKey(userApiKey);
       return {
@@ -120,7 +112,7 @@ export class TimeService {
 
   async getRanking([from, to]: [string, string]) {
     try {
-      const times = await this.timeRepository.getRanking([from, to]);
+      const times = await this.timeRepositoryPort.getRanking([from, to]);
       for (const time of times) {
         const user = await this.userRepository.getEmailByApiKey(
           time._id.apiKey,

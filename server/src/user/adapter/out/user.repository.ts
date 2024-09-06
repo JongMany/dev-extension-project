@@ -3,7 +3,7 @@ import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {FindUserDto} from 'src/auth/dto/findUser.dto';
 import {SignupDto} from 'src/auth/dto/signup.dto';
-import {User, UserDocument} from 'src/user/domain/user.schema';
+import {User, UserDocument} from 'src/user/domain/schema/user.schema';
 import * as bcrypt from 'bcryptjs';
 import {CheckDuplicate} from 'src/auth/dto/checkDuplicate.dto';
 import {UserRepositoryPort} from "../../application/port/out/user.repository.port";

@@ -4,7 +4,7 @@ import { Model, Types } from 'mongoose';
 import { CreateTaskDto } from 'src/goal/dto/createTask.dto';
 import { UpdateTaskDto } from 'src/goal/dto/updateTask.dto';
 import { Goal, GoalDocument } from 'src/goal/goal.schema';
-import { User, UserDocument } from 'src/user/domain/user.schema';
+import { User, UserDocument } from 'src/user/domain/schema/user.schema';
 
 @Injectable()
 export class GoalRepository {
