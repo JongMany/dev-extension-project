@@ -6,7 +6,8 @@ import { Profile } from 'src/profile/profile.schema';
 import { Time } from 'src/time/time.schema';
 
 @Schema()
-export class User extends Document {
+// export class User extends Document {
+export class User {
   @Prop({ required: true, unique: true })
   @IsNotEmpty()
   @IsString()

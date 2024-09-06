@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { eachDayOfInterval, format } from 'date-fns';
 import { TimePayload } from 'src/time/dto/saveTime.dto';
 import { TimeRepository } from 'src/time/time.repository';
-import { UserRepository } from 'src/user/user.repository';
+import { UserRepository } from 'src/user/adapter/out/user.repository';
 
 @Injectable()
 export class TimeService {
