@@ -8,7 +8,7 @@ export abstract class TimeServicePort {
   abstract getProgrammingDataDuringPeriod(
       email: string,
       [from, to]: [string, string],
-  ): Promise< {programmingLanguage: string, programDay: Date, programDuration: number, programmingDate: Date, fileName: string, project: string[]}[]>;
+  ): Promise< {programmingLanguage: string, programDay: Date, programDuration: number, programmingTime: Date, fileName: string, project: string[]}[]>;
 
   abstract findMyRank(email: string, [from, to]: [string, string]):  Promise<any[] | {email: string, nickname: string, totalDuration: any, rank: any}>;
   abstract getRanking([from, to]: [string, string]): Promise<{email: any, nickname: any, totalDuration: any}[]>;

@@ -79,7 +79,7 @@ export class TimeRepository implements TimeRepositoryPort{
         },
       },
     ]);
-    console.log(time);
+    console.log("allRank", time);
     return time;
   }
 
@@ -105,6 +105,7 @@ export class TimeRepository implements TimeRepositoryPort{
         $limit: 20,
       },
     ]);
+    console.log("myRank", time);
     return time;
   }
 }

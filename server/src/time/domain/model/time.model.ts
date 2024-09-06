@@ -47,7 +47,7 @@ export default class Time {
       programmingLanguage: this.programmingLanguage,
       programDay: this.programDay,
       programDuration: this.programDuration,
-      programmingDate: this.programmingDate,
+      programmingTime: this.programmingDate,
       fileName: this.fileName,
       project: this.project
     }

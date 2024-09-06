@@ -63,7 +63,7 @@ export class TimeService implements TimeServicePort{
   async getProgrammingDataDuringPeriod(
     email: string,
     [from, to]: [string, string],
-  ): Promise<{ programDuration: number; fileName: string; programmingLanguage: string; programDay: Date; project: string[]; programmingDate: Date }[]> {
+  ): Promise<{ programDuration: number; fileName: string; programmingLanguage: string; programDay: Date; project: string[]; programmingTime: Date }[]> {
     try {
       const userApiKey = await this.userRepository.getApiKeyByEmail(email);
       if (!userApiKey) {
