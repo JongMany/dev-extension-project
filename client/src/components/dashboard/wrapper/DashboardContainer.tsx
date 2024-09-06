@@ -12,7 +12,7 @@ import QueryBasedRenderer from "@components/shared/query-based-renderer/QueryBas
 
 export default function DashboardContainer() {
   const {data, isFetching, isError} = useFetchProgrammingTime();
-
+  console.log(isError, data, isFetching)
   return (
       <section className="grid grid-cols-2">
         <QueryBasedRenderer isLoading={isFetching} isError={isError} data={data} Loader={<Hourglass/>}

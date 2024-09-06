@@ -17,14 +17,14 @@ export function fillDefaultForInactiveDatesForAllLanguages(programData: UserProg
             ...item,
             programDay: format(item.programDay, "yyyy-MM-dd"),
             language:
-                languageMapper[item.programLanguage as ProgrammingLanguageExt] || "other",
+                languageMapper[item.programmingLanguage as ProgrammingLanguageExt] || "other",
           }));
       result.push(...data);
     } else {
       result.push({
         programDay: date,
         programDuration: 0,
-        programLanguage: "none",
+        programmingLanguage: "none",
         project: [],
         programmingTime: 0,
         fileName: "",
@@ -36,12 +36,12 @@ export function fillDefaultForInactiveDatesForAllLanguages(programData: UserProg
 
 export const groupByProgrammingLanguage = (userProgrammingInfoResponseDTO: UserProgrammingInfoResponseDTO[]) => {
   return userProgrammingInfoResponseDTO.reduce((acc, cur) => {
-    const language = cur.programLanguage;
+    const language = cur.programmingLanguage;
     if (acc[language] === undefined) {
       acc[language] = [];
     }
     const data = {
-      language: cur.programLanguage,
+      language: cur.programmingLanguage,
       date: cur.programDay,
       duration: cur.programDuration,
     };
