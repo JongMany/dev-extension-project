@@ -3,7 +3,7 @@ import { IsDate, IsNumber } from 'class-validator';
 import { Document } from 'mongoose';
 
 @Schema()
-export class Time extends Document {
+export class TimeSchemaModel extends Document {
   @Prop({ required: true })
   @IsNumber()
   programDuration: number;
@@ -29,5 +29,5 @@ export class Time extends Document {
   project: string[];
 }
 
-export const TimeSchema = SchemaFactory.createForClass(Time);
-export type TimeDocuemnt = Time & Document;
+export const TimeSchema = SchemaFactory.createForClass(TimeSchemaModel);
+

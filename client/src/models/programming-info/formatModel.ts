@@ -29,7 +29,7 @@ export function convertProgramDataToLanguageProportion(userProgrammingInfoRespon
 function aggregateProgrammingTimeByLanguage(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]) {
   return userProgrammingInfoResponseDTOs.reduce((acc, cur) => {
     const language: ProgrammingLanguage =
-        languageMapper[cur.programLanguage as ProgrammingLanguageExt] ||
+        languageMapper[cur.programmingLanguage as ProgrammingLanguageExt] ||
         languageMapper.other;
     acc[language] = (acc[language] || 0) + cur.programDuration;
     return acc;
@@ -107,7 +107,7 @@ export const toSeparateLanguageDurationTrendVO = (
 export function toDurationByProject(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]) {
   return userProgrammingInfoResponseDTOs.map((data) => {
     return {
-      project: [...data.project, `${data.fileName}.${data.programLanguage}`],
+      project: [...data.project, `${data.fileName}.${data.programmingLanguage}`],
       duration: data.programDuration,
     };
   });
@@ -119,7 +119,7 @@ export const toProjectHierarchyVO = pipe(toDurationByProject, removeDuplicatePat
 export function toProjectDependencyLinkVO(UserProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]): ProjectDependencyLinkVO[] {
   const deps: ProjectDependencyLinkVO[]  = UserProgrammingInfoResponseDTOs.map((data) => [
     ...data.project,
-    `${data.fileName}.${data.programLanguage}`,
+    `${data.fileName}.${data.programmingLanguage}`,
   ]);
 
   if (deps.length === 0) {

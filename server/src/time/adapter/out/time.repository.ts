@@ -2,14 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { format } from 'date-fns';
 import { Model } from 'mongoose';
-import { TimePayload } from 'src/time/dto/saveTime.dto';
-import { Time, TimeDocuemnt } from 'src/time/time.schema';
+import { TimePayload } from 'src/time/domain/dto/saveProgrammingTime.dto';
+import { TimeSchemaModel } from 'src/time/domain/schema/time.schema';
 import { ko } from 'date-fns/locale';
+import {TimeRepositoryPort} from "../../application/port/out/time.respository.port";
+import {TimeEntity} from "../../domain/entity/time.entity";
+import TimeMapper from "../../mapper/time.mapper";
 @Injectable()
-export class TimeRepository {
+
+export class TimeRepository implements TimeRepositoryPort{
   constructor(
-    @InjectModel(Time.name)
-    private timeModel: Model<TimeDocuemnt>,
+    @InjectModel(TimeSchemaModel.name)
+    private timeModel: Model<TimeEntity>,
   ) {}
 
   async saveProgrammingTime(apiKey: string, payload: TimePayload) {
@@ -18,9 +22,7 @@ export class TimeRepository {
       const current = format(currentDate, 'yyyy-MM-dd HH:mm:ss', {
         locale: ko,
       });
-      // const programDay = format(payload.currentTime, 'yyyy/MM/dd');
       const programDay = format(currentDate, 'yyyy-MM-dd', { locale: ko });
-      console.log(programDay, current);
       const time = new this.timeModel({
         apiKey,
         // programmingDate: payload.currentTime,
@@ -32,11 +34,8 @@ export class TimeRepository {
         project: payload.docs,
       });
 
-      // console.log('time', time, payload);
-      const tm = await time.save();
-      console.log('tm', tm);
-      // return tm;
-      return time;
+      await time.save();
+      return TimeMapper.toDomain(time);
     } catch (err) {
       console.log('save time error', err);
       throw new Error(err);
@@ -44,13 +43,12 @@ export class TimeRepository {
   }
 
   async getTimeDuringPeriod([from, to]: [string, string], apiKey: string) {
-    console.log([from, to], apiKey);
-    const time = await this.timeModel.find({
+    const times = await this.timeModel.find({
       programDay: { $gte: from, $lte: to },
       apiKey,
     });
-    console.log('time', time);
-    return time;
+    return TimeMapper.toDomains(times);
+    // return time;
   }
 
   async getAllRank([from, to]: [string, string]) {
@@ -81,7 +79,7 @@ export class TimeRepository {
         },
       },
     ]);
-    console.log(time);
+    console.log("allRank", time);
     return time;
   }
 
@@ -107,6 +105,7 @@ export class TimeRepository {
         $limit: 20,
       },
     ]);
+    console.log("myRank", time);
     return time;
   }
 }

@@ -3,10 +3,11 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { Document, Types } from 'mongoose';
 import { Goal } from 'src/goal/goal.schema';
 import { Profile } from 'src/profile/profile.schema';
-import { Time } from 'src/time/time.schema';
+import { TimeSchemaModel } from 'src/time/domain/schema/time.schema';
 
 @Schema()
-export class User extends Document {
+// export class User extends Document {
+export class User {
   @Prop({ required: true, unique: true })
   @IsNotEmpty()
   @IsString()
@@ -35,7 +36,7 @@ export class User extends Document {
   @IsString()
   refreshToken: string;
 
-  @Prop({ type: [Types.ObjectId], ref: Time.name })
+  @Prop({ type: [Types.ObjectId], ref: TimeSchemaModel.name })
   developTime: Types.ObjectId[];
 
   @Prop({ type: [Types.ObjectId], ref: Goal.name })

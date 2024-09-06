@@ -4,7 +4,7 @@ import { CreateTaskDto } from 'src/goal/dto/createTask.dto';
 import { UpdateTaskDto } from 'src/goal/dto/updateTask.dto';
 
 import { GoalRepository } from 'src/goal/goal.repository';
-import { UserRepository } from 'src/user/user.repository';
+import { UserRepository } from 'src/user/adapter/out/user.repository';
 
 @Injectable()
 export class GoalService {

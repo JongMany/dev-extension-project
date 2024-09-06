@@ -25,19 +25,25 @@ export default function useFetchProgrammingTime() {
     );
 
     const data = (await response.json()) as { data: UserProgrammingInfoResponseDTO[] };
-    console.log(data);
+
     const convertedData = data.data.map((d) => {
+
+      console.log("zonedTime", d)
       const zonedTime = toZonedTime(
         new Date(d.programmingTime).toISOString(),
         localTimeZone
       );
+      console.log("zonedTime", zonedTime)
 
       return {
         ...d,
         programDuration: d.programDuration / 1000,
         programmingTime: format(zonedTime, "yyyy-MM-dd HH:mm:ss"),
       };
+
     });
+
+    console.log('convertedData', convertedData);
     return convertedData;
   };
 

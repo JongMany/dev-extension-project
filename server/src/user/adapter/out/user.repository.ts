@@ -1,18 +1,15 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { FindUserDto } from 'src/auth/dto/findUser.dto';
-import { SignupDto } from 'src/auth/dto/signup.dto';
-import { User, UserDocument } from 'src/user/user.schema';
+import {ConflictException, Injectable, InternalServerErrorException,} from '@nestjs/common';
+import {InjectModel} from '@nestjs/mongoose';
+import {Model} from 'mongoose';
+import {FindUserDto} from 'src/auth/dto/findUser.dto';
+import {SignupDto} from 'src/auth/dto/signup.dto';
+import {User, UserDocument} from 'src/user/domain/schema/user.schema';
 import * as bcrypt from 'bcryptjs';
-import { CheckDuplicate } from 'src/auth/dto/checkDuplicate.dto';
+import {CheckDuplicate} from 'src/auth/dto/checkDuplicate.dto';
+import {UserRepositoryPort} from "../../application/port/out/user.repository.port";
 
 @Injectable()
-export class UserRepository {
+export class UserRepository implements UserRepositoryPort {
   constructor(
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
@@ -20,19 +17,12 @@ export class UserRepository {
 
   async findOne(findUserDto: FindUserDto) {
     const { email, apiKey } = findUserDto;
-    const user = await this.userModel.findOne({ email, apiKey });
-    return user;
+    return this.userModel.findOne({email, apiKey});
   }
 
   async checkDuplicate(input: CheckDuplicate) {
     const user = await this.userModel.findOne(input);
-    // console.log(user, input);
-    console.log(input);
-    if (user) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!user;
   }
   async getAllGoalIds(email: string) {
     const user = await this.userModel.findOne({ email });
@@ -41,15 +31,18 @@ export class UserRepository {
   }
 
   async updateAccessToken(email: string, accessToken: string) {
-    return await this.userModel.updateOne({ email }, { accessToken });
+    return this.userModel.updateOne({email}, {accessToken});
+    // return await this.userModel.updateOne({ email }, { accessToken });
   }
 
   async findUserByEmail(email: string) {
-    return await this.userModel.findOne({ email });
+    return this.userModel.findOne({email});
+    // return await this.userModel.findOne({ email });
   }
 
   async updateRefreshToken(email: string, refreshToken: string) {
-    return await this.userModel.updateOne({ email }, { refreshToken });
+    return this.userModel.updateOne({email}, {refreshToken});
+    // return await this.userModel.updateOne({ email }, { refreshToken });
   }
 
   async createUser(signupDto: SignupDto, profileId: string) {
@@ -79,9 +72,9 @@ export class UserRepository {
   }
 
   async saveProgrammingTime(apiKey: string, timeModel: any) {
-    return await this.userModel.updateOne(
-      { apiKey },
-      { $push: { developTime: timeModel._id } },
+    return this.userModel.updateOne(
+        {apiKey},
+        {$push: {developTime: timeModel._id}},
     );
   }
 
