@@ -1,3 +1,5 @@
+import {ProjectDependencyLinkVO} from "@/models/programming-info/vo/projectDependencyLink.vo";
+
 type Category = {
   name: string;
 };
@@ -18,7 +20,7 @@ type Node = {
   symbolSize?: number;
 };
 
-export const makeDepsGraphLinkAndNode = (deps: string[][]) => {
+export const makeDepsGraphLinkAndNode = (deps: ProjectDependencyLinkVO[]) => {
   const nodes: Node[] = [];
   const links: Link[] = [];
   const categories: Category[] = [];

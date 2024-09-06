@@ -21,7 +21,7 @@ import {
   fillDefaultForInactiveDatesForAllLanguages,
   fillDefaultForInactiveDatesForEachLanguage,
   groupByProgrammingLanguage
-} from "@utils/chart/durationTrend";
+} from "@utils/chart/data-format/durationTrend";
 
 
 // 프로젝트는 아직 구현 안됨

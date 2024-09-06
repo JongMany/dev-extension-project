@@ -9,12 +9,12 @@ import {
   ProgrammingActiveData, ProgrammingActiveDataPerLanguage, SeparateLanguageDurationTrendVO
 } from "@/models/programming-info/vo/programmingLanguageDurationTrend.vo";
 import {pipe} from "@utils/shared/common/pipe";
-import {buildProjectHierarchyStructure, removeDuplicatePath} from "@utils/chart/hierachy";
+import {buildProjectHierarchyStructure, removeDuplicatePath} from "@utils/chart/data-format/hierachy";
 import {ProjectDependencyLinkVO} from "@/models/programming-info/vo/projectDependencyLink.vo";
 import {
   filterDuplicatedDependencies,
   removeDuplicateInDependencyPath
-} from "@utils/chart/projectDependency";
+} from "@utils/chart/data-format/projectDependency";
 
 export function convertProgramDataToLanguageProportion(userProgrammingInfoResponseDTOs: UserProgrammingInfoResponseDTO[]): ProgrammingLanguageProportionVO[] {
 
