@@ -1,20 +1,14 @@
 "use client";
 import ReactECharts from "echarts-for-react";
 import { ChangeEvent, useState } from "react";
+import {ProjectHierarchyVO} from "@/models/programming-info/vo/projectHierarchy.vo";
 
 // https://echarts.apache.org/examples/en/editor.html?c=treemap-sunburst-transition
-export type HierarchyData = {
-  name: string;
-  children: HierarchyData[];
-  value: number;
-  size: number; // value와 size는 같은 값
-};
-
 type Props = {
-  hierarchyData: HierarchyData;
+  hierarchyData: ProjectHierarchyVO;
 };
 
-function makeTreemapOption(hierarchyData: HierarchyData) {
+function makeTreemapOption(hierarchyData: ProjectHierarchyVO) {
   return {
    
     series: [
@@ -37,7 +31,7 @@ function makeTreemapOption(hierarchyData: HierarchyData) {
   };
 }
 
-function makeSunburstOption(hierarchyData: HierarchyData) {
+function makeSunburstOption(hierarchyData: ProjectHierarchyVO) {
   return {
     series: [
       {
