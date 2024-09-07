@@ -67,7 +67,6 @@ export class TimeController {
       );
       return res.status(HttpStatus.OK).json({data: result});
     } catch (error) {
-      // console.log(error);
       return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({message: 'error'});
@@ -82,9 +81,8 @@ export class TimeController {
       @Param('to') to: string,
       @Res() res: Response,
   ) {
-    // console.log('from', from, 'to', to);
     try {
-      const result = await this.timeServicePort.getTimesDuringPeriod(email, [
+      const result = await this.timeServicePort.getProgrammingTimeByDateList(email, [
         from,
         to,
       ]);
@@ -95,9 +93,6 @@ export class TimeController {
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({message: 'error'});
     }
-
-    // console.log(dates);
-    // return `from ${from} to ${to}`;
   }
 
   // Ranking은 별도 분리
