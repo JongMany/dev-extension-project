@@ -1,11 +1,12 @@
 import {TimePayload} from "../../../domain/dto/saveProgrammingTime.dto";
 import {ProgrammingInformationDTO} from "../../../domain/dto/programmingInformation.dto";
-import {ProgrammingTimeDTO} from "../../../domain/dto/programmingTime.dto";
+import {ProgrammingTimeByDateDTO} from "../../../domain/dto/programmingTimeByDate.dto";
+
 
 export abstract class TimeServicePort {
   abstract saveProgrammingTime(apiKey: string, payload: TimePayload): Promise<{ status: string }>;
 
-  abstract getTimesDuringPeriod(email: string, [from, to]: [string, string]): Promise<ProgrammingTimeDTO[]>
+  abstract getProgrammingTimeByDateList(email: string, [from, to]: [string, string]): Promise<ProgrammingTimeByDateDTO[]>
 
   abstract getProgrammingDataDuringPeriod(
       email: string,

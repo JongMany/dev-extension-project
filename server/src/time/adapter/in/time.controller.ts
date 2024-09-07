@@ -82,7 +82,7 @@ export class TimeController {
       @Res() res: Response,
   ) {
     try {
-      const result = await this.timeServicePort.getTimesDuringPeriod(email, [
+      const result = await this.timeServicePort.getProgrammingTimeByDateList(email, [
         from,
         to,
       ]);
