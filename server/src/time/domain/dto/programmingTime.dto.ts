@@ -1,0 +1,1 @@
+export type ProgrammingTimeDTO = { date: string, time: number }
