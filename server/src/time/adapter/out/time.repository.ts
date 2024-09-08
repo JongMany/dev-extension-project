@@ -77,7 +77,6 @@ export class TimeRepository implements TimeRepositoryPort {
         },
       },
     ]);
-    console.log("allRank", time);
     return time;
   }
 

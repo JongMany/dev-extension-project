@@ -88,7 +88,6 @@ export class TimeController {
       ]);
       return res.status(HttpStatus.OK).json({data: result});
     } catch (error) {
-      // console.log(error);
       return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({message: 'error'});
@@ -104,7 +103,6 @@ export class TimeController {
   ) {
     try {
       const result = await this.timeServicePort.getRanking([from, to]);
-      // console.log(result);
       return res.status(HttpStatus.OK).json({data: result});
     } catch (error) {
       return res
@@ -128,11 +126,5 @@ export class TimeController {
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({message: 'error'});
     }
-  }
-
-
-  @Get('')
-  async getProgrammingTime2() {
-    return 'get programming time123';
   }
 }
