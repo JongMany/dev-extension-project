@@ -1,14 +1,14 @@
 import {Injectable} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {format} from 'date-fns';
-import {Model} from 'mongoose';
+import {InjectConnection, InjectModel} from '@nestjs/mongoose';
+import {ClientSession, Connection, Error, Model, Types} from 'mongoose';
 import {TimePayload} from 'src/time/domain/dto/saveProgrammingTime.dto';
 import {TimeSchemaModel} from 'src/time/domain/schema/time.schema';
-import {ko} from 'date-fns/locale';
 import {TimeRepositoryPort} from "../../application/port/out/time.respository.port";
 import {TimeEntity} from "../../domain/entity/time.entity";
 import TimeMapper from "../../mapper/time.mapper";
 import {formatProgrammingDate} from "../../application/utils/formatProgrammingDate";
+import * as console from "console";
+import {User, UserDocument} from "../../../user/domain/schema/user.schema";
 
 @Injectable()
 
@@ -16,10 +16,13 @@ export class TimeRepository implements TimeRepositoryPort {
   constructor(
       @InjectModel(TimeSchemaModel.name)
       private timeModel: Model<TimeEntity>,
+      @InjectModel(User.name)
+      private userModel: Model<UserDocument>,
+      @InjectConnection() private readonly connection: Connection, // connection 주입
   ) {
   }
 
-  async saveProgrammingTime(apiKey: string, payload: TimePayload) {
+  async saveProgrammingTime(apiKey: string, payload: TimePayload, session: ClientSession) {
     try {
       const {fullDateTime, programDay} = formatProgrammingDate(new Date());
 
@@ -33,7 +36,7 @@ export class TimeRepository implements TimeRepositoryPort {
         project: payload.docs,
       });
 
-      await time.save();
+      await time.save({ session});
       return TimeMapper.toDomain(time);
     } catch (err) {
       console.error('Failed to save programming time:', err);
@@ -101,5 +104,28 @@ export class TimeRepository implements TimeRepositoryPort {
       },
     ]);
     return time;
+  }
+
+  async abortTransaction(session: ClientSession) {
+    await session.abortTransaction(); // 트랜잭션 롤백
+
+  }
+
+  async commitTransaction(session: ClientSession) {
+    await session.commitTransaction(); // 트랜잭션 커밋
+  }
+
+  async removeProgrammingTime(apiKey: string, developTimeToRemove: string, session: ClientSession) {
+    return await this.userModel.updateOne(
+        { apiKey },
+        { $pull: { developTime: new Types.ObjectId(developTimeToRemove) } }, // ObjectId를 배열에서 제거
+        { session } // 세션 전달
+    );
+  }
+
+  async startTransaction(): Promise<ClientSession> {
+    const session = await this.connection.startSession(); // MongoDB 세션 시작
+    session.startTransaction(); // 트랜잭션 시작
+    return session;
   }
 }
