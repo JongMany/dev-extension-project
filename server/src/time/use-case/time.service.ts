@@ -1,38 +1,54 @@
-import {Injectable} from '@nestjs/common';
-import {format} from 'date-fns';
-import {TimePayload} from 'src/time/domain/dto/saveProgrammingTime.dto';
-import {UserRepository} from 'src/user/adapter/out/user.repository';
-import {TimeServicePort} from "../application/port/in/time.service.port";
-import {TimeRepositoryPort} from "../application/port/out/time.respository.port";
-import Time from "../domain/model/time.model";
-import {ProgrammingTimeByDateDTO, ProgrammingTimeByDateMap} from "../domain/dto/programmingTimeByDate.dto";
-
+import { Injectable } from '@nestjs/common';
+import { format } from 'date-fns';
+import { TimePayload } from 'src/time/domain/dto/saveProgrammingTime.dto';
+import { UserRepository } from 'src/user/adapter/out/user.repository';
+import { TimeServicePort } from '../application/port/in/time.service.port';
+import { TimeRepositoryPort } from '../application/port/out/time.repository.port';
+import Time from '../domain/model/time.model';
+import {
+  ProgrammingTimeByDateDTO,
+  ProgrammingTimeByDateMap,
+} from '../domain/dto/programmingTimeByDate.dto';
 
 @Injectable()
 export class TimeService implements TimeServicePort {
   constructor(
-      private readonly timeRepositoryPort: TimeRepositoryPort,
-      private readonly userRepository: UserRepository,
-  ) {
-  }
+    private readonly timeRepositoryPort: TimeRepositoryPort,
+    private readonly userRepository: UserRepository,
+  ) {}
 
   async saveProgrammingTime(apiKey: string, payload: TimePayload) {
     const session = await this.timeRepositoryPort.startTransaction();
     try {
       const timeModel = await this.timeRepositoryPort.saveProgrammingTime(
-          apiKey,
-          payload,
-          session
+        apiKey,
+        payload,
+        session,
       );
-      await this.userRepository.saveProgrammingTime(apiKey, timeModel);
-      return {status: 'OK'};
+
+      if (!timeModel) {
+        const developTimeToRemove = timeModel.get().getId();
+        // await this.userRepository.removeProgrammingTime(apiKey,developTimeToRemove,session);
+      } else {
+        // await this.userRepository.saveProgrammingTime(apiKey, timeModel, session);
+        await this.userRepository.saveProgrammingTime(apiKey, timeModel);
+      }
+
+      await this.timeRepositoryPort.commitTransaction(session); // 성공 시 커밋
+      return { status: 'OK' };
     } catch (err) {
       console.log('error', err);
-      return {status: 'ERROR'};
+      await this.timeRepositoryPort.abortTransaction(session); // 오류 시 롤백
+      return { status: 'ERROR' };
+    } finally {
+      await session.endSession(); // 세션 종료
     }
   }
 
-  async getProgrammingTimeByDateList(email: string, [from, to]: [string, string]) {
+  async getProgrammingTimeByDateList(
+    email: string,
+    [from, to]: [string, string],
+  ) {
     try {
       const userApiKey = await this.userRepository.getApiKeyByEmail(email);
       if (!userApiKey) {
@@ -40,11 +56,14 @@ export class TimeService implements TimeServicePort {
       }
 
       const times = await this.timeRepositoryPort.getTimeDuringPeriod(
-          [from, to],
-          userApiKey,
+        [from, to],
+        userApiKey,
       );
-      const programmingTimeByDate: ProgrammingTimeByDateMap = this.aggregateTimesByDate(times);
-      return this.convertProgrammingTimeByDateToProgrammingTimeDTO(programmingTimeByDate)
+      const programmingTimeByDate: ProgrammingTimeByDateMap =
+        this.aggregateTimesByDate(times);
+      return this.convertProgrammingTimeByDateToProgrammingTimeDTO(
+        programmingTimeByDate,
+      );
     } catch (err) {
       console.error('Error fetching times during period:', err);
       throw new Error('Failed to retrieve programming times.');
@@ -61,29 +80,32 @@ export class TimeService implements TimeServicePort {
   }
 
   // 합산된 시간을 포맷에 맞춰 변환하는 함수
-  private convertProgrammingTimeByDateToProgrammingTimeDTO(programmingTimeByDate: ProgrammingTimeByDateMap): ProgrammingTimeByDateDTO[] {
-    return Object.entries(programmingTimeByDate).map(([date, programDuration]) => ({
-      date,
-      time: programDuration / (1000 * 60), // 시간을 분 단위로 변환
-    }));
+  private convertProgrammingTimeByDateToProgrammingTimeDTO(
+    programmingTimeByDate: ProgrammingTimeByDateMap,
+  ): ProgrammingTimeByDateDTO[] {
+    return Object.entries(programmingTimeByDate).map(
+      ([date, programDuration]) => ({
+        date,
+        time: programDuration / (1000 * 60), // 시간을 분 단위로 변환
+      }),
+    );
   }
 
   async getProgrammingDataDuringPeriod(
-      email: string,
-      [from, to]: [string, string],
+    email: string,
+    [from, to]: [string, string],
   ) {
     try {
       const userApiKey = await this.userRepository.getApiKeyByEmail(email);
       if (userApiKey) {
         const times = await this.timeRepositoryPort.getTimeDuringPeriod(
-            [from, to],
-            userApiKey,
+          [from, to],
+          userApiKey,
         );
         return times.map((time) => time.getTimeObject());
       } else {
         return [];
       }
-
     } catch (err) {
       console.log(err);
     }
@@ -115,7 +137,7 @@ export class TimeService implements TimeServicePort {
       const times = await this.timeRepositoryPort.getRanking([from, to]);
       for (const time of times) {
         const user = await this.userRepository.getEmailByApiKey(
-            time._id.apiKey,
+          time._id.apiKey,
         );
         time['email'] = user.email;
         time['nickname'] = user.nickname;

@@ -30,4 +30,3 @@ export class TimeSchemaModel extends Document {
 }
 
 export const TimeSchema = SchemaFactory.createForClass(TimeSchemaModel);
-

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { Document, Types } from 'mongoose';
+import { Types } from 'mongoose';
 import { Goal } from 'src/goal/goal.schema';
 import { Profile } from 'src/profile/profile.schema';
 import { TimeSchemaModel } from 'src/time/domain/schema/time.schema';
@@ -47,4 +47,4 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-export type UserDocument = User & Document;
+// export type UserDocument = User & Document;

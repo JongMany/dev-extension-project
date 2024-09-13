@@ -1,4 +1,4 @@
-import {Document} from "mongoose";
+import { Document } from 'mongoose';
 // export type TimeEntity = Time & Document;
 export interface TimeEntity extends Document {
   programDuration: number;

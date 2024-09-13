@@ -9,19 +9,19 @@ export default class Time {
   private readonly project: string[];
 
   constructor(
-      id: string,
-      programDuration: number,
-      programDay: Date,
-      programmingDate: Date,
-      apiKey: string,
-      programmingLanguage: string,
-      fileName: string,
-      project: string[]
+    id: string,
+    programDuration: number,
+    programDay: Date,
+    programmingDate: Date,
+    apiKey: string,
+    programmingLanguage: string,
+    fileName: string,
+    project: string[],
   ) {
     this.id = id;
     this.programmingLanguage = programmingLanguage;
     this.programDay = programDay;
-    this.programDuration = programDuration
+    this.programDuration = programDuration;
     this.programmingDate = programmingDate;
     this.apiKey = apiKey;
     this.fileName = fileName;
@@ -36,8 +36,11 @@ export default class Time {
     return this.programDay;
   }
 
+  getId() {
+    return this.id;
+  }
 
-  getProgrammingDate(){
+  getProgrammingDate() {
     return this.programmingDate;
   }
 
@@ -49,7 +52,7 @@ export default class Time {
       programDuration: this.programDuration,
       programmingTime: this.programmingDate,
       fileName: this.fileName,
-      project: this.project
-    }
+      project: this.project,
+    };
   }
 }

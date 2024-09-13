@@ -4,7 +4,8 @@ import { Model, Types } from 'mongoose';
 import { CreateTaskDto } from 'src/goal/dto/createTask.dto';
 import { UpdateTaskDto } from 'src/goal/dto/updateTask.dto';
 import { Goal, GoalDocument } from 'src/goal/goal.schema';
-import { User, UserDocument } from 'src/user/domain/schema/user.schema';
+import { UserEntity } from 'src/user/domain/entity/user.entity';
+import { User } from 'src/user/domain/schema/user.schema';
 
 @Injectable()
 export class GoalRepository {
@@ -13,7 +14,7 @@ export class GoalRepository {
     private goalModel: Model<GoalDocument>,
 
     @InjectModel(User.name)
-    private userModel: Model<UserDocument>,
+    private userModel: Model<UserEntity>,
   ) {}
 
   async createTask(goalDto: CreateTaskDto, email: string) {
