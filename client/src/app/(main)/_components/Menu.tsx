@@ -4,7 +4,6 @@ import { auth } from "@/auth";
 
 export const Menu = async () => {
   const session = await auth();
-  console.log('session', session);
   const menuItems = [
     { text: "홈", href: "/main" },
     { text: "대시보드", href: "/dashboard" },
@@ -21,7 +20,6 @@ export const Menu = async () => {
             <Link href={item.href}>{item.text}</Link>
           </MenuItem>
         ))}
-        {/* <li></li> */}
       </ul>
     </div>
   );
