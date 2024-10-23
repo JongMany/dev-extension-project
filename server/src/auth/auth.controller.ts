@@ -35,7 +35,7 @@ export class AuthController {
     @Body(ValidationPipe) signupDto: SignupDto,
     @Res() res: Response,
   ) {
-    // console.log('signupDto', signupDto);
+    console.log('signupDto', signupDto);
 
     try {
       const user = await this.authService.signup(signupDto);

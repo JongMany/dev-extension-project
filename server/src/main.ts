@@ -10,6 +10,7 @@ const whiteList = [
   'http://127.0.0.1:3000',
   'http://localhost:3000',
   'https://www.study-log.net',
+  'https://study-log.net',
 ];
 async function bootstrap() {
   console.log('MONGO_URI', process.env.MONGO_URI);

@@ -1,9 +1,9 @@
-import getQueryClient from "@/lib/getQueryClient";
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
-import EditForm from "@/app/(main)/profile/edit/_components/EditForm";
-import {fetchServer} from "@/lib/fetchServer";
+
 import {auth} from "@/auth";
-import EditFormWrapper from "@/app/(main)/profile/edit/_components/EditFormWrapper";
+import {ProfileEditor} from "@components/profile";
+import getQueryClient from "@utils/shared/query-client/getQueryClient";
+import {fetchServer} from "@utils/shared/fetch/fetchServer";
 
 async function EditProfilePage() {
   const session = await auth();
@@ -11,7 +11,7 @@ async function EditProfilePage() {
   await queryClient.prefetchQuery({
     queryKey: ["profile", session?.user.email],
     queryFn: async () => {
-      const response = await fetchServer(`/profile/${session?.user.email}`, {});
+      const response = await fetchServer(`/v1/profile/${session?.user.email}`, {});
       const data = await response?.json();
       return data;
     },
@@ -22,7 +22,7 @@ async function EditProfilePage() {
   return <main>
     <h2 className="font-bold text-xl">프로필 편집</h2>
     <HydrationBoundary state={dehydratedState}>
-      <EditFormWrapper />
+      <ProfileEditor />
     </HydrationBoundary>
   </main>;
 }

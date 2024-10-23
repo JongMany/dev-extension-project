@@ -6,19 +6,27 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --bg: #e3e4e8;
+  /*--bg: #17181c;*/
+  --fg: #2e3138;
+  --primary: #255ff4;
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --bg: #17181c;
+    /*--fg: #c7cad1;*/
+    --fg: #2e3138;
   }
 }
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    /*text-wrap: balance;*/
   }
 }
 

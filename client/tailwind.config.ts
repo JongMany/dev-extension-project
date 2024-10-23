@@ -15,7 +15,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       gridTemplateColumns: {
-        signup: "1fr 3fr 1fr",
+        signUp: "1fr 3fr 1fr",
       },
       keyframes: {
         glow: {

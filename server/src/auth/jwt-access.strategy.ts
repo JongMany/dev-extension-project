@@ -3,8 +3,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import * as config from 'config';
 
-import { UserRepository } from 'src/user/user.repository';
-import { User } from 'src/user/user.schema';
+import { UserRepository } from 'src/user/adapter/out/user.repository';
+import { User } from 'src/user/domain/schema/user.schema';
 
 @Injectable()
 export class JwtAcessStrategy extends PassportStrategy(Strategy, 'access') {
