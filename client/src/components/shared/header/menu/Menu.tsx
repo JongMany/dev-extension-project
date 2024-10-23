@@ -5,7 +5,7 @@ import {MenuItem} from "@components/shared/header/menu/MenuItem";
 
 export const Menu = async () => {
   const session = await auth();
-  console.log("session", session);
+
   const menuItems = [
     { text: "홈", href: "/main" },
     { text: "대시보드", href: "/dashboard" },
